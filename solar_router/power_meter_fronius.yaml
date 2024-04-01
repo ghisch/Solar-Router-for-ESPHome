@@ -1,0 +1,60 @@
+# ----------------------------------------------------------------------------------------------------
+# Sensor updated every second to give feedback in Home Assistant
+# ----------------------------------------------------------------------------------------------------
+
+sensor:
+  # Sensor showing the actual power consumption
+  - id: real_power
+    platform: template
+    name: "Real Power"
+    device_class: "power"
+    unit_of_measurement: "W"
+    update_interval: 1s
+
+# ----------------------------------------------------------------------------------------------------
+# Use http request component
+# ----------------------------------------------------------------------------------------------------
+
+http_request:
+  id: http_request_data
+  useragent: esphome/device
+  timeout: 10s
+
+# ----------------------------------------------------------------------------------------------------
+# Define scripts for power collection
+# ----------------------------------------------------------------------------------------------------
+
+script:
+  # Fronius script gather power reports from inverter and update globals (real_power)
+  # Information are provided as json. Power exchanged with the grid is names PowerReal_P_Sum
+  # When this value is positive, energy is taken from the grid.
+  # When this value is negative, energy is pushed to the grid.
+  - id: power_meter_source
+    mode: single
+    then:
+      - if:
+          condition:
+            wifi.connected:
+          then:
+            - http_request.get:
+                url: http://${power_meter_ip_address}/solar_api/v1/GetMeterRealtimeData.cgi
+                headers:
+                  Content-Type: application/json
+                verify_ssl: False
+                on_response:
+                  then:
+                    - lambda: |-
+                        json::parse_json(id(http_request_data).get_string(), [](JsonObject data) {
+                          id(real_power).publish_state(data["Body"]["Data"]["0"]["PowerReal_P_Sum"].as< float >());
+                        });
+
+time:
+  - platform: sntp
+    on_time:
+      - seconds: /1
+        then:
+          - if:
+              condition:
+                - lambda: return id(power_meter_activated) != 0;
+              then:
+                - script.execute: power_meter_source
