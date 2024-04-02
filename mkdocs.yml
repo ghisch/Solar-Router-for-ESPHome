@@ -1,0 +1,55 @@
+site_name: Solar Router for ESPHome
+repo_url: https://github.com/XavierBerger/Solar-Router-for-ESPHome
+repo_name: Fork me on GitHub
+edit_uri: ""
+
+nav:
+  - Home: index.md
+  - Disclamer: disclamer.md
+  - Solar Router: solar_router.md
+  - Hardware: hardware.md
+  - Firmware:
+      - Overview: firmware.md
+      - Installation: installation.md
+      - Examples:
+          - Standalone: standalone_example.md
+          - With proxy: proxy_example.md
+  - Power Meter:
+      - Fronius: fronius.md
+      - Proxy Client: proxy_client.md
+  - Regulator:
+      - Triac: triac.md
+      - Relay: relay.md
+  - Engine: engine.md
+
+  - Developers: developers.md
+  - ChangeLog: changelog.md
+  - License: license.md
+
+theme:
+  feaures:
+    - tabs
+  name: material
+
+  font:
+    text: Ubuntu
+    code: Ubuntu Mono
+
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      type: datetime
+  - glightbox
