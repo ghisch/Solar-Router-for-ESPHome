@@ -1,0 +1,58 @@
+# ----------------------------------------------------------------------------------------------------
+# Sensor updated every second to give feedback in Home Assistant
+# ----------------------------------------------------------------------------------------------------
+
+sensor:
+  # Sensor showing the actual power consumption
+  - id: real_power
+    platform: template
+    name: "Real Power"
+    device_class: "power"
+    unit_of_measurement: "W"
+    update_interval: 1s
+
+# ----------------------------------------------------------------------------------------------------
+# Use http request component
+# ----------------------------------------------------------------------------------------------------
+
+http_request:
+  id: http_request_data
+  useragent: esphome/device
+  timeout: 10s
+
+# ----------------------------------------------------------------------------------------------------
+# Define scripts for power collection
+# ----------------------------------------------------------------------------------------------------
+
+script:
+  # Get power reports from another PowerMEter and update globals (real_power)
+  # Information are provided as json. Power exchanged with the grid is names "Value"
+  - id: power_meter_source
+    mode: single
+    then:
+      - if:
+          condition:
+            wifi.connected:
+          then:
+            - http_request.get:
+                url: http://${power_meter_ip_address}/sensor/real_power
+                headers:
+                  Content-Type: application/json
+                verify_ssl: False
+                on_response:
+                  then:
+                    - lambda: |-
+                        json::parse_json(id(http_request_data).get_string(), [](JsonObject data) {
+                          id(real_power).publish_state(data["value"].as< float >());
+                        });
+
+time:
+  - platform: sntp
+    on_time:
+      - seconds: /1
+        then:
+          - if:
+              condition:
+                - lambda: return id(power_meter_activated) != 0;
+              then:
+                - script.execute: power_meter_source
