@@ -15,22 +15,23 @@ Solar router engine's automatic regulation can be activated or deactivated with 
 
 The yellow LED is reflecting the network connection:
 
-- ***OFF***: solar router is not connected to power supply.
-- ***ON***: solar router is connected to the network.
-- ***blink***: solar router is not connected to the network and is trying to reconnect.
+- ***OFF*** : solar router is not connected to power supply.
+- ***ON*** : solar router is connected to the network.
+- ***blink*** : solar router is not connected to the network and is trying to reconnect.
+- ***fast blink*** : An error occurs during the reading of energy exchanged with the grid.
 
 
 The green LED is reflecting the actual configuration of regulation:
 
-- ***OFF***: automatic regulation is deactivated.
-- ***ON***: automatic regulation is active and is not diverting energy to the load.
-- ***blink***: solar router is currently sending energy to the load.
+- ***OFF*** : automatic regulation is deactivated.
+- ***ON*** : automatic regulation is active and is not diverting energy to the load.
+- ***blink*** : solar router is currently sending energy to the load.
 
 ## Configuration
 
 To use this package, add the following lines to your configuration file:
 
-```yaml
+```yaml linenums="1"
 packages:
   power_meter:
     url: http://github.com/XavierBerger/ESPHome-Solar-Router/
@@ -39,7 +40,7 @@ packages:
 
 When this package is used it is required to define the following paramater is `substitution` section as show in the example bellow:
 
-```yaml
+```yaml linenums="1"
 substitutions:
   # LEDs -------------------------------------------------------------------------
   # Green LED is reflecting regulation status

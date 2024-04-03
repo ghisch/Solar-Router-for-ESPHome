@@ -21,14 +21,15 @@ nav:
       - Triac: triac.md
       - Relay: relay.md
   - Engine: engine.md
-
-  - Developers: developers.md
+  - Contributing: contributing.md
   - ChangeLog: changelog.md
   - License: license.md
+  - About: about.md
 
 theme:
-  feaures:
+  features:
     - tabs
+    - content.code.copy
   name: material
 
   font:

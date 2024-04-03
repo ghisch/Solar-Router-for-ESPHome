@@ -6,7 +6,7 @@ Fronius is providing an *Open Inteface* named [Fronius Solar API](https://www.fr
 
 To use this package, add the following lines to your configuration file:
 
-```yaml
+```yaml linenums="1"
 packages:
   power_meter:
     url: http://github.com/XavierBerger/ESPHome-Solar-Router/
@@ -15,7 +15,7 @@ packages:
 
 This package needs to know the IP address of the inverter. This IP address has to be defined by `power_meter_ip_address` into `subtsitution` section of your configuration as in example ballow:
 
-```yaml
+```yaml linenums="1"
 substitutions:
   # Power meter source -----------------------------------------------------------
   # Define ip address of Fronius inverter
@@ -24,7 +24,7 @@ substitutions:
 
 This package is activated/deactivated with a global variable `power_meter_activated`. This `globals` is provided by the [solar router engine](engine.md) package. If this power meter is use inside a proxy, it is required to add this `globals` into you configuration yaml as follow:
 
-```yaml
+```yaml linenums="1"
 globals:
   - id: power_meter_activated
     type: int
@@ -37,7 +37,7 @@ See [proxy example](proxy_example.md) to see how to implement it.
 !!! important "ESP8266 and ESP8285"
     ESP8266 and ESP8285 has few memory but can be used a proxy if ssl support is disabled in `http_request`.
 
-    ```yaml
+    ```yaml linenums="1"
     http_request:
       esp8266_disable_ssl_support: True
     ```

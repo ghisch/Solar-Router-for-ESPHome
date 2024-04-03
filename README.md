@@ -1,5 +1,5 @@
-[![doc](docs/images/SolarRouterforESPHomeDocumentation.svg)](https://xavierberger.github.io/Solar-Router-for-ESPHome/)
-[![doc](docs/images/SolarRouterforESPHomeChangeLog.svg)](https://xavierberger.github.io/Solar-Router-for-ESPHome/changelog/)
+[![doc](docs/images/SolarRouterforESPHomeDocumentation.svg)](https://xavierberger.github.io/Solar-Router-for-ESPHome/)  
+[![changelog](docs/images/SolarRouterforESPHomeChangeLog.svg)](https://xavierberger.github.io/Solar-Router-for-ESPHome/changelog/)  
 [![issues](docs/images/SolarRouterforESPHomeReportbugorrequestenhancement.svg)](https://github.com/XavierBerger/Solar-Router-for-ESPHome/issues)
 
 # Solar Router for ESPHome 
