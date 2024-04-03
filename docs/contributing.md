@@ -1,16 +1,17 @@
-**Solar Router for [ESPHome](http://esphome.io)** is design to be modular to make easy the customisation to various power meters and various regulators. You want to contribute? You are welcome. To do so, create a fork of the main repository, in your fork, create a branch and add your modifications. Once done, you can propose a merge request of your branch into the main project.
+**Solar Router for [ESPHome](http://esphome.io)** is design to be modular to make easy the customisation to various power meters and various regulators.  
+You want to contribute? You are welcome. To do so, create a fork of the [main repository](https://github.com/XavierBerger/Solar-Router-for-ESPHome). In your fork, create a branch and add your modifications. Once done, you can propose a pull request of your branch into the branch ***main*** of main project.
 
-### Developing a hardware
+### Developing a **Hardware**
 
-You can propose any ardware based on your needs. If this new hardware require to use GPIO, the pins used by your hardware have to be configuration into `subsitution` section.
+You can propose any hardware based on your needs. If this new hardware require to use GPIO, the pins used by your hardware have to be configuration into `subsitution` section.
 
-A documentation have be added describing this new hardware and its constraints (Ex: GPIO capabilities). See [update documentation](developers.md#update-documentation) chapter bellow.
+A documentation have be added describing this new hardware and its constraints (Ex: GPIO capabilities). See [update documentation](#update-documentation) chapter bellow.
 
-## Developping a power meter
+## Developping a **Power Meter**
 
-A power meter is a component designed to provide and periodically update a sensor named `real_power`.
+A **Power Meter** is a component designed to provide and periodically update a sensor named `real_power`.
 
-```yaml
+```yaml linenums="1"
 sensor:
   # Sensor showing the actual power consumption
   - id: real_power
@@ -27,13 +28,13 @@ If this new power meter needs specific configuration, required parameters have t
 
 A documentation have to be added describing the power meter and how to configure it. See [update documentation](developers.md#update-documentation) chapter bellow.
 
-## Developping a regulator
+## Developping a **Regulator**
 
-A regulator has to manage the energy sent to the load based on the `triac_opening` sensor state. `triac_sensor` state can vary from 0 (where no energy is sent to the load) to 100 (where all the energy possible is sent to the load).
+A **Regulator** has to manage the energy sent to the load based on the `triac_opening` sensor state. `triac_sensor` state can vary from 0 (where no energy is sent to the load) to 100 (where all the energy possible is sent to the load).
 
 The following code represent and example of usage based on `light` component using `brightness` to control the energy diverted:
 
-```yaml
+```yaml linenums="1"
 script:
   # Apply regulation on triac using light component
   - id: regulation_control
@@ -48,9 +49,9 @@ If this new power meter needs specific configuration, required parameters have t
 
 A documentation have to be added describing the power meter and how to configure it. See [update documentation](developers.md#update-documentation) chapter bellow.
 
-## Update documentation
+## Update **Documentation**
 
-Documentation is written using [mkdocs](https://www.mkdocs.org/) and [Maretial for MkDocs](https://squidfunk.github.io/mkdocs-material/).
+Documentation is written using [mkdocs](https://www.mkdocs.org/) and [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 
 To install mkdocs, you need to install [Python](https://python.org) and then install the required module with the following command `pip install -r requirements.txt`.
 

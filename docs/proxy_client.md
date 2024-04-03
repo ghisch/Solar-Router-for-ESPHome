@@ -4,7 +4,7 @@ A **proxy client** is designed to get the power meter values from an other compo
 
 To use this package, add the following lines to your configuration file:
 
-```yaml
+```yaml linenums="1"
 packages:
   power_meter:
     url: http://github.com/XavierBerger/ESPHome-Solar-Router/
@@ -13,7 +13,7 @@ packages:
 
 This integration needs to know the IP address of the power meter proxy. This IP address has to be defined into `power_meter_ip_address` into `subtsitution` section of your configuration as in example ballow:
 
-```yaml
+```yaml linenums="1"
 substitutions:
   # Power meter source -----------------------------------------------------------
   # Define ip address of Fronius inverter
@@ -22,7 +22,7 @@ substitutions:
 
 This integration is activated/deactivated with a global variable `power_meter_activated`. This `globals` is provided by the [solar router engine](engine.md) package. If this power meter is use inside a proxy, it is required to add this `globals` into you configuration yaml as follow:
 
-```yaml
+```yaml linenums="1"
 globals:
   - id: power_meter_activated
     type: int

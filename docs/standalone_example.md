@@ -5,6 +5,6 @@ This configuration of the **Solar Router** is using [Fronuis power meter](froniu
 GPIO pins have been defined to match hardware configuration described [here](hardware.md)
 
 
-```yaml
+```yaml linenums="1"
 --8<-- "esp32-standalone.yaml"
 ```
