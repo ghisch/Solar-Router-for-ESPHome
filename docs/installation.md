@@ -26,7 +26,7 @@ A **proxy** just need 1 **power meter** package
 * [Proxy client](proxy_client.md)  
     Get power data from outside from solar router
 !!! abstract "Contribute"
-    You are developer and your power meter is missing fron this list, refer to [developers](developers.md) section to see how to contribute to this project.
+    You are developer and your power meter is missing fron this list, refer to [contributing](contributing.md) section to see how to contribute to this project.
 
 #### Step 2.2: Select a Regulator
 
@@ -35,7 +35,7 @@ A **proxy** just need 1 **power meter** package
 * [Relay](relay.md)  
   Regulate energy with a Solid State Relais or a Triac 
 !!! abstract "Contribute"
-    You are developer and your regulator is missing fron this list, refer to [developers](developers.md) section to see how to contribute to this project.
+    You are developer and your regulator is missing fron this list, refer to [contributing](contributing.md) section to see how to contribute to this project.
 
 
 #### Step 2.3: Add the Solar Router Engine

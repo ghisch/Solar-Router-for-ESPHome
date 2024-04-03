@@ -26,7 +26,7 @@ This sensor is used by the **Solar Router Engine** to get the value of power exc
 
 If this new power meter needs specific configuration, required parameters have to be added into `substitution` section.
 
-A documentation have to be added describing the power meter and how to configure it. See [update documentation](developers.md#update-documentation) chapter bellow.
+A documentation have to be added describing the power meter and how to configure it. See [update documentation](#update-documentation) chapter bellow.
 
 ## Developping a **Regulator**
 
@@ -47,7 +47,7 @@ script:
 ```
 If this new power meter needs specific configuration, required parameters have to be added into `substitution` section.
 
-A documentation have to be added describing the power meter and how to configure it. See [update documentation](developers.md#update-documentation) chapter bellow.
+A documentation have to be added describing the power meter and how to configure it. See [update documentation](#update-documentation) chapter bellow.
 
 ## Update **Documentation**
 
