@@ -10,12 +10,12 @@
       Control if Solar routing should be activated or not
     * ***Reactivity***  
       How fast will be the solar routing 
+    * ***Regulator opening***  
+      What is the current percentage of gate opening to send energy to the load 
     * ***Target grid exchange***  
       What is the target of energy exchanged with the grid.  
       &lt; 0 energy is sent to the grid  
       &gt; 0 energy is used from the grid
-    * ***Gate opening***  
-      What is the current percentage of gate opening to send energy to the load 
 !!! note ""
     **Sensors**
     

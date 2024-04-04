@@ -1,10 +1,15 @@
 #!/bin/bash
+
 SCRIPT_DIR=$(dirname "$0")
-pushd ${SCRIPT_DIR}/.. > /dev/null
+pushd "${SCRIPT_DIR}/.." > /dev/null
 git cliff > docs/changelog.md
 code docs/changelog.md
-echo "Check changelog before publishing and hit enter (Ctrl+C to cancel)."
-read a
-mkdocs gh-deploy
+
+read -r -p "Ready to publish? [Y/N]: " response
+
+if [[ "$response" =~ ^[Yy]$ ]]; then
+    mkdocs gh-deploy
+fi
 git restore docs/changelog.md
+
 popd > /dev/null
