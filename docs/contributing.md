@@ -22,6 +22,8 @@ sensor:
     update_interval: 1s
 ```
 
+!!! tip "Tip: See already developped power meter for examples"
+
 This sensor is used by the **Solar Router Engine** to get the value of power exchanged with the grid.
 
 If this new power meter needs specific configuration, required parameters have to be added into `substitution` section.
@@ -30,9 +32,9 @@ A documentation have to be added describing the power meter and how to configure
 
 ## Developping a **Regulator**
 
-A **Regulator** has to manage the energy sent to the load based on the `triac_opening` sensor state. `triac_sensor` state can vary from 0 (where no energy is sent to the load) to 100 (where all the energy possible is sent to the load).
+A **Regulator** has to manage the energy sent to the load based on the `regulator_opening` sensor state. `regulator_opening` state can vary from 0 (where no energy is sent to the load) to 100 (where all the energy possible is sent to the load).
 
-The following code represent and example of usage based on `light` component using `brightness` to control the energy diverted:
+The following code represent and example (extracted from [regulator_truac.yaml](../solar_router/regulator_triac.yaml)) of usage based on `light` component using `brightness` to control the energy diverted:
 
 ```yaml linenums="1"
 script:
@@ -43,8 +45,11 @@ script:
       # Apply opening level on triac using light component
       - light.turn_on:
           id: dimmer_controller
-          brightness: !lambda return id(triac_opening).state/100.0;
+          brightness: !lambda return id(regulator_opening).state/100.0;
 ```
+
+!!! tip "Tip: See already developped regulators for examples"
+
 If this new power meter needs specific configuration, required parameters have to be added into `substitution` section.
 
 A documentation have to be added describing the power meter and how to configure it. See [update documentation](#update-documentation) chapter bellow.
