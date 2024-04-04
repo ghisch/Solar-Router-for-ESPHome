@@ -10,4 +10,5 @@ This integration enables users to effortlessly monitor and control the router's 
     This project involves working with high voltage (110 or 230 volts), which can be hazardous.  
     Please read the [disclaimer](disclamer.md) before proceeding with the **Solar Router for ESPHome** project. 
 
-![SolarRouterClosed](images/SolarRouterClosed.png)
+![SolarRouterClosed](images/SolarRouterClosed.png){width=350}
+![Dashboard](images/SolarRouterInHomeAssistantDashboard.png){width=350}

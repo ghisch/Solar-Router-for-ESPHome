@@ -23,21 +23,21 @@ switch:
     on_turn_off:
       then:
         - light.turn_off: green_led
-        - number.to_min: triac_opening
+        - number.to_min: regulator_opening
         - lambda: id(real_power).publish_state(NAN);
         - lambda: id(power_meter_activated) = 0;
 
 number:
-  # Report or define triac opening value
-  # If solar routing is not enabled, this value define the level of triac opening
+  # Report or define regulator opening value
+  # If solar routing is not enabled, this value define the level of regulator opening
   # If solar routing is enabled, this value is automatically updated and reflect the level
-  #   of triac opening defined by the solar router
+  #   of regulator opening defined by the solar router
   #   Moving the slider will have an impact on the solar energy diverted and will
   #   immadiatelly be corrected by the solar router. It is advised to not use the slider
   #   when the router is activated.
   - platform: template
-    name: "Triac Opening"
-    id: triac_opening
+    name: "Regulator Opening"
+    id: regulator_opening
     min_value: 0
     max_value: 100
     step: 1
@@ -50,7 +50,7 @@ number:
         - if:
             condition:
               number.in_range:
-                id: triac_opening
+                id: regulator_opening
                 above: 1
             then:
               - light.turn_on:
@@ -64,7 +64,7 @@ number:
                   then:
                     - light.turn_on: green_led
 
-  # Define the reactivity of triac opening
+  # Define the reactivity of regulator opening
   - platform: template
     name: "Reactivity"
     id: reactivity
@@ -99,19 +99,19 @@ number:
 
 script:
   # Manage energy regulation
-  # Calculate the delta of percentage to apply to the triac opening status to go closer to the
+  # Calculate the delta of percentage to apply to the regulator opening status to go closer to the
   # objective. Closer we are to the objective smaller are the steps. Reactivity parameter is
   # doing a ponderation on this parameter to avoid resonance effects.
   - id: energy_regulation
     mode: single
     then:
-      # Define the opening level of triac based on power measured and grid exchange target
-      # The value of triac is a precentage and is then limited to the range 0 100
+      # Define the opening level of regulator based on power measured and grid exchange target
+      # The value of regulator is a precentage and is then limited to the range 0 100
       - lambda: |-
           double delta = -1*(id(real_power).state-id(target_grid_exchange).state)*id(reactivity).state/1000;
-          double triac_status = id(triac_opening).state + delta;            
-          triac_status = std::max(0.0, std::min(100.0, triac_status));
-          id(triac_opening).publish_state(triac_status);
+          double regulator_status = id(regulator_opening).state + delta;            
+          regulator_status = std::max(0.0, std::min(100.0, regulator_status));
+          id(regulator_opening).publish_state(regulator_status);
 
 # ----------------------------------------------------------------------------------------------------
 # Pooling data every seconds

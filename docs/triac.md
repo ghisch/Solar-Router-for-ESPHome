@@ -3,8 +3,8 @@
 A triac is able to split the current sent to the load to reduce the power transmitted.  
 This component is the base of AC Dimmers.
 
-??? note "How does triac work?"
-    If you want to know more about this component, you can refer to [Wikipedia](https://en.wikipedia.org/wiki/TRIAC#Application).  
+??? note "How does this regulator work?"
+    If you want to know more how a triac can regulate the transmited energy, you can refer to [Wikipedia](https://en.wikipedia.org/wiki/TRIAC#Application).  
     The following schema is showing how the input sinus is cut to reduce the energy transfered to the load:
 
     <figure markdown="span">
@@ -19,8 +19,7 @@ In this package, we propose to use a board manufactured by RobotDyn.
 
 !!! warning
     The triac is supposed to support up the 24A (which represent a power greater than 5500W). The heat dissipator is undersized regarding to the level of energy which is supported by the triac. It is then recommanded to replace the heat dissipator with a bigger one.
-
-The following schematic is representing the wiring of the board
+The following schematic is representing the wiring of the board:
 ![triac](images/RobotDynTriac24A.drawio.png)
 
 To use this package, add the following lines to your configuration file:
