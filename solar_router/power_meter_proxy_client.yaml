@@ -19,6 +19,7 @@ http_request:
   id: http_request_data
   useragent: esphome/device
   timeout: 10s
+  verify_ssl: False
 
 # ----------------------------------------------------------------------------------------------------
 # Define scripts for power collection
@@ -36,14 +37,14 @@ script:
           then:
             - http_request.get:
                 url: http://${power_meter_ip_address}/sensor/real_power
-                headers:
-                  Content-Type: application/json
-                verify_ssl: False
+                capture_response: true
+                max_response_buffer_size: 4096
                 on_response:
                   then:
                     - lambda: |-
-                        json::parse_json(id(http_request_data).get_string(), [](JsonObject data) {
+                        json::parse_json(body, [](JsonObject root) -> bool {
                           id(real_power).publish_state(data["value"].as< float >());
+                          return true;
                         });
 
 time:
