@@ -1,3 +1,4 @@
+esphome
 mkdocs
 mkdocs-git-revision-date-localized-plugin
 mkdocs-glightbox

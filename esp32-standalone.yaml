@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------------------
-# ESPHome configuration - This part depends on your hardware target
+# Wifi configuration - This part depends on your hardware target
 # ----------------------------------------------------------------------------------------------------
 
 esphome:
@@ -13,17 +13,23 @@ esp32:
 
 # Enable logging
 logger:
-  baud_rate: 0
+  baud_rate: 115200
   level: INFO
   logs:
     component: ERROR
 
 # Enable Home Assistant API
 api:
+  encryption:
+    key: !secret api_encryption_key
 
-# Enable over-the-air updates
+
 ota:
   platform: esphome
+  password: !secret solar_router_ota_password
+
+# Enable improv serial
+improv_serial:
 
 # WiFi connection
 wifi:
@@ -38,17 +44,25 @@ web_server:
 # Customisation
 # ----------------------------------------------------------------------------------------------------
 
+# This part of the script is designed to be use for customisation. It shouldn't be necessary to
+# edit other part of the script to perform configuration.
+
 substitutions:
   # Power meter source -----------------------------------------------------------
-  # Define ip address of Fronius inverter
+  # Define ip address of inverter
+  # Required for : Fronius
   power_meter_ip_address: "192.168.1.21"
 
-  # Regulator configuration ------------------------------------------------------
+
+  # Regulator --------------------------------------------------------------------
+  regulator: "ac_dimmer"
+
+  # Regulator configuration 
   # Define GPIO pin connected to AC Dimmer for gate and zero crossing detection.
   regulator_gate_pin: GPIO22
-  regulator_zero_crossing_pin: GPIO23
+  regulator_zero_crossing_pin: GPIO23 
 
-  # LEDs -------------------------------------------------------------------------
+  # LEDs ------------------------------------------------------------------------- 
   # Green LED is reflecting regulation status
   # Yellow LED is reflecting power meter status
   green_led_pin: GPIO19
@@ -58,9 +72,14 @@ packages:
   power_meter:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
     file: solar_router/power_meter_fronius.yaml
+    refresh: 5s
   regulator:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
     file: solar_router/regulator_triac.yaml
+    # file: solar_router/regulator_relay.yaml
+    refresh: 5s
   solar_router:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
     file: solar_router/solar_router_engine.yaml
+    refresh: 5s
+
