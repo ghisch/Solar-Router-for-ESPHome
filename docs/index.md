@@ -12,3 +12,4 @@ This integration enables users to effortlessly monitor and control the router's 
 
 ![SolarRouterClosed](images/SolarRouterClosed.png){width=350}
 ![Dashboard](images/SolarRouterInHomeAssistantDashboard.png){width=350}
+
