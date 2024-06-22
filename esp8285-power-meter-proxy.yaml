@@ -21,6 +21,7 @@ api:
 
 # Enable over-the-air updates
 ota:
+  - platform: esphome
 
 # WiFi connection
 wifi:

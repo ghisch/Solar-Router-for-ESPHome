@@ -1,7 +1,9 @@
+esphome
 mkdocs
+mkdocs-git-revision-date-localized-plugin
+mkdocs-glightbox
+mkdocs-include-markdown-plugin
 mkdocs-material
 mkdocs-material-extensions
 mkdocs-minify-plugin
-mkdocs-git-revision-date-localized-plugin
-mkdocs-glightbox
 pymdown-extensions

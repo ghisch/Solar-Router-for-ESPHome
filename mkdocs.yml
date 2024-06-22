@@ -54,3 +54,4 @@ plugins:
   - git-revision-date-localized:
       type: datetime
   - glightbox
+  - include-markdown

@@ -58,6 +58,11 @@ A documentation have to be added describing the power meter and how to configure
 
 Documentation is written using [mkdocs](https://www.mkdocs.org/) and [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 
-To install mkdocs, you need to install [Python](https://python.org) and then install the required module with the following command `pip install -r requirements.txt`.
+To install `mkdocs`, you need to install [Python](https://python.org) and then :
+
+- Create a virtual environment (see [Python documentation](https://docs.python.org/3/library/venv.html)).
+- Install the required module with the following command `pip install -r requirements.txt`.
 
 Documentation is stored in `docs` directory. To see you modification in real time in your browser, execute the command `mkdocs serve` and browse [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+{% include "changelog.md"%}

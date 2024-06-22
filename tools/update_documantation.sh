@@ -5,7 +5,7 @@ pushd "${SCRIPT_DIR}/.." > /dev/null
 git cliff > docs/changelog.md
 code docs/changelog.md
 
-read -r -p "Ready to publish? [Y/N]: " response
+read -r -p "Ready to publish? [y/N]: " response
 
 if [[ "$response" =~ ^[Yy]$ ]]; then
     mkdocs gh-deploy
