@@ -43,7 +43,7 @@ script:
                   then:
                     - lambda: |-
                         json::parse_json(body, [](JsonObject root) -> bool {
-                          id(real_power).publish_state(data["value"].as< float >());
+                          id(real_power).publish_state(root["value"].as< float >());
                           return true;
                         });
 
