@@ -50,10 +50,16 @@ globals:
     type: int
     initial_value: "1"
 
+# Uncomment the following lines if you want to use the source from github
+# packages:
+#   power_meter:
+#     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+#     file: solar_router/power_meter_fronius.yaml
+
+# Remove the following lines if you want to use the source from github
 packages:
   power_meter:
-    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-    file: solar_router/power_meter_fronius.yaml
+    <<: !include solar_router/power_meter_fronius.yaml
 
 http_request:
   esp8266_disable_ssl_support: True

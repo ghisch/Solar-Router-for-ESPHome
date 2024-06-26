@@ -19,11 +19,11 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: !secret api_key
+    key: !secret api_encryption_key
 
 ota:
   - platform: esphome
-    password: !secret ota_password
+    password: !secret solar_router_ota_password
 
 # Define wifi connection
 wifi:
@@ -157,6 +157,7 @@ http_request:
   timeout: 10s
   esp8266_disable_ssl_support: True
   id: http_request_data
+  verify_ssl: False
 
 # ----------------------------------------------------------------------------------------------------
 # Define scripts for power collection or energy regulation
@@ -172,14 +173,13 @@ script:
     then:
       - http_request.get:
           url: http://${fronius_inverter_ip_address}/solar_api/v1/GetMeterRealtimeData.cgi
-          headers:
-            Content-Type: application/json
-          verify_ssl: False
+          capture_response: true
           on_response:
             then:
               - lambda: |-
-                  json::parse_json(id(http_request_data).get_string(), [](JsonObject data) {
-                    id(real_power).publish_state(data["Body"]["Data"]["0"]["PowerReal_P_Sum"].as< float >());
+                  json::parse_json(body, [](JsonObject root) -> bool {
+                    id(real_power).publish_state(root["Body"]["Data"]["0"]["PowerReal_P_Sum"].as< float >());
+                    return true;
                   });
 
   # Manage energy regulation
