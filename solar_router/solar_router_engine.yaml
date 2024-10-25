@@ -109,7 +109,7 @@ script:
       # The value of regulator is a precentage and is then limited to the range 0 100
       - lambda: |-
           double delta = -1*(id(real_power).state-id(target_grid_exchange).state)*id(reactivity).state/1000;
-          double regulator_status = id(regulator_opening).state + delta;            
+          double regulator_status = id(regulator_opening).state + delta;
           regulator_status = std::max(0.0, std::min(100.0, regulator_status));
           id(regulator_opening).publish_state(regulator_status);
 

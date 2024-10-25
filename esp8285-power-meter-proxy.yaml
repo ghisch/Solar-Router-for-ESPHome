@@ -12,13 +12,15 @@ esp8266:
 # Enable logging
 logger:
   baud_rate: 115200
-  level: INFO
+  level: DEBUG
   logs:
     component: ERROR
     http_request.arduino: ERROR
 
 # Enable Home Assistant API
 api:
+  encryption:
+    key: !secret proxy_api_encryption_key
 
 # Enable over-the-air updates
 ota:
