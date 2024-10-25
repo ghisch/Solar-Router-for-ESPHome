@@ -54,6 +54,8 @@ globals:
 #   power_meter:
 #     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
 #     file: solar_router/power_meter_fronius.yaml
+#     refresh: 5s
+
 
 # Remove the following lines if you want to use the source from github
 packages:
