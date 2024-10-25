@@ -1,7 +1,22 @@
-**Solar Router for [ESPHome](http://esphome.io)** is design to be modular to make easy the customisation to various power meters and various regulators.  
-You want to contribute? You are welcome. To do so, create a fork of the [main repository](https://github.com/XavierBerger/Solar-Router-for-ESPHome). In your fork, create a branch and add your modifications. Once done, you can propose a pull request of your branch into the branch ***main*** of main project.
+# Contributing to development
 
-### Developing a **Hardware**
+**Solar Router for [ESPHome](http://esphome.io)** is design to be modular to make easy the customisation to various power meters and various regulators.  
+You want to contribute? You are welcome and you will find bellow some recommendation to do so.
+
+## Setup development environement
+
+To contribute to **Solar-Router-for-ESPHome** and develop a new feature on your computer and propose a *merge request*, you should:
+
+- [Create and activate a Python virtual environment](https://docs.python.org/3/library/venv.html)
+- Install ESPHome CLI:`pip install esphome` 
+- Fork [the repository](https://github.com/XavierBerger/Solar-Router-for-ESPHome) on Github
+- Clone the repository on your PC
+- Create a branch starting from **main**
+- Install and test your code on you device : `esphome run my_configuration/yaml`
+- Update the code and push update on your repository
+- Propose a pull request from your fork to the official repository
+
+## Developing a **Hardware**
 
 You can propose any hardware based on your needs. If this new hardware require to use GPIO, the pins used by your hardware have to be configuration into `subsitution` section.
 
@@ -34,7 +49,7 @@ A documentation have to be added describing the power meter and how to configure
 
 A **Regulator** has to manage the energy sent to the load based on the `regulator_opening` sensor state. `regulator_opening` state can vary from 0 (where no energy is sent to the load) to 100 (where all the energy possible is sent to the load).
 
-The following code represent and example (extracted from [regulator_truac.yaml](../solar_router/regulator_triac.yaml)) of usage based on `light` component using `brightness` to control the energy diverted:
+The following code represent and example (extracted from [regulator_triac.yaml](https://github.com/XavierBerger/Solar-Router-for-ESPHome/blob/main/solar_router/regulator_triac.yaml)) of usage based on `light` component using `brightness` to control the energy diverted:
 
 ```yaml linenums="1"
 script:
