@@ -21,3 +21,6 @@ substitutions:
 ```
 
 This integration is activated/deactivated with a global variable `power_meter_activated`. This `globals` is provided by the [solar router engine](engine.md) package.
+
+!!! warning "Network dependency"
+    This power meter require the network to gather information about energy exchanged with the grid.

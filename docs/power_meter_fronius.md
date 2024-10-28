@@ -42,3 +42,6 @@ See [proxy example](proxy_example.md) to see how to implement it.
       esp8266_disable_ssl_support: True
     ```
     See [HTTP Request component](https://esphome.io/components/http_request.html#esp8266-disable-ssl-support) for details
+
+!!! warning "Network dependency"
+    This power meter require the network to gather information about energy exchanged with the grid.
