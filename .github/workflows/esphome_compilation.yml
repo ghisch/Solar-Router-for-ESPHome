@@ -29,6 +29,7 @@ jobs:
         echo "solar_router_ota_password: \"mySolarRouterOtaPassword\"" >> secrets.yaml
         echo "api_encryption_key: \"8q4u9dNBGMcsPemx+Q+WzLTU+mLXHAgPsrTpGjyV1hs=\"" >> secrets.yaml
         echo "hotspot_password: \"myHotspotPassword\"" >> secrets.yaml
+        echo "proxy_api_encryption_key: \"8q4u9dNBGMcsPemx+Q+WzLTU+mLXHAgPsrTpGjyV1hs=\"" >> secrets.yaml
         
     - name: Compile esp32-proxy-client.yaml
       continue-on-error: true
