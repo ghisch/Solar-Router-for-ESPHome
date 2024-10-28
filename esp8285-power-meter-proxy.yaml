@@ -37,8 +37,8 @@ wifi:
 
 substitutions:
   # Power meter source -----------------------------------------------------------
-  # Define ip address of Fronius inverter
-  power_meter_ip_address: "192.168.1.21"
+  # Sensor in home assistant gathering the power consumption
+  main_power_sensor: sensor.solarnet_puissance_du_reseau_electrique
 
   # LEDs -------------------------------------------------------------------------
   # Yellow LED is reflecting power meter
@@ -53,14 +53,10 @@ globals:
 # packages:
 #   power_meter:
 #     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-#     file: solar_router/power_meter_fronius.yaml
+#     file: solar_router/power_meter_home_assistant.yaml
 #     refresh: 5s
-
 
 # Remove the following lines if you want to use the source from github
 packages:
   power_meter:
-    <<: !include solar_router/power_meter_fronius.yaml
-
-http_request:
-  esp8266_disable_ssl_support: True
+    <<: !include solar_router/power_meter_home_assistant.yaml

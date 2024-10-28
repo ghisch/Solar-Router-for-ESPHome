@@ -16,6 +16,7 @@ nav:
           - With proxy: proxy_example.md
   - Power Meter:
       - Fronius: power_meter_fronius.md
+      - Home Assistant: power_meter_home_assistant.md
       - Proxy Client: power_meter_proxy_client.md
   - Regulator:
       - Triac: regulator_triac.md

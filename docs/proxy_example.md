@@ -1,6 +1,6 @@
 # Solar Router using a proxy
 
-The configuration of the **Proxy client** is only using a [Fronuis power meter](power_meter_fronius.md)
+The configuration of the **Proxy client** is only using a [Home Assistant power meter](power_meter_home_assistant.md)
 
 ```yaml linenums="1"
 --8<-- "esp8285-power-meter-proxy.yaml"
