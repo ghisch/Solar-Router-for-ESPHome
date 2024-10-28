@@ -1,6 +1,6 @@
 # Standalone Solar Router
 
-This configuration of the **Solar Router** is using [Fronuis power meter](fronius.md), [Triac regulator](triac.md), [Solar router engine](engine.md).
+This configuration of the **Solar Router** is using [Fronuis power meter](power_meter_fronius.md), [Triac regulator](regulator_triac.md), [Solar router engine](engine.md).
 
 GPIO pins have been defined to match hardware configuration described [here](hardware.md)
 

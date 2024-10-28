@@ -49,7 +49,7 @@ A documentation have to be added describing the power meter and how to configure
 
 A **Regulator** has to manage the energy sent to the load based on the `regulator_opening` sensor state. `regulator_opening` state can vary from 0 (where no energy is sent to the load) to 100 (where all the energy possible is sent to the load).
 
-The following code represent and example (extracted from [regulator_triac.yaml](https://github.com/XavierBerger/Solar-Router-for-ESPHome/blob/main/solar_router/regulator_triac.yaml)) of usage based on `light` component using `brightness` to control the energy diverted:
+The following code represent an example (extracted from [regulator_triac.yaml](https://github.com/XavierBerger/Solar-Router-for-ESPHome/blob/main/solar_router/regulator_triac.yaml)) of usage based on `light` component using `brightness` to control the energy diverted:
 
 ```yaml linenums="1"
 script:

@@ -21,19 +21,21 @@ A **proxy** just need 1 **power meter** package
 
 #### Step 2.1: Select a Power Meter 
 
-* [Fronius](fronius.md)  
+* [Fronius](power_meter_fronius.md)  
     Get power data from Fronius inverter (Tested on Gen24 Primo)
-* [Proxy client](proxy_client.md)  
+* [Proxy client](power_meter_proxy_client.md)  
     Get power data from outside from solar router
+
 !!! abstract "Contribute"
     You are developer and your power meter is missing fron this list, refer to [contributing](contributing.md) section to see how to contribute to this project.
 
 #### Step 2.2: Select a Regulator
 
-* [Triac](triac.md)  
+* [Triac](regulator_triac.md)  
   Regulate energy with a Triac
-* [Relay](relay.md)  
-  Regulate energy with a Solid State Relais or a Triac 
+* [Relay](regulator_relay.md)  
+  Regulate energy with a Solid State Relais or a Triac
+   
 !!! abstract "Contribute"
     You are developer and your regulator is missing fron this list, refer to [contributing](contributing.md) section to see how to contribute to this project.
 
