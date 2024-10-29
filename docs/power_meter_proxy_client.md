@@ -20,13 +20,7 @@ substitutions:
   power_meter_ip_address: "192.168.1.21"
 ```
 
-This integration is activated/deactivated with a global variable `power_meter_activated`. This `globals` is provided by the [solar router engine](engine.md) package. If this power meter is use inside a proxy, it is required to add this `globals` into you configuration yaml as follow:
+This integration is activated/deactivated with a global variable `power_meter_activated`. This `globals` is provided by the [solar router engine](engine.md) package.
 
-```yaml linenums="1"
-globals:
-  - id: power_meter_activated
-    type: int
-    initial_value: "1"
-```
-
-See [proxy example](proxy_example.md) to see how to implement it.
+!!! warning "Network dependency"
+    This power meter require the network to gather information about energy exchanged with the grid.

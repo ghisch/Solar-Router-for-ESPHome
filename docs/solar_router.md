@@ -1,6 +1,6 @@
 # Solar router
 
-**Solar Router for [ESPHome](http://esphome.io)** has been designed to work with [Home Assistant](http://home-assistant.io) and it requires the installation of [ESPHome integration](https://www.home-assistant.io/integrations/esphome/).
+**Solar Router for [ESPHome](http://esphome.io)** has been designed to work with [Home Assistant](http://home-assistant.io) and it requires the installation of [ESPHome integration](https://www.home-assistant.io/integrations/esphome/).  
 
 ![HA](images/SolarRouterInHomeAssistant.png){ align=left }
 !!! note ""

@@ -15,11 +15,12 @@ nav:
           - Standalone: standalone_example.md
           - With proxy: proxy_example.md
   - Power Meter:
-      - Fronius: fronius.md
-      - Proxy Client: proxy_client.md
+      - Fronius: power_meter_fronius.md
+      - Home Assistant: power_meter_home_assistant.md
+      - Proxy Client: power_meter_proxy_client.md
   - Regulator:
-      - Triac: triac.md
-      - Relay: relay.md
+      - Triac: regulator_triac.md
+      - Relay: regulator_relay.md
   - Engine: engine.md
   - Contributing: contributing.md
   - ChangeLog: changelog.md
