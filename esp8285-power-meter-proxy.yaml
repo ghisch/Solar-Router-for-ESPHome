@@ -44,6 +44,7 @@ substitutions:
   # Yellow LED is reflecting power meter
   yellow_led_pin: GPIO1
 
+# power_meter_activated has to be set to 1 to activate the power measurment read
 globals:
   - id: power_meter_activated
     type: int
