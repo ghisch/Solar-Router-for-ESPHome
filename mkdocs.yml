@@ -22,6 +22,7 @@ nav:
       - Triac: regulator_triac.md
       - Relay: regulator_relay.md
   - Engine: engine.md
+  - HA configuration: ha_configuration.md
   - Contributing: contributing.md
   - ChangeLog: changelog.md
   - License: license.md
