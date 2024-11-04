@@ -22,6 +22,7 @@ nav:
       - Triac: regulator_triac.md
       - Relay: regulator_relay.md
   - Engine: engine.md
+  - HA configuration: ha_configuration.md
   - Contributing: contributing.md
   - ChangeLog: changelog.md
   - License: license.md
@@ -44,6 +45,11 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.snippets:
       check_paths: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
   - pymdownx.superfences
   - attr_list
   - md_in_html
