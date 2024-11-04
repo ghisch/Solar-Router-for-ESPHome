@@ -44,6 +44,11 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.snippets:
       check_paths: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
   - pymdownx.superfences
   - attr_list
   - md_in_html
