@@ -11,7 +11,7 @@ To do this divertion, it calculates the percentage of the regulator "opening" an
 
 Solar router engine's automatic regulation can be activated or deactivated with the activation switch.
 
-## User feedbak LEDS
+## User feedback LEDS
 
 The yellow LED is reflecting the network connection:
 
@@ -33,7 +33,7 @@ To use this package, add the following lines to your configuration file:
 
 ```yaml linenums="1"
 packages:
-  power_meter:
+  engine:
     url: http://github.com/XavierBerger/ESPHome-Solar-Router/
     file: solar_router/solar_router_engine.yaml
 ```
