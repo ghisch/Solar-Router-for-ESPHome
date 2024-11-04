@@ -7,13 +7,27 @@ You want to contribute? You are welcome and you will find bellow some recommenda
 
 To contribute to **Solar-Router-for-ESPHome** and develop a new feature on your computer and propose a *merge request*, you should:
 
-- [Create and activate a Python virtual environment](https://docs.python.org/3/library/venv.html)
-- Install ESPHome CLI:`pip install esphome` 
-- Fork [the repository](https://github.com/XavierBerger/Solar-Router-for-ESPHome) on Github
-- Clone the repository on your PC
-- Create a branch starting from **main**
-- Install and test your code on you device : `esphome run my_configuration/yaml`
+- Fork [**Solar-Router-for-ESPHome** repository](https://github.com/XavierBerger/Solar-Router-for-ESPHome) on Github
+- Clone your forked repository on your PC
+- Create a development branch starting from **main**
+- [Create and activate a Python virtual environment](https://docs.python.org/3/library/venv.html) 
+    ```shell
+    python -m venv venv
+    venv/bin/activate
+    ```
+- Install ESPHome CLI and other requirements:
+    ```shell
+    pip install -r requirements.txt
+    ``` 
+- Install and test your code on you device : 
+    ```shell
+    esphome run my_configuration/yaml
+    ```
 - Update the code and push update on your repository
+- Install and test you code with `esphome` command line
+    ```shell
+    esphome run my_solar_router.yaml
+    ```
 - Propose a pull request from your fork to the official repository
 
 ## Developing a **Hardware**
@@ -47,7 +61,7 @@ A documentation have to be added describing the power meter and how to configure
 
 ## Developping a **Regulator**
 
-A **Regulator** has to manage the energy sent to the load based on the `regulator_opening` sensor state. `regulator_opening` state can vary from 0 (where no energy is sent to the load) to 100 (where all the energy possible is sent to the load).
+A **Regulator** has to manage the percentage of energy sent to the load based on the `regulator_opening` sensor state. `regulator_opening` state can vary from 0 (where no energy is sent to the load) to 100 (where all the energy possible is sent to the load).
 
 The following code represent an example (extracted from [regulator_triac.yaml](https://github.com/XavierBerger/Solar-Router-for-ESPHome/blob/main/solar_router/regulator_triac.yaml)) of usage based on `light` component using `brightness` to control the energy diverted:
 
