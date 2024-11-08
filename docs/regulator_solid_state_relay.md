@@ -1,4 +1,4 @@
-# Relay regulator
+# Solid State Relay regulator
 
 A relay is able to let current pass to the load or not. By sending small part of current (blinking), it is possibile to divert a well defined amount of energy to the load.
 
@@ -19,7 +19,7 @@ A relay is able to let current pass to the load or not. By sending small part of
 
 The following schematic is representing the wiring of the relay:
 
-![relay](images/relay.drawio.png)
+![relay](images/solid_state_relay.drawio.png)
 
 To use this package, add the following lines to your configuration file:
 
@@ -27,7 +27,7 @@ To use this package, add the following lines to your configuration file:
 packages:
   regulator:
     url: http://github.com/XavierBerger/ESPHome-Solar-Router/
-    file: solar_router/regulator_relay.yaml
+    file: solar_router/regulator_solid_state_relay.yaml
 ```
 
 This package require the definition of pin connected to the triac module for zero crossing detection (regulator_zero_crossing_pin) and gate/PWM control (regulator_gate_pin)
