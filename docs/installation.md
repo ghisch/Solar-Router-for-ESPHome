@@ -23,6 +23,8 @@ A **proxy** just need 1 **power meter** package
 
 * [Fronius](power_meter_fronius.md)  
     Get power data from Fronius inverter (Tested on Gen24 Primo)
+* [Home Assistant](power_meter_home_assistant.md)  
+    Get power data from Home Assistant sensor
 * [Proxy client](power_meter_proxy_client.md)  
     Get power data from outside from solar router
 
