@@ -11,7 +11,7 @@ esp8266:
 
 # Enable logging
 logger:
-  baud_rate: 0
+  baud_rate: 115200
   level: INFO
   logs:
     component: ERROR
