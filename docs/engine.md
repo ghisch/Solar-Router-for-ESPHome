@@ -1,13 +1,9 @@
 
 # Solar Router Engine
 
-This package is implementing the engine of the solar router which is determine when and how many energy has to be diverted to the load.
+This package is implementing the engine of the solar router which determines when and how many energy has to be diverted to the load.
 
-**Solar router engine** calls every second the power meter to get the actual power consumed.
-
-If power is bellow the target it will then channel the excess of produced energy to the load with the regulator.
-
-To do this divertion, it calculates the percentage of the regulator "opening" and adjust it dynamically to reach the target.
+**Solar router engine** calls every second the power meter to get the actual power consumed. If energy produce is greater than energy consummed and exceed the define echange target, the engine will determine the **percentage of the regulator "opening"** and adjusts it dynamically to reach the target.
 
 Solar router engine's automatic regulation can be activated or deactivated with the activation switch.
 
@@ -35,7 +31,7 @@ To use this package, add the following lines to your configuration file:
 packages:
   engine:
     url: http://github.com/XavierBerger/ESPHome-Solar-Router/
-    file: solar_router/solar_router_engine.yaml
+    file: solar_router/engine.yaml
 ```
 
 When this package is used it is required to define the following paramater is `substitution` section as show in the example bellow:

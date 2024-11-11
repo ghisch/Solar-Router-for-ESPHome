@@ -23,6 +23,8 @@ A **proxy** just need 1 **power meter** package
 
 * [Fronius](power_meter_fronius.md)  
     Get power data from Fronius inverter (Tested on Gen24 Primo)
+* [Home Assistant](power_meter_home_assistant.md)  
+    Get power data from Home Assistant sensor
 * [Proxy client](power_meter_proxy_client.md)  
     Get power data from outside from solar router
 
@@ -31,13 +33,14 @@ A **proxy** just need 1 **power meter** package
 
 #### Step 2.2: Select a Regulator
 
-* [Triac](regulator_triac.md)  
-  Regulate energy with a Triac
-* [Relay](regulator_relay.md)  
-  Regulate energy with a Solid State Relais or a Triac
-   
+* For regulator which can be controlled from 0% ro 100%
+  * [Triac](regulator_triac.md)  
+    Regulate energy with a Triac
+  * [Solid State Relay](regulator_solid_state_relay.md)  
+    Regulate energy with a Solid State Relais or a Triac
+
 !!! abstract "Contribute"
-    You are developer and your regulator is missing fron this list, refer to [contributing](contributing.md) section to see how to contribute to this project.
+    You are developer and your regulator is missing from this list, refer to [contributing](contributing.md) section to see how to contribute to this project.
 
 
 #### Step 2.3: Add the Solar Router Engine
