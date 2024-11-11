@@ -92,4 +92,13 @@ To install `mkdocs`, you need to install [Python](https://python.org) and then :
 
 Documentation is stored in `docs` directory. To see you modification in real time in your browser, execute the command `mkdocs serve` and browse [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-{% include "changelog.md"%}
+!!! note "Changelog update"
+    ChangeLog is only available in officially published [documentation](https://xavierberger.github.io/Solar-Router-for-ESPHome/changelog/).  
+    Changelog is updated manually after a new release is published.
+
+    Changelog is generated using `git-cliff`.  
+    Version are based on tags.  
+    Lines added in changelog are based on *merge commit messages*.
+
+    The script `tools\update_documentation.sh` is designed to update `changelog.md`, generate and publish `mkdocs` documentation on [github pages](https://xavierberger.github.io/Solar-Router-for-ESPHome/).  
+    **The script updating the documentation is entented to be used by repository maintainer only.**
