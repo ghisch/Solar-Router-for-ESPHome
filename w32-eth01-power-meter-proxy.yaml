@@ -14,7 +14,7 @@ esp32:
 # Enable logging
 logger:
   baud_rate: 115200
-  level: DEBUG
+  level: INFO
   logs:
     component: ERROR
     http_request.arduino: ERROR

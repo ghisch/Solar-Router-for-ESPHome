@@ -33,20 +33,28 @@ A **proxy** just need 1 **power meter** package
 
 #### Step 2.2: Select a Regulator
 
-* For regulator which can be controlled from 0% ro 100%
-  * [Triac](regulator_triac.md)  
+* For regulator which can be controlled from 0% to 100%
+    * [Triac](regulator_triac.md)  
     Regulate energy with a Triac
-  * [Solid State Relay](regulator_solid_state_relay.md)  
-    Regulate energy with a Solid State Relais or a Triac
+    * [Solid State Relay](regulator_solid_state_relay.md)  
+    Regulate energy with a Solid State Relais
+* For regulator wich can only be switched ON/OFF
+    * [Mecanical relay](regulator_mecanical_relay.md)  
+    Regulate energy with mecanical relay
+
 
 !!! abstract "Contribute"
     You are developer and your regulator is missing from this list, refer to [contributing](contributing.md) section to see how to contribute to this project.
 
 
-#### Step 2.3: Add the Solar Router Engine
+#### Step 2.3: Add a Solar Router Engine
 
-* [Solar Router Engine](engine.md)  
+* [Variable Engine](engine.md)  
   Read power exchange with the grid, determine and apply the percentage of regulator opening.
+
+* [ON/OFF Engine](engine_on_off.md)  
+  Read power exchange with the grid, and start to divert energy if a threshold is reached and stop if another threshold is reached.
+
 
 ### Ster 3: Configure your solar router
 

@@ -3,8 +3,8 @@
 # ----------------------------------------------------------------------------------------------------
 
 esphome:
-  name: "esp8285"
-  friendly_name: ESP8285
+  name: "esp8266"
+  friendly_name: ESP8266
 
 esp8266:
   board: esp01_1m
@@ -22,10 +22,6 @@ api:
   encryption:
     key: !secret proxy_api_encryption_key
 
-# Enable over-the-air updates
-ota:
-  - platform: esphome
-
 # WiFi connection
 wifi:
   ssid: !secret wifi_ssid
@@ -37,18 +33,18 @@ wifi:
 
 substitutions:
   # Power meter source -----------------------------------------------------------
-  # Sensor in home assistant gathering the power consumption
-  main_power_sensor: sensor.solarnet_puissance_du_reseau_electrique
+  # Define ip address of Power Meter (Fronius Inverter)
+  power_meter_ip_address: "192.168.1.21"
 
   # LEDs -------------------------------------------------------------------------
+  # Green LED is reflecting regulation status
   # Yellow LED is reflecting power meter
-  yellow_led_pin: GPIO1
+  green_led_pin: GPIO1
+  yellow_led_pin: GPIO2
 
-# power_meter_activated has to be set to 1 to activate the power measurment read
-globals:
-  - id: power_meter_activated
-    type: int
-    initial_value: "1"
+  # Regulator configuration ------------------------------------------------------
+  # Define GPIO pin connected to mecanical relay.
+  regulator_gate_pin: GPIO0
 
 # Uncomment the following lines if you want to use the source from github
 # packages:
@@ -56,8 +52,20 @@ globals:
 #     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
 #     file: solar_router/power_meter_home_assistant.yaml
 #     refresh: 5s
+#  regulator:
+#     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+#     file:solar_router/regulator_mecanical_relay.yaml
+#     refresh: 5s
+#  solar_router:
+#    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+#     file: solar_router/engine_on_off.yaml
+#     refresh: 5s
 
 # Remove the following lines if you want to use the source from github
 packages:
   power_meter:
-    <<: !include solar_router/power_meter_home_assistant.yaml
+    <<: !include solar_router/power_meter_fronius.yaml
+  regulator:
+    <<: !include solar_router/regulator_mecanical_relay.yaml
+  solar_router:
+    <<: !include solar_router/engine_on_off.yaml
