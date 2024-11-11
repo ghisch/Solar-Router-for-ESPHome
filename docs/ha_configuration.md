@@ -1,6 +1,6 @@
 # Home Assistant configuration
 
-**Power meter** is reading energy exchanged with the grid every secondes.  
+**Power meters** are reading energy exchanged with the grid every secondes.  
 By default, Home Assistant *recorder* is saving this information in its database.  
 To optimize data storage in Home Assistant, it's essential to configure databases appropriately.
 
@@ -22,7 +22,7 @@ To optimize data storage in Home Assistant, it's essential to configure database
     Home Assistant `recorder` is constantly saves data in database. Refer to [recorder configuration](https://www.home-assistant.io/integrations/recorder/) for details.
 
 
-!!! warning "If you are uding InfluxDB"
+!!! warning "If you are using InfluxDB"
     If you are using InfluxDB, you should pay the same attention about data recording.  
     Refer to the [integration documentation](https://www.home-assistant.io/integrations/influxdb/) to exclude `real_power` from your database.
 

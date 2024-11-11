@@ -19,7 +19,7 @@ substitutions:
   # Sensor in home assistant gathering the power consumption
   main_power_sensor: sensor.main_power
 ```
-!!! warning Data availability and refresh rate
+!!! warning "Data availability and refresh rate"
     This power meter rely on Home Assistant to gather the value of energy exchanged with the grid. It also depends on the rate of sensor update. If a sensor is updated too slowly, the regulation may not work as expected.
 
     Contrary to Home Assistant power meter, native power meters are autonomous and can continue to regulate even is Home Assistant is offline. Some power meter can have a direct access to the measure and may even be independent to the network.

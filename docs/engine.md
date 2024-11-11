@@ -1,11 +1,11 @@
 
-# Solar Router Engine
+# Variable engine
 
 This package is implementing the engine of the solar router which determines when and how many energy has to be diverted to the load.
 
-**Solar router engine** calls every second the power meter to get the actual power consumed. If energy produce is greater than energy consummed and exceed the define echange target, the engine will determine the **percentage of the regulator "opening"** and adjusts it dynamically to reach the target.
+**Variable engine** calls every second the power meter to get the actual energy exchanged with the grid. If energy produce is greater than energy consummed and exceed the define echange target, the engine will determine the **percentage of the regulator "opening"** and adjusts it dynamically to reach the target.
 
-Solar router engine's automatic regulation can be activated or deactivated with the activation switch.
+Engine's automatic regulation can be activated or deactivated with the activation switch.
 
 ## User feedback LEDS
 

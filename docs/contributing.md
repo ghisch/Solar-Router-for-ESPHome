@@ -3,11 +3,19 @@
 **Solar Router for [ESPHome](http://esphome.io)** is design to be modular to make easy the customisation to various power meters and various regulators.  
 You want to contribute? You are welcome and you will find bellow some recommendation to do so.
 
-## Setup development environement
+## Developing a **Hardware**
 
-To contribute to **Solar-Router-for-ESPHome** and develop a new feature on your computer and propose a *merge request*, you should:
+You can propose any hardware based on your needs. If this new hardware require to use GPIO, the pins used by your hardware have to be configuration into `subsitution` section.
 
-- Fork [**Solar-Router-for-ESPHome** repository](https://github.com/XavierBerger/Solar-Router-for-ESPHome) on Github
+A documentation have be added describing this new hardware and its constraints (Ex: GPIO capabilities). See [update documentation](#update-documentation) chapter bellow.
+
+## Developing a **Software package**
+
+### Setup development environement
+
+To contribute to **Solar Router for ESPHome** and develop a new feature on your computer and propose a *merge request*, you should:
+
+- Fork [**Solar Router for ESPHome** repository](https://github.com/XavierBerger/Solar-Router-for-ESPHome) on Github
 - Clone your forked repository on your PC
 - Create a development branch starting from **main**
 - [Create and activate a Python virtual environment](https://docs.python.org/3/library/venv.html) 
@@ -19,24 +27,14 @@ To contribute to **Solar-Router-for-ESPHome** and develop a new feature on your 
     ```shell
     pip install -r requirements.txt
     ``` 
-- Install and test your code on you device : 
+- Install and test your code on you device with `esphome` command line: 
     ```shell
-    esphome run my_configuration/yaml
+    esphome run my_configuration.yaml
     ```
 - Update the code and push update on your repository
-- Install and test you code with `esphome` command line
-    ```shell
-    esphome run my_solar_router.yaml
-    ```
 - Propose a pull request from your fork to the official repository
 
-## Developing a **Hardware**
-
-You can propose any hardware based on your needs. If this new hardware require to use GPIO, the pins used by your hardware have to be configuration into `subsitution` section.
-
-A documentation have be added describing this new hardware and its constraints (Ex: GPIO capabilities). See [update documentation](#update-documentation) chapter bellow.
-
-## Developping a **Power Meter**
+### Developping a **Power Meter**
 
 A **Power Meter** is a component designed to provide and periodically update a sensor named `real_power`.
 
@@ -53,13 +51,13 @@ sensor:
 
 !!! tip "Tip: See already developped power meter for examples"
 
-This sensor is used by the **Solar Router Engine** to get the value of power exchanged with the grid.
+This sensor is used by **Engines** to get the value of power exchanged with the grid.
 
 If this new power meter needs specific configuration, required parameters have to be added into `substitution` section.
 
 A documentation have to be added describing the power meter and how to configure it. See [update documentation](#update-documentation) chapter bellow.
 
-## Developping a **Regulator**
+### Developping a **Regulator**
 
 A **Regulator** has to manage the percentage of energy sent to the load based on the `regulator_opening` sensor state. `regulator_opening` state can vary from 0 (where no energy is sent to the load) to 100 (where all the energy possible is sent to the load).
 

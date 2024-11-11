@@ -46,4 +46,4 @@ Bill of material:
 
 !!! Note "This router has some limitation"
     * It has to be used with ON/OFF engine and is not compatible with variable engine
-    * Due to the small space of memory, it doesn't support OTA
+    * Due to the small space of memory, it doesn't support OTA update

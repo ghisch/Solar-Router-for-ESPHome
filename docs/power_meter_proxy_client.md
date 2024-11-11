@@ -11,7 +11,7 @@ packages:
     file: solar_router/power_meter_proxy.yaml
 ```
 
-This integration needs to know the IP address of the power meter proxy. This IP address has to be defined into `power_meter_ip_address` into `subtsitution` section of your configuration as in example ballow:
+This integration needs to know the IP address of the power meter proxy. This IP address has to be defined into `power_meter_ip_address` into `subtsitution` section of your configuration as in example bellow:
 
 ```yaml linenums="1"
 substitutions:
@@ -20,7 +20,7 @@ substitutions:
   power_meter_ip_address: "192.168.1.21"
 ```
 
-This integration is activated/deactivated with a global variable `power_meter_activated`. This `globals` is provided by the [solar router engine](engine.md) package.
+This integration is activated/deactivated with a global variable `power_meter_activated`. This `globals` is provided by an ***engine*** package.
 
 !!! warning "Network dependency"
     This power meter require the network to gather information about energy exchanged with the grid.

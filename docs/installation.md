@@ -1,6 +1,6 @@
 # Installation and Configuration
 
-To install your solar router, you need to define the archtecture of your solution between [standalone](firmware.md#standalone-configuration) installation, installation working with [proxy](firmware.md#power-meter-proxy-configuration) or [multiple solar router](firmware.md#multiple-solar-router-configuration) installation.
+To install your solar router, you need to define the archtecture of your solution between [standalone](firmware.md#standalone-configuration) installation; installation working with [proxy](firmware.md#power-meter-proxy-configuration) or [multiple solar router](firmware.md#multiple-solar-router-configuration) installation.
 
 ### Step 1: Install and configure ESPHome firmware
 
@@ -11,11 +11,11 @@ Adopt it into [Home Assistant](https://home-assistant.io).
 
 !!! important "Wifi reconnection"
     Remove `ap:` and `captive_portal:`.  
-    *This will prevent the solar router from connecting to WiFi in case of loss of connection* 
+    *This could prevent the solar router from connecting to WiFi in case of loss of connection* 
 
 ### Step 2: Select packages
 
-A **solar router** needs 3 packages: a **power meter**, a **regulator** and the **solar router engine**.
+A **solar router** needs 3 packages: a **power meter**, a **regulator** and the **engine**.
 
 A **proxy** just need 1 **power meter** package
 
@@ -61,7 +61,9 @@ A **proxy** just need 1 **power meter** package
 Each package requires a configuration which is done in `substitution` section.  
 *Refer to documentation of packages selected and add configuration to the end of your yaml file.*
 
-You can refer to examples to see how to configure your yaml for a [standalone](standalone_example.md) installation a [proxy based](proxy_example.md) installation
+You can refer to examples to see how to configure your yaml for a [standalone](standalone_example.md) installation a [proxy based](proxy_example.md) installation.
+
+!!! example "More examples are avialble in [github](https://github.com/XavierBerger/Solar-Router-for-ESPHome)"
 
 
 ### Step 4: Upload firmware
