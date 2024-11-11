@@ -1,11 +1,11 @@
 
-# Solar Router Engine
+# ON/OFF Engine
 
-This package is implementing the engine of the solar router which determines enerdy can be diverted to a local load or not.
+This package is implementing the engine of the solar router which determines energy can be diverted to a local load or not.
 
-**Solar router engine** calls every second the power meter to get the actual power consumed. If energy sent to the grid is greater than the diverstion start level (in W), the relay is closed to use the energy locally. When the energy sent to the grid reach the level (in W) defined to stop the divertion, the relay is openned and local consomption is stopped.
+**ON/OFF engine** calls every second the power meter to get the actual power consumed. If energy sent to the grid is greater than the divertion start level (in W) during start tempo (in s), the relay is closed to use the energy locally. When the energy sent to the grid reach the level (in W) defined to stop the divertion during stop tempo (in s), the relay is openned and local consomption is stopped.
 
-Solar router engine's automatic regulation can be activated or deactivated with the activation switch.
+ON/OFF engine's automatic regulation can be activated or deactivated with the activation switch.
 
 The following schema is representing the consumption with this engine activated:
 
@@ -13,7 +13,7 @@ The following schema is representing the consumption with this engine activated:
 
 **Legend:**
 
- * Green: Energy consummed coming from solar pannel
+ * Green: Energy consummed coming from solar pannel (self consumption)
  * Yellow: Energy sent to the grid
  * Red: Energy consummed coming from the grid
 
@@ -23,7 +23,7 @@ The following schema is representing the consumption with this engine activated:
 * **②** The yellow part of the graph is showing the stop level. In this example 0W.
 
 !!! Danger "Carefully set the start and stop levels"
-    The start level has to be greater than the power of the load plugged to the solar router. If not, as soon as the energy will be diverted to the load, the stop level will be reached and you will see the router switching between ON and OFF every seconds.
+    The start level has to be greater than the power of the load plugged to the solar router. If not, as soon as the energy will be diverted to the load, the stop level will be reached and you will see the router switching between ON and OFF (based on temporisation you defined).
 
 ## User feedback LEDS
 

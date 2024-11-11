@@ -31,7 +31,7 @@ packages:
     file: solar_router/regulator_triac.yaml
 ```
 
-This package require the definition of pin connected to the triac module for zero crossing detection (regulator_zero_crossing_pin) and gate/PWM control (regulator_gate_pin)
+This package require the definition of pin connected to the triac module for zero crossing detection (`regulator_zero_crossing_pin`) and gate/PWM control (`regulator_gate_pin`)
 
 ```yaml linenums="1"
 substitutions:

@@ -22,7 +22,7 @@ substitutions:
   power_meter_ip_address: "192.168.1.21"
 ```
 
-This package is activated/deactivated with a global variable `power_meter_activated`. This `globals` is provided by the [solar router engine](engine.md) package. If this power meter is use inside a proxy, it is required to add this `globals` into you configuration yaml as follow:
+This package is activated/deactivated with a global variable `power_meter_activated`. This `globals` is provided by an ***engine*** package. If this power meter is use inside a proxy, it is required to add this `globals` into you configuration yaml as follow:
 
 ```yaml linenums="1"
 globals:

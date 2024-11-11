@@ -34,3 +34,16 @@ Bill of material:
 * 1 x Yellow LED
 * 1 x Solid state relay
 * 2 x resistor 470 Ohms for LEDs
+
+## The smallest Solar Router
+
+![small solar router](images/micro_power_router.png){ width=200 }
+
+Bill of material:
+
+* 1 x ESP01 relay module board
+* 1 x ESP8266 (or equivalent)
+
+!!! Note "This router has some limitation"
+    * It has to be used with ON/OFF engine and is not compatible with variable engine
+    * Due to the small space of memory, it doesn't support OTA update
