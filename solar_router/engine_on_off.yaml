@@ -1,0 +1,198 @@
+# ----------------------------------------------------------------------------------------------------
+# User interaction
+# ----------------------------------------------------------------------------------------------------
+<<: !include engine_common.yaml
+
+switch:
+  # Define is router is active or not
+  # When switch is ON, activate power meter (pooling timer will trigger every seconds)
+  # When switch is OFF, deactivate power meter, turn off divertion and reset counters
+  - platform: template
+    name: "Activate Solar Routing"
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    id: activate
+    on_turn_on:
+      then:
+        - light.turn_on: green_led
+        - lambda: id(power_meter_activated) = 1;
+    on_turn_off:
+      then:
+        - light.turn_off: green_led
+        - lambda: |- 
+            id(real_power).publish_state(NAN);
+            id(start_tempo_counter).publish_state(NAN);
+            id(stop_tempo_counter).publish_state(NAN);
+            id(power_meter_activated) = 0;
+            id(energy_divertion).turn_off();
+            id(regulator_opening).publish_state(0);
+
+  # Define if energy has to be diverted or not.
+  # Reset counter, manage regulator opening (0 or 100) and manage LEDs
+  - platform: template
+    name: "Energy divertion"
+    id: energy_divertion
+    optimistic: True
+    on_turn_on:
+      then:
+        - lambda: |-
+            id(regulator_opening).publish_state(100);
+            id(start_tempo_counter).publish_state(NAN);
+            id(stop_tempo_counter).publish_state(NAN);
+        - script.execute: regulation_control
+        - light.turn_on:
+            id: green_led
+            effect: blink
+    on_turn_off:
+      then:
+        - lambda: |-
+            id(regulator_opening).publish_state(0);
+            id(start_tempo_counter).publish_state(NAN);
+            id(stop_tempo_counter).publish_state(NAN);
+        - script.execute: regulation_control
+        - light.turn_off: green_led
+        - if:
+            condition:
+              - switch.is_on: activate
+            then:
+              - light.turn_on: green_led
+
+number:
+  # Regulator opening from 0 to 100
+  - platform: template
+    id: regulator_opening
+    name: "Regulator opening"
+    step: 1
+    min_value: 0
+    initial_value: 0
+    max_value: 100
+    internal: True
+    unit_of_measurement: "%"
+    optimistic: True
+  
+  # Define the power level to start divertion
+  - platform: template
+    name: "Start power level"
+    id: start_power_level
+    optimistic: True
+    restore_value: True
+    mode: box
+    min_value: 0
+    max_value: 999999
+    initial_value: 1200
+    unit_of_measurement: "W"
+    step: 1
+
+
+  # Define the tempo before closing the relay
+  - platform: template
+    name: "Start tempo"
+    id: start_tempo
+    optimistic: True
+    restore_value: True
+    mode: box
+    min_value: 0
+    max_value: 300
+    initial_value: 10
+    unit_of_measurement: "s"
+    step: 1
+
+  # Define the power level to stop divertion
+  - platform: template
+    name: "Stop power level"
+    id: stop_power_level
+    optimistic: True
+    restore_value: True
+    mode: box
+    min_value: 0
+    max_value: 999999
+    initial_value: 0
+    unit_of_measurement: "w"
+    step: 1
+
+  # Define the tempo before oprning the relay
+  - platform: template
+    name: "Stop tempo"
+    id: stop_tempo
+    optimistic: True
+    restore_value: True
+    mode: box
+    min_value: 0
+    max_value: 300
+    initial_value: 10
+    unit_of_measurement: "s"
+    step: 1
+
+sensor:
+  # Sensor tempo decreasing to 0 before starting divertion
+  - id: start_tempo_counter
+    platform: template
+    name: "Start tempo"
+    unit_of_measurement: "s"
+    update_interval: 1s
+  # Sensor tempo decreasing to 0 before stoping divertion
+  - id: stop_tempo_counter
+    platform: template
+    name: "Stop tempo"
+    unit_of_measurement: "s"
+    update_interval: 1s
+
+
+# ----------------------------------------------------------------------------------------------------
+# Define scripts for energy regulation
+# ----------------------------------------------------------------------------------------------------
+
+script:
+  # ...
+  - id: energy_regulation
+    mode: single
+    then:
+      # Energy export is negative
+      - lambda: |-
+          if (id(real_power).state < -id(start_power_level).state) 
+          {
+            // Energy divertion is needed
+            if ( id(energy_divertion).state ){
+              // Energy divertion is already done
+              id(start_tempo_counter).publish_state(NAN);
+              return;
+            }
+
+            id(stop_tempo_counter).publish_state(NAN);
+            if ( isnan(id(start_tempo_counter).raw_state) ){
+              id(start_tempo_counter).publish_state(id(start_tempo).state);
+            }
+
+            id(start_tempo_counter).publish_state(id(start_tempo_counter).state - 1);
+            if (id(start_tempo_counter).state <= 0)
+            {
+              id(energy_divertion).turn_on();
+              id(start_tempo_counter).publish_state(NAN);
+            }
+            return;
+          }
+          if (id(real_power).state > -id(stop_power_level).state) 
+          {
+            // If energy divertio need to be stopped
+            if (not id(energy_divertion).state){
+              // Energy divertion is already stopped
+              return;
+            }
+
+            id(start_tempo_counter).publish_state(NAN);
+            if ( isnan(id(stop_tempo_counter).raw_state) ){
+              id(stop_tempo_counter).publish_state(id(stop_tempo).state);
+            }
+
+            id(stop_tempo_counter).publish_state(id(stop_tempo_counter).state - 1);
+            if (id(stop_tempo_counter).state <= 0)
+            {
+              id(energy_divertion).turn_off();
+              id(stop_tempo_counter).publish_state(NAN);
+            }
+            return;
+          }
+          
+          id(start_tempo_counter).publish_state(NAN);
+          id(stop_tempo_counter).publish_state(NAN);
+ 

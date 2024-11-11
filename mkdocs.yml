@@ -21,7 +21,9 @@ nav:
   - Regulator:
       - Triac: regulator_triac.md
       - Solid State Relay: regulator_solid_state_relay.md
-  - Engine: engine.md
+  - Engine: 
+      - Variable regulation: engine.md
+      - ON/OFF regulation: engine_on_off.md
   - HA configuration: ha_configuration.md
   - Contributing: contributing.md
   - ChangeLog: changelog.md
