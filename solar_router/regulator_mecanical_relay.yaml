@@ -1,0 +1,31 @@
+# ----------------------------------------------------------------------------------------------------
+# Define scripts for energy divertion
+# ----------------------------------------------------------------------------------------------------
+
+script:
+  # Apply regulation on relay
+  - id: regulation_control
+    mode: single
+    then:
+      lambda: |-
+        if (id(energy_divertion).state)
+        {
+          id(relay_output).turn_on();
+        }
+        else
+        {
+          id(relay_output).turn_off();
+        }
+
+# ----------------------------------------------------------------------------------------------------
+# relay control
+# ----------------------------------------------------------------------------------------------------
+
+# Control the relay through GPIO
+output:
+  - platform: gpio
+    id: relay_output
+    pin: 
+      number: ${regulator_gate_pin}
+      inverted: true
+

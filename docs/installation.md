@@ -38,6 +38,10 @@ A **proxy** just need 1 **power meter** package
     Regulate energy with a Triac
     * [Solid State Relay](regulator_solid_state_relay.md)  
     Regulate energy with a Solid State Relais
+* For regulator wich can only be switched ON/OFF
+    * [Mecanical relay](regulator_mecanical_relay.md)  
+    Regulate energy with mecanical relay
+
 
 !!! abstract "Contribute"
     You are developer and your regulator is missing from this list, refer to [contributing](contributing.md) section to see how to contribute to this project.
