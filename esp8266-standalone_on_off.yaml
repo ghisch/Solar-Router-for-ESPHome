@@ -8,6 +8,7 @@ esphome:
 
 esp8266:
   board: esp01_1m
+  restore_from_flash: true
 
 # Enable logging
 logger:
@@ -26,6 +27,8 @@ api:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
+  # If you have a WiFi activity plannification, you may have to update the reboot timeout (Default: 15min)
+  reboot_timeout: 24h
 
 # ----------------------------------------------------------------------------------------------------
 # Customisation
@@ -40,6 +43,7 @@ substitutions:
   # Green LED is reflecting regulation status
   # Yellow LED is reflecting power meter
   green_led_pin: GPIO1
+  green_led_inverted : "True"
   yellow_led_pin: GPIO2
 
   # Regulator configuration ------------------------------------------------------
@@ -63,6 +67,8 @@ substitutions:
 
 # Remove the following lines if you want to use the source from github
 packages:
+  common:
+    <<: !include solar_router/common.yaml
   power_meter:
     <<: !include solar_router/power_meter_fronius.yaml
   regulator:
