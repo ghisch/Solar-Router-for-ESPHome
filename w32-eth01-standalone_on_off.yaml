@@ -7,7 +7,7 @@ esphome:
   friendly_name: wt32-eth01_2
 
 esp32:
-  board: esp32dev
+  board: wt32-eth01
   framework:
     type: arduino
 
@@ -77,6 +77,8 @@ substitutions:
 
 # Remove the following lines if you want to use the source from github
 packages:
+  common:
+    <<: !include solar_router/common.yaml
   power_meter:
     <<: !include solar_router/power_meter_fronius.yaml
   regulator:
