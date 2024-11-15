@@ -12,6 +12,10 @@ globals:
 # Pooling data every seconds
 # ----------------------------------------------------------------------------------------------------
 
+substitutions:
+  green_led_inverted: "False"
+  yellow_led_inverted: "False"
+
 # Component managing time.
 # If activate switch is ON, power measurment and energy regulation are performed every secondes
 time:
@@ -59,10 +63,12 @@ output:
   - id: yellow_led_output
     platform: gpio
     pin: ${yellow_led_pin}
+    inverted: ${yellow_led_inverted}
 
   - id: green_led_output
     platform: gpio
     pin: ${green_led_pin}
+    inverted: ${green_led_inverted}
 
 light:
   - id: yellow_led
