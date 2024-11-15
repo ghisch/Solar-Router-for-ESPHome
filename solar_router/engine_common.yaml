@@ -47,7 +47,7 @@ time:
           - light.turn_off: yellow_led
           - if:
               condition:
-                wifi.connected:
+                lambda: 'return network::is_connected();'
               then:
                 - light.turn_on: yellow_led
               else:
