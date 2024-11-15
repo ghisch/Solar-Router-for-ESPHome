@@ -35,7 +35,9 @@ improv_serial:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-
+  # If you have a WiFi activity plannification, you may have to update the reboot timeout (Default: 15min)
+  reboot_timeout: 24h
+  
 # Activate web interface
 web_server:
   port: 80
