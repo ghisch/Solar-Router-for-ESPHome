@@ -15,6 +15,7 @@ nav:
           - Standalone: standalone_example.md
           - With proxy: proxy_example.md
   - Power Meter:
+      - Overview: power_meter.md
       - Fronius: power_meter_fronius.md
       - Home Assistant: power_meter_home_assistant.md
       - Proxy client: power_meter_proxy_client.md
