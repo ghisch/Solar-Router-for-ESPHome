@@ -1,4 +1,4 @@
-# Fronius Home Assistant
+# Home Assistant Power Meter
 
 This power meter is designed get power consumption directly from Home Assistant sensor.
 

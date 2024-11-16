@@ -1,4 +1,4 @@
-# Proxy client
+# Proxy Client Power Meter
 
 A **proxy client** is designed to get the power meter values from an other component. This component could be a dedicated device such as an ESP8266 running only one power meter package (See [proxy architecture](firmware.md#power-meter-proxy-configuration)) or it can be another solar router runing a power meter reading the real power exchanged with the grid (See [multiple solar router architecture](firmware.md#multiple-solar-router-configuration)).
 

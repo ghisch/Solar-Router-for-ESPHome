@@ -1,4 +1,4 @@
-# Mecanical Relay regulator
+# Mecanical Relay Regulator
 
 A relay is able to let current pass to the load or not. 
 
