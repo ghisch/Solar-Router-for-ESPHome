@@ -172,9 +172,10 @@ script:
           }
           if (id(real_power).state > -id(stop_power_level).state) 
           {
-            // If energy divertio need to be stopped
+            // If energy divertion need to be stopped
             if (not id(energy_divertion).state){
               // Energy divertion is already stopped
+              id(stop_tempo_counter).publish_state(NAN);
               return;
             }
 
