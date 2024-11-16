@@ -1,4 +1,4 @@
-# Solid State Relay regulator
+# Solid State Relay Regulator
 
 A relay is able to let current pass to the load or not. By sending small part of current (blinking), it is possibile to divert a well defined amount of energy to the load.
 

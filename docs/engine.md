@@ -1,5 +1,5 @@
 
-# Variable engine
+# Variable Engine
 
 This package is implementing the engine of the solar router which determines when and how many energy has to be diverted to the load.
 
