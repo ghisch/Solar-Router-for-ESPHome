@@ -21,6 +21,10 @@ substitutions:
   emeter_index: "0"
 ```
 
+!!! note "HTTP Authentication Header"
+    This power meter allow to define HTTP Authentication Header with the variable `power_meter_auth_header`.
+    This variable can be set in `substitution` section.
+
 This package is activated/deactivated with a global variable `power_meter_activated`. This `globals` is provided by the [solar router engine](engine.md) package.
 
 If this power meter is use inside a proxy, it is required to add this `globals` into you configuration yaml as follow:
