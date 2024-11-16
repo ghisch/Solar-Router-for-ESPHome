@@ -19,6 +19,7 @@ nav:
       - Fronius: power_meter_fronius.md
       - Home Assistant: power_meter_home_assistant.md
       - Proxy client: power_meter_proxy_client.md
+      - Shelly EM: power_meter_shelly_em.md
   - Regulator:
       - Triac: regulator_triac.md
       - Solid State Relay: regulator_solid_state_relay.md
