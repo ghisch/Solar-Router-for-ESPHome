@@ -31,17 +31,5 @@ globals:
     initial_value: "1"
 ```
 
-See [proxy example](proxy_example.md) to see how to implement it.
-
-
-!!! important "ESP8266 and ESP8285"
-    ESP8266 and ESP8285 has few memory but can be used a proxy if ssl support is disabled in `http_request`.
-
-    ```yaml linenums="1"
-    http_request:
-      esp8266_disable_ssl_support: True
-    ```
-    See [HTTP Request component](https://esphome.io/components/http_request.html#esp8266-disable-ssl-support) for details
-
 !!! warning "Network dependency"
     This power meter require the network to gather information about energy exchanged with the grid.
