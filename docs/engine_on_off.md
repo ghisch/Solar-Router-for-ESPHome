@@ -25,6 +25,9 @@ The following schema is representing the consumption with this engine activated:
 !!! Danger "Carefully set the start and stop levels"
     The start level has to be greater than the power of the load plugged to the solar router. If not, as soon as the energy will be diverted to the load, the stop level will be reached and you will see the router switching between ON and OFF (based on temporisation you defined).
 
+!!! tips "finely adjust start and stop tempo"
+    The start and stop tempo determine the responsiveness of the regulation. These delays must be finely adjusted to avoid oscillations. For example, if you have an electric stove, pay attention to the heating delays.
+
 ## User feedback LEDS
 
 The yellow LED is reflecting the network connection:
