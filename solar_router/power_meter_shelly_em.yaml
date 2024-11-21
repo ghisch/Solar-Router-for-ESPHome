@@ -71,6 +71,11 @@ script:
                               id(real_power).publish_state(NAN);
                           }
                         }
+                on_error:
+                  then:
+                    - lambda: |-
+                        ESP_LOGW("custom", "HTTP Request failed or timeout occurred");
+                        id(real_power).publish_state(NAN);
 
 time:
   - platform: sntp

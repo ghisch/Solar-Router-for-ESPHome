@@ -62,13 +62,15 @@ time:
 output:
   - id: yellow_led_output
     platform: gpio
-    pin: ${yellow_led_pin}
-    inverted: ${yellow_led_inverted}
+    pin: 
+      number: ${yellow_led_pin}
+      inverted: ${yellow_led_inverted}
 
   - id: green_led_output
     platform: gpio
-    pin: ${green_led_pin}
-    inverted: ${green_led_inverted}
+    pin: 
+      number: ${green_led_pin}
+      inverted: ${green_led_inverted}
 
 light:
   - id: yellow_led
