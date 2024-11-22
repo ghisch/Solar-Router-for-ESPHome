@@ -1,7 +1,9 @@
+esphome:
+  min_version: 2024.11.1
+
 # ----------------------------------------------------------------------------------------------------
 # Sensor updated every second to give feedback in Home Assistant
 # ----------------------------------------------------------------------------------------------------
-
 sensor:
   # Sensor showing the actual power consumption
   - id: real_power
