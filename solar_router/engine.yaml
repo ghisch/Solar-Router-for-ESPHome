@@ -104,6 +104,11 @@ script:
       # Define the opening level of regulator based on power measured and grid exchange target
       # The value of regulator is a precentage and is then limited to the range 0 100
       - lambda: |-
+          if (isnan(id(real_power).state)){
+            // If we can have information about grid exchange, do not divert any energy
+            id(regulator_opening).publish_state(0);
+            return;
+          }
           double delta = -1*(id(real_power).state-id(target_grid_exchange).state)*id(reactivity).state/1000;
           double regulator_status = id(regulator_opening).state + delta;
           regulator_status = std::max(0.0, std::min(100.0, regulator_status));

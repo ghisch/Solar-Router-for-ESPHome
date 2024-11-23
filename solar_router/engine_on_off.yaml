@@ -148,6 +148,11 @@ script:
     then:
       # Energy export is negative
       - lambda: |-
+          if (isnan(id(real_power).state)){
+            // If we can have information about grid exchange, do not divert any energy
+            id(energy_divertion).turn_off();
+            return;
+          }
           if (id(real_power).state < -id(start_power_level).state) 
           {
             // Energy divertion is needed
