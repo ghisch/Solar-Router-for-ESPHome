@@ -27,6 +27,8 @@ nav:
   - Engine: 
       - Variable regulation: engine.md
       - ON/OFF regulation: engine_on_off.md
+  - Energy Counter: 
+      - Theorical: energy_counter_theorical.md
   - HA configuration: ha_configuration.md
   - Contributing: contributing.md
   - ChangeLog: changelog.md

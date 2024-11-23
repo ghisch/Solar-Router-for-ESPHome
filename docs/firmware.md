@@ -7,6 +7,7 @@ Packages are :
 * **Power meters** : design to measure the energy exchanged with the grid.
 * **Regulator** : design to channel the surplus of energy to a designated load.
 * **Engine** : design to determine how much of energy and when surplus of energy should be diverted to the load.
+* **Energy counter** : design to report the amount of energy diverted to the load.
 
 ## Packages
 

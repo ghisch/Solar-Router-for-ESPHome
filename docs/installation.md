@@ -47,7 +47,7 @@ A **proxy** just need 1 **power meter** package
     You are developer and your regulator is missing from this list, refer to [contributing](contributing.md) section to see how to contribute to this project.
 
 
-#### Step 2.3: Add a Solar Router Engine
+#### Step 2.3: Add an Engine
 
 * [Variable Engine](engine.md)  
   Read power exchange with the grid, determine and apply the percentage of regulator opening.
@@ -55,15 +55,19 @@ A **proxy** just need 1 **power meter** package
 * [ON/OFF Engine](engine_on_off.md)  
   Read power exchange with the grid, and start to divert energy if a threshold is reached and stop if another threshold is reached.
 
+#### Step 2.4: Add an Energy Counter (*Optional*)
 
-### Ster 3: Configure your solar router
+* [Energy Saved Counter Theorical](energy_saved_counter_theorical.md)  
+  Calculate energy savec base on energy diverted and load power.
+
+### Step 3: Configure your solar router
 
 Each package requires a configuration which is done in `substitution` section.  
 *Refer to documentation of packages selected and add configuration to the end of your yaml file.*
 
 You can refer to examples to see how to configure your yaml for a [standalone](standalone_example.md) installation a [proxy based](proxy_example.md) installation.
 
-!!! example "More examples are avialble in [github](https://github.com/XavierBerger/Solar-Router-for-ESPHome)"
+!!! example "More examples are available in [github](https://github.com/XavierBerger/Solar-Router-for-ESPHome)"
 
 
 ### Step 4: Upload firmware
