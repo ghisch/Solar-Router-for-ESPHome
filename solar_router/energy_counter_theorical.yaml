@@ -1,0 +1,56 @@
+# ----------------------------------------------------------------------------------------------------
+# Calculate daily energy diverted
+# ----------------------------------------------------------------------------------------------------
+
+# Define the power of load plugged on the solar router
+number:
+  - platform: template
+    name: "Load power"
+    id: load_power
+    min_value: 1
+    max_value: 99999
+    step: 1
+    unit_of_measurement: "W"
+    optimistic: True
+    restore_value: true
+    
+# Script updating the power consumed counter
+script:
+  - id: energy_diverted_counter
+    mode: single
+    then:
+      - lambda: |-
+          id(therorical_energy_diverted).publish_state(id(load_power).state*id(regulator_opening).state / 100);
+
+# Sensor showing the actual energy diverted consumption
+sensor:
+  - id: energy_diverted
+    platform: total_daily_energy
+    name: 'Energy diverted'
+    power_id: therorical_energy_diverted
+    unit_of_measurement: 'kWh'
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 3
+    filters:
+      # Multiplication factor from W to kW is 0.001
+      - multiply: 0.001
+
+  - platform: template
+    name: Theorical energy diverted
+    id: therorical_energy_diverted
+    unit_of_measurement: 'W'
+
+# Enable time component to 
+#  - Update energy diverted counter
+#  - Reset energy at midnight
+time:
+  - platform: homeassistant
+    id: homeassistant_time_for_solar_router
+
+  - platform: sntp
+    on_time:
+      # Trigger action every second
+      - seconds: /1
+        then:
+          - script.execute: energy_diverted_counter
