@@ -102,4 +102,6 @@ packages:
     <<: !include solar_router/regulator_triac.yaml
   solar_router:
     <<: !include solar_router/engine.yaml
-
+  energy_counter: 
+    <<: !include solar_router/energy_counter_theorical.yaml
+    
