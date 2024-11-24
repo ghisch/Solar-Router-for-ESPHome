@@ -57,7 +57,7 @@ A **proxy** just need 1 **power meter** package
 
 #### Step 2.4: Add an Energy Counter (*Optional*)
 
-* [Energy Saved Counter Theorical](energy_saved_counter_theorical.md)  
+* [Energy Counter Theorical](energy_counter_theorical.md)  
   Calculate energy savec base on energy diverted and load power.
 
 ### Step 3: Configure your solar router
