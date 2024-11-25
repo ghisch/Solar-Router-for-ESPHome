@@ -2,16 +2,19 @@
 
 Firmware has been split in several packages which can be assemble to the needs of user.
 
+![packages combination](images/packages.drawio.png)
+
 Packages are :
 
 * **Power meters** : design to measure the energy exchanged with the grid.
-* **Regulator** : design to channel the surplus of energy to a designated load.
 * **Engine** : design to determine how much of energy and when surplus of energy should be diverted to the load.
+* **Regulator** : design to channel the surplus of energy to a designated load.
 * **Energy counter** : design to report the amount of energy diverted to the load.
 
 ## Packages
 
 Packages can be combined to create a variaty of solar router as in following examples.
+
 
 ### Standalone configuration
 
