@@ -6,7 +6,7 @@ edit_uri: ""
 nav:
   - Home: index.md
   - Disclamer: disclamer.md
-  - Solar Router: solar_router.md
+  - Solar Router / Diverter: solar_router.md
   - Hardware: hardware.md
   - Firmware:
       - Overview: firmware.md
@@ -29,6 +29,10 @@ nav:
       - ON/OFF regulation: engine_on_off.md
   - Energy Counter: 
       - Theorical: energy_counter_theorical.md
+  - Temperature limiter:
+      - Overview: temperature_limiter.md
+      - Home Assistant: temperature_limiter_home_assistant.md
+      - DS18B20: temperature_limiter_DS18B20.md
   - HA configuration: ha_configuration.md
   - Contributing: contributing.md
   - ChangeLog: changelog.md
