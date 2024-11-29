@@ -1,8 +1,16 @@
 # ----------------------------------------------------------------------------------------------------
-# Pooling data every seconds
+# User interaction
 # ----------------------------------------------------------------------------------------------------
 
+globals:
+  # By default, if no temperature package is used, safety_limit is disabled
+  - id: safety_limit
+    type: bool
+    initial_value: "false"
+
+
 substitutions:
+  # By default led are pin control is not inverted
   green_led_inverted: "False"
   yellow_led_inverted: "False"
 
@@ -47,7 +55,6 @@ time:
 # ----------------------------------------------------------------------------------------------------
 # LED Management
 # ----------------------------------------------------------------------------------------------------
-
 output:
   - id: yellow_led_output
     platform: gpio

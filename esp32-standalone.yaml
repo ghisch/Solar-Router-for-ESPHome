@@ -75,6 +75,8 @@ substitutions:
   green_led_pin: GPIO19
   yellow_led_pin: GPIO18
 
+  # Temperature sensor
+  temperature_sensor: "input_number.test_temperature"
 
 # Uncomment the following lines if you want to use the source from github
 # packages:
@@ -104,4 +106,6 @@ packages:
     <<: !include solar_router/engine.yaml
   energy_counter: 
     <<: !include solar_router/energy_counter_theorical.yaml
+  temperature_limiter:
+    <<: !include solar_router/temperature_limiter_home_assistant.yaml
     

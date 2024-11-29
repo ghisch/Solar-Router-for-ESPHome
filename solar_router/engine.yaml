@@ -104,8 +104,8 @@ script:
       # Define the opening level of regulator based on power measured and grid exchange target
       # The value of regulator is a precentage and is then limited to the range 0 100
       - lambda: |-
-          if (isnan(id(real_power).state)){
-            // If we can have information about grid exchange, do not divert any energy
+          if (isnan(id(real_power).state) or id(safety_limit)){
+            // If we can have information about grid exchange or if safety_limit is active, do not divert any energy
             id(regulator_opening).publish_state(0);
             return;
           }
