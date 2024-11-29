@@ -20,7 +20,7 @@ substitutions:
   power_meter_ip_address: "192.168.1.21"
 ```
 
-This integration is activated/deactivated with a global variable `power_meter_activated`. This `globals` is provided by an ***engine*** package.
+This integration is activated/deactivated with a global variable `power_meter_activated`. This variable can be modified by a switch inside Home Assistant.
 
 !!! warning "Network dependency"
     This power meter require the network to gather information about energy exchanged with the grid.

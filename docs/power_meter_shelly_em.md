@@ -25,15 +25,13 @@ substitutions:
     This power meter allow to define HTTP Authentication Header with the variable `power_meter_auth_header`.
     This variable can be set in `substitution` section.
 
-This package is activated/deactivated with a global variable `power_meter_activated`. This `globals` is provided by the [solar router engine](engine.md) package.
+This package is activated/deactivated with a global variable `power_meter_activated`. By default a power meter is deactivated at start. The activation switch determines if power meter has to be started or not. 
 
-If this power meter is use inside a proxy, it is required to add this `globals` into you configuration yaml as follow:
+If this power meter is use inside a proxy it is required to activated in at start by setting `power_meter_activated_at_start` to `1` into you configuration yaml as in the example bellow:
 
 ```yaml linenums="1"
-globals:
-  - id: power_meter_activated
-    type: int
-    initial_value: "1"
+substitutions:
+  power_meter_activated_at_start: "1"
 ```
 
 !!! warning "Network dependency"
