@@ -11,7 +11,7 @@ packages:
     file: solar_router/power_meter_home_assistant.yaml
 ```
 
-This package needs to know the sensor to use to get the power consumption. This sensor has to be defined by `main_power_sensor` into `subtsitution` section of your configuration as in example ballow:
+This package needs to know the sensor to use to get the power consumption. This sensor has to be defined by `main_power_sensor` into `subtsitutions` section of your configuration as in example ballow:
 
 ```yaml linenums="1"
 substitutions:

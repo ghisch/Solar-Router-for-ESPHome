@@ -11,7 +11,7 @@ packages:
     file: solar_router/power_meter_proxy.yaml
 ```
 
-This integration needs to know the IP address of the power meter proxy. This IP address has to be defined into `power_meter_ip_address` into `subtsitution` section of your configuration as in example bellow:
+This integration needs to know the IP address of the power meter proxy. This IP address has to be defined into `power_meter_ip_address` into `subtsitutions` section of your configuration as in example bellow:
 
 ```yaml linenums="1"
 substitutions:
