@@ -1,5 +1,9 @@
 # Solid State Relay Regulator
 
+This regulator is performing a **Burst Fire Regulation**.
+
+![alt text](images/Regulation_burst_fire.png)
+
 A relay is able to let current pass to the load or not. By sending small part of current (blinking), it is possibile to divert a well defined amount of energy to the load.
 
 !!! tip "Tip: This regulator can also be used with a triac"

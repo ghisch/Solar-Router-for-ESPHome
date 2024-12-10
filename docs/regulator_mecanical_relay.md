@@ -1,5 +1,9 @@
 # Mecanical Relay Regulator
 
+This regulator is performing an **All or Nothing Regulation**.
+
+![alt text](images/Regulation_on_off.png)
+
 A relay is able to let current pass to the load or not. 
 
 The following schematic is representing the wiring of the relay:

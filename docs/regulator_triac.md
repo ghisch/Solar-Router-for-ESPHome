@@ -1,5 +1,9 @@
 # Triac Regulator
 
+This regulator is performing a **Phase Control Regulation**.
+
+![alt text](images/Regulation_phase_control.png)
+
 A triac is able to split the current sent to the load to reduce the power transmitted.  
 This component is the base of AC Dimmers.
 
