@@ -38,6 +38,7 @@ nav:
   - ChangeLog: changelog.md
   - License: license.md
   - About: about.md
+  - Alternatives: alternatives.md
 
 theme:
   features:
