@@ -16,7 +16,7 @@ To use this package, add the following lines to your configuration file:
 ```yaml linenums="1"
 packages:
   temperature_limiter:
-    url: http://github.com/XavierBerger/ESPHome-Solar-Router/
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
     file: solar_router/temperature_limiter_DS18B20.yaml
 ```
 

@@ -11,7 +11,8 @@
     * ***Activate Solar Routing***  
       Control if Solar routing should be activated or not
     * ***Reactivity***  
-      How fast will be the solar routing 
+      How fast will be the solar routing
+      From 1 to 100. 1 is the slowest, 100 is the fastest.
     * ***Regulator opening***  
       What is the current percentage of gate opening to send energy to the load 
     * ***Target grid exchange***  
