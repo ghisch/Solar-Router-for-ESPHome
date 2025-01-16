@@ -36,9 +36,11 @@ switch:
         - number.set:
             id: regulator_opening
             value: 0
+        - script.execute: bypass_control
     on_turn_off:
       then:
         - lambda: id(full_power_timer) = 0;
+        - script.execute: bypass_control
 
 number:
   # Report or define regulator opening value
@@ -106,11 +108,11 @@ number:
     unit_of_measurement: "W"
     step: 1
 
+globals:
   # Define the number of consecutive regulations where regulator is at 100% before activating bypass relay
   # When regulator is at 100% and delta is still positive, this counter is incremented
-  # When counter reach 30 (=30s if 1 regulation per second), bypass relay is activated
+  # When counter reach bypass_timer_threshold, bypass relay is activated
   # Counter is reset to 0 when regulator is not at 100% or when delta is negative
-globals:
   - id: full_power_timer
     type: int
     restore_value: no
@@ -126,7 +128,7 @@ script:
   # objective. Closer we are to the objective smaller are the steps. Reactivity parameter is
   # doing a ponderation on this parameter to avoid resonance effects.
   # Bypass relay is activated when regulator is at 100% and delta is still positive
-  # and when counter reach 30 (=30s if 1 regulation per second)
+  # and when counter reach bypass_timer_threshold
   - id: energy_regulation
     mode: single
     then:
@@ -154,10 +156,10 @@ script:
             regulator_status = std::max(0.0, std::min(100.0, regulator_status));
             id(regulator_opening).publish_state(regulator_status);
 
-            // If regulator is at 100% for more than 30 regulations (=30s if 1 regulation per second)
+            // If regulator is at 100% for more than bypass_timer_threshold regulations
             if (regulator_status >= 100 && delta > 0) {
               id(full_power_timer)++;
-              if (id(full_power_timer) >= 30) {
+              if (id(full_power_timer) >= ${bypass_timer_threshold }) {
                 id(bypass_relay).turn_on();
               }
             } else {
