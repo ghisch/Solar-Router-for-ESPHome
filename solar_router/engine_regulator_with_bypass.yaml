@@ -1,0 +1,135 @@
+# ----------------------------------------------------------------------------------------------------
+# User interaction
+# ----------------------------------------------------------------------------------------------------
+<<: !include engine_common.yaml
+
+switch:
+  - platform: template
+    name: "Activate Solar Routing"
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    id: activate
+    on_turn_on:
+      then:
+        - light.turn_on: green_led
+        - lambda: id(power_meter_activated) = 1;
+    on_turn_off:
+      then:
+        - light.turn_off: green_led
+        - number.to_min: regulator_opening
+        - switch.turn_off: bypass_relay
+        - lambda: |- 
+            id(real_power).publish_state(NAN);
+            id(power_meter_activated) = 0;
+
+  - platform: template
+    name: "Bypass Relay"
+    id: bypass_relay
+    optimistic: true
+    on_turn_on:
+      then:
+        - number.set:
+            id: regulator_opening
+            value: 0
+    on_turn_off:
+      then:
+        - lambda: id(full_power_timer) = 0;
+
+number:
+  - platform: template
+    name: "Regulator Opening"
+    id: regulator_opening
+    min_value: 0
+    max_value: 100
+    step: 1
+    unit_of_measurement: "%"
+    optimistic: True
+    mode: slider
+    on_value:
+      then:
+        - script.execute: regulation_control
+        - if:
+            condition:
+              number.in_range:
+                id: regulator_opening
+                above: 1
+            then:
+              - light.turn_on:
+                  id: green_led
+                  effect: blink
+            else:
+              - light.turn_off: green_led
+              - if:
+                  condition:
+                    - switch.is_on: activate
+                  then:
+                    - light.turn_on: green_led
+
+  - platform: template
+    name: "Reactivity"
+    id: reactivity
+    optimistic: True
+    restore_value: True
+    mode: box
+    min_value: 1
+    max_value: 100
+    initial_value: 10
+    unit_of_measurement: ""
+    step: 1
+
+  - platform: template
+    name: "Target grid exchange"
+    id: target_grid_exchange
+    optimistic: True
+    restore_value: True
+    mode: box
+    min_value: -99999
+    max_value: 99999
+    initial_value: 0
+    unit_of_measurement: "W"
+    step: 1
+
+globals:
+  - id: full_power_timer
+    type: int
+    restore_value: no
+    initial_value: '0'
+
+script:
+  - id: energy_regulation
+    mode: single
+    then:
+      - lambda: |-
+          if (isnan(id(real_power).state) or id(safety_limit)){
+            id(regulator_opening).publish_state(0);
+            id(bypass_relay).turn_off();
+            return;
+          }
+
+          double delta = -1*(id(real_power).state-id(target_grid_exchange).state)*id(reactivity).state/1000;
+          
+          if (id(bypass_relay).state) {
+            // If bypass relay is turned on
+            if (delta < 0) {
+              // Turn off bypass relay and go back to regulator
+              id(bypass_relay).turn_off();
+              double regulator_status = 100 + delta;
+              regulator_status = std::max(0.0, std::min(100.0, regulator_status));
+              id(regulator_opening).publish_state(regulator_status);
+            }
+          } else {
+            // Normal Regulator Mode
+            double regulator_status = id(regulator_opening).state + delta;
+            regulator_status = std::max(0.0, std::min(100.0, regulator_status));
+            id(regulator_opening).publish_state(regulator_status);
+
+            // If regulator is at 100% for more than 30 regulations (=30s if 1 regulation per second)
+            if (regulator_status >= 100 && delta > 0) {
+              id(full_power_timer)++;
+              if (id(full_power_timer) >= 30) {
+                id(bypass_relay).turn_on();
+              }
+            } else {
+              id(full_power_timer) = 0;
+            }
+          }
