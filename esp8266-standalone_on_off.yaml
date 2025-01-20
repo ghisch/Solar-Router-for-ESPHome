@@ -37,7 +37,7 @@ wifi:
 substitutions:
   # Power meter source -----------------------------------------------------------
   # Define ip address of Power Meter (Fronius Inverter)
-  power_meter_ip_address: "192.168.1.21"
+  main_power_sensor: "sensor.smart_meter_ts_100a_1_puissance_reelle"
 
   # LEDs -------------------------------------------------------------------------
   # Green LED is reflecting regulation status
@@ -50,28 +50,20 @@ substitutions:
   # Define GPIO pin connected to mecanical relay.
   regulator_gate_pin: GPIO0
 
-# Uncomment the following lines if you want to use the source from github
-# packages:
-#   power_meter:
-#     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-#     file: solar_router/power_meter_home_assistant.yaml
-#     refresh: 5s
-#  regulator:
-#     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-#     file:solar_router/regulator_mecanical_relay.yaml
-#     refresh: 5s
-#  solar_router:
-#    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-#     file: solar_router/engine_on_off.yaml
-#     refresh: 5s
-
-# Remove the following lines if you want to use the source from github
 packages:
   common:
-    <<: !include solar_router/common.yaml
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/common.yaml
+    refresh: 1d
   power_meter:
-    <<: !include solar_router/power_meter_fronius.yaml
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/power_meter_home_assistant.yaml
+    refresh: 1d
   regulator:
-    <<: !include solar_router/regulator_mecanical_relay.yaml
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/regulator_mecanical_relay.yaml
+    refresh: 1d
   solar_router:
-    <<: !include solar_router/engine_on_off.yaml
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/engine_on_off.yaml
+    refresh: 1d

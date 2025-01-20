@@ -80,34 +80,28 @@ substitutions:
   temperature_update_interval: 1s
   red_led_pin: GPIO4
 
-# Uncomment the following lines if you want to use the source from github
-# packages:
-#   power_meter:
-#     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-#     file: solar_router/power_meter_fronius.yaml
-#     refresh: 5s
-#   regulator:
-#     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-#     file: solar_router/regulator_triac.yaml
-#     # file: solar_router/regulator_relay.yaml
-#     refresh: 5s
-#   solar_router:
-#     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-#     file: solar_router/engine.yaml
-#     refresh: 5s
-
-# And Comment the following lines if you want to use the source from github
 packages:
   common:
-    <<: !include solar_router/common.yaml
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/common.yaml
+    refresh: 1d
   power_meter:
-    <<: !include solar_router/power_meter_fronius.yaml
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/power_meter_fronius.yaml
+    refresh: 1d
   regulator:
-    <<: !include solar_router/regulator_triac.yaml
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/regulator_triac.yaml
+    refresh: 1d
   solar_router:
-    <<: !include solar_router/engine.yaml
-  energy_counter: 
-    <<: !include solar_router/energy_counter_theorical.yaml
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/engine.yaml
+    refresh: 1d
+  energy_counter:
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/energy_counter_theorical.yaml
+    refresh: 1d
   temperature_limmiter:
-    <<: !include solar_router/temperature_limiter_DS18B20.yaml
-    
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/temperature_limiter_DS18B20.yaml
+    refresh: 1d
