@@ -69,16 +69,12 @@ substitutions:
   # power_meter_activated has to be set to 1 to activate the power measurment read
   power_meter_activated_at_start: "1"
 
-# Uncomment the following lines if you want to use the source from github
-# packages:
-#   power_meter:
-#     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-#     file: solar_router/power_meter_fronius.yaml
-#     refresh: 5s
-
-# Remove the following lines if you want to use the source from github
 packages:
   common:
-    <<: !include solar_router/common.yaml
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/common.yaml
+    refresh: 1d
   power_meter:
-    <<: !include solar_router/power_meter_fronius.yaml
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/power_meter_fronius.yaml
+    refresh: 1d
