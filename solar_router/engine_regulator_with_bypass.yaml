@@ -19,7 +19,7 @@ switch:
       then:
         - light.turn_off: green_led
         - number.to_min: regulator_opening
-        - switch.turn_off: bypass_relay
+        - switch.turn_off: energy_divertion
         - lambda: |- 
             id(real_power).publish_state(NAN);
             id(power_meter_activated) = 0;
@@ -29,18 +29,18 @@ switch:
   # When bypass relay is OFF, the regulator opening is set to the value defined by the solar router
   - platform: template
     name: "Bypass Relay"
-    id: bypass_relay
+    id: energy_divertion
     optimistic: true
     on_turn_on:
       then:
         - number.set:
             id: regulator_opening
             value: 0
-        - script.execute: bypass_control
+        - script.execute: regulation_control
     on_turn_off:
       then:
         - lambda: id(full_power_timer) = 0;
-        - script.execute: bypass_control
+        - script.execute: regulation_control
 
 number:
   # Report or define regulator opening value
@@ -135,17 +135,17 @@ script:
       - lambda: |-
           if (isnan(id(real_power).state) or id(safety_limit)){
             id(regulator_opening).publish_state(0);
-            id(bypass_relay).turn_off();
+            id(energy_divertion).turn_off();
             return;
           }
 
           double delta = -1*(id(real_power).state-id(target_grid_exchange).state)*id(reactivity).state/1000;
           
-          if (id(bypass_relay).state) {
+          if (id(energy_divertion).state) {
             // If bypass relay is turned on
             if (delta < 0) {
               // Turn off bypass relay and go back to regulator
-              id(bypass_relay).turn_off();
+              id(energy_divertion).turn_off();
               double regulator_status = 100 + delta;
               regulator_status = std::max(0.0, std::min(100.0, regulator_status));
               id(regulator_opening).publish_state(regulator_status);
@@ -160,7 +160,7 @@ script:
             if (regulator_status >= 100 && delta > 0) {
               id(full_power_timer)++;
               if (id(full_power_timer) >= ${bypass_timer_threshold }) {
-                id(bypass_relay).turn_on();
+                id(energy_divertion).turn_on();
               }
             } else {
               id(full_power_timer) = 0;
