@@ -68,17 +68,13 @@ substitutions:
   yellow_led_pin: GPIO18
 
 packages:
-  common:
-    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-    file: solar_router/common.yaml
-    refresh: 1d
   power_meter:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
     file: solar_router/power_meter_proxy_client.yaml
     refresh: 1d
   regulator:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-    file: solar_router/regulator_triac.yaml
+    file: solar_router/regulator_solid_state_relay.yaml
     refresh: 1d
   solar_router:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/

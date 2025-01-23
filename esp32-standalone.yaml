@@ -75,10 +75,6 @@ substitutions:
   green_led_pin: GPIO19
   yellow_led_pin: GPIO18
 
-  # Temperature sensor
-  temperature_sensor: "input_number.test_temperature"
-  red_led_pin: GPIO4
-
 
 packages:
   common:
@@ -92,13 +88,9 @@ packages:
   regulator:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
     file: solar_router/regulator_triac.yaml
-    # file: solar_router/regulator_relay.yaml
     refresh: 1d
   engine:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
     file: solar_router/engine.yaml
     refresh: 1d
-  temperature_limiter:
-    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-    file: solar_router/temperature_limiter_home_assistant.yaml
-    refresh: 1d
+
