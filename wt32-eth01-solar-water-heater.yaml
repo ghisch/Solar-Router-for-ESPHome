@@ -3,8 +3,8 @@
 # ----------------------------------------------------------------------------------------------------
 
 esphome:
-  name: wt32-eth01-2
-  friendly_name: wt32-eth01-2
+  name: "solar-water-heater"
+  friendly_name: "solar-water-heater"
 
 esp32:
   board: wt32-eth01
@@ -23,12 +23,12 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: !secret wt32_eth01_2_api_encryption_key
+    key: !secret solar_water_heater_api_encryption_key
 
 # Enable over-the-air updates
 ota:
   - platform: esphome
-    password: !secret wt32_eth01_2_ota_password
+    password: !secret solar_water_heater_ota_password
 
 # WiFi connection
 # To activate WiFi :
@@ -79,7 +79,12 @@ substitutions:
   # Temperature sensor
   DS18B20_pin: GPIO02
   temperature_update_interval: 1s
-  red_led_pin: GPIO4
+
+  # Safety limit LED
+  red_led_pin: GPIO5
+
+  # Fan control
+  fan_control_pin: GPIO4
 
 packages:
   common:
@@ -102,7 +107,7 @@ packages:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
     file: solar_router/energy_counter_theorical.yaml
     refresh: 1d
-  temperature_limmiter:
+  temperature_limiter:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
     file: solar_router/temperature_limiter_DS18B20.yaml
     refresh: 1d

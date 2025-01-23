@@ -50,6 +50,10 @@ substitutions:
   # Define GPIO pin connected to mecanical relay.
   regulator_gate_pin: GPIO0
 
+  # Temperature sensor
+  temperature_sensor: "input_number.test_temperature"
+  red_led_pin: GPIO4
+  
 packages:
   common:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
@@ -66,4 +70,8 @@ packages:
   solar_router:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
     file: solar_router/engine_on_off.yaml
+    refresh: 1d
+  temperature_limiter:
+    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
+    file: solar_router/temperature_limiter_home_assistant.yaml
     refresh: 1d

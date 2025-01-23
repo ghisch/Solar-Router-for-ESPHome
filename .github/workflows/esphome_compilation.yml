@@ -26,29 +26,29 @@ jobs:
       run: |
         echo "wifi_ssid: \"myWifiSsid\"" > secrets.yaml
         echo "wifi_password: \"myWifiPassword\"" >> secrets.yaml
-        echo "solar_router_ota_password: \"mySolarRouterOtaPassword\"" >> secrets.yaml
+        echo "ota_password: \"mySolarRouterOtaPassword\"" >> secrets.yaml
         echo "api_encryption_key: \"8q4u9dNBGMcsPemx+Q+WzLTU+mLXHAgPsrTpGjyV1hs=\"" >> secrets.yaml
         echo "hotspot_password: \"myHotspotPassword\"" >> secrets.yaml
         echo "proxy_api_encryption_key: \"8q4u9dNBGMcsPemx+Q+WzLTU+mLXHAgPsrTpGjyV1hs=\"" >> secrets.yaml
         
     - name: Compile esp32-proxy-client.yaml
       continue-on-error: true
-      run: esphome compile esp32-proxy-client.yaml  
+      run: tools/convert_to_local_source_for_ci.sh esp32-proxy-client.yaml && esphome compile work_in_progress.yaml
       id: conf1
     
-    - name: Compile esp32-standalone.yaml
+    - name: Compile wt32-eth01-solar-water-heater.yaml
       continue-on-error: true
-      run: esphome compile esp32-standalone.yaml
+      run: tools/convert_to_local_source_for_ci.sh wt32-eth01-solar-water-heater.yaml && esphome compile work_in_progress.yaml
       id: conf2
       
-    - name: Compile esp8266-proof-of-concept.yaml
+    - name: Compile esp8266-standalone_on_off.yaml
       continue-on-error: true
-      run: esphome compile esp8266-proof-of-concept.yaml
+      run: tools/convert_to_local_source_for_ci.sh esp8266-standalone_on_off.yaml && esphome compile work_in_progress.yaml
       id: conf3
       
     - name: Compile esp8285-power-meter-proxy.yaml
       continue-on-error: true
-      run: esphome compile esp8285-power-meter-proxy.yaml
+      run: tools/convert_to_local_source_for_ci.sh esp8285-power-meter-proxy.yaml && esphome compile work_in_progress.yaml
       id: conf4
 
     - name: Check for compile errors
@@ -56,4 +56,5 @@ jobs:
         if [ ${{ steps.conf1.outcome }} == 'failure' ] || [ ${{ steps.conf2.outcome }} == 'failure' || ${{ steps.conf3.outcome }} == 'failure' ] || [ ${{ steps.conf4.outcome }} == 'failure']; then
             echo "One or more compilations failed"
             exit 1
-        fi
+          fi
+

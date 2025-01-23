@@ -51,10 +51,6 @@ substitutions:
   power_meter_activated_at_start: "1"
 
 packages:
-  common:
-    url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
-    file: solar_router/common.yaml
-    refresh: 1d
   power_meter:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
     file: solar_router/power_meter_shelly_em.yaml
