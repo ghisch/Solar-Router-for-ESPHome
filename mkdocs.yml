@@ -2,6 +2,7 @@ site_name: Solar Router for ESPHome
 repo_url: https://github.com/XavierBerger/Solar-Router-for-ESPHome
 repo_name: Fork me on GitHub
 edit_uri: ""
+copyright: © Copyright Xavier Berger - 2024-2025
 
 nav:
   - Home: index.md
@@ -33,12 +34,15 @@ nav:
       - Overview: temperature_limiter.md
       - Home Assistant: temperature_limiter_home_assistant.md
       - DS18B20: temperature_limiter_DS18B20.md
-  - HA configuration: ha_configuration.md
-  - Contributing: contributing.md
-  - ChangeLog: changelog.md
-  - License: license.md
-  - About: about.md
-  - Alternatives: alternatives.md
+  - Home Assistant:
+      - Recorder configuration: recorder_configuration.md
+  - About:
+    - ChangeLog: changelog.md
+    - License: license.md
+    - Contributing: contributing.md
+    - Alternatives: alternatives.md
+    - About the project: about.md
+
 
 theme:
   name: material
@@ -73,14 +77,14 @@ plugins:
       languages:
         - locale: en
           default: true
-          name: English
+          name: 🇬🇧 English
           build: true
         - locale: fr
-          name: Français
+          name: 🇫🇷 Français
           build: true
           nav_translations:
             Home: Accueil
-            Disclamer: Clause de non-responsabilité
+            Disclamer: Avertissement
             Solar Router / Diverter: Routeur solaire
             Hardware: Materiel
             Overview: Aperçu
@@ -92,7 +96,7 @@ plugins:
             Progressive regulation: Régulation progressive
             ON/OFF regulation: Regi=ulation tout ou rien
             Theorical: Théorique
-            HA configuration: Configuration de HA
+            Recorder configuration: Configuration des recorder
             Contributing: Contribution
             License: Licence
             About: A propos
