@@ -6,4 +6,5 @@ mkdocs-include-markdown-plugin
 mkdocs-material
 mkdocs-material-extensions
 mkdocs-minify-plugin
+mkdocs-static-i18n
 pymdown-extensions
