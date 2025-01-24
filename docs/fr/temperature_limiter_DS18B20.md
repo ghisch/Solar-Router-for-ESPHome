@@ -1,4 +1,4 @@
-# Limiteur de température DS18B20
+# Temperature limiter DS18B20
 
 Ce package est conçu pour surveiller la température provenant d'un capteur DS18B20 connecté à un ESP32 et déterminer si un seuil de température a été atteint ou non.
 

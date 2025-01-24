@@ -1,6 +1,6 @@
-# Compteur de puissance pour Home Assistant
+# Power meter pour Home Assistant
 
-Ce compteur de puissance est conçu pour obtenir la consommation électrique directement à partir d'un capteur Home Assistant.
+Ce *power meter* est conçu pour obtenir la consommation électrique directement à partir d'un capteur Home Assistant.
 
 Pour utiliser ce package, ajoutez les lignes suivantes à votre fichier de configuration :
 

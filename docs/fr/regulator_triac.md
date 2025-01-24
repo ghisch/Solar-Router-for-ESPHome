@@ -1,4 +1,4 @@
-# Régulateur Triac
+# Triac regulator
 
 Ce régulateur effectue une **Régulation par Contrôle de Phase**.
 

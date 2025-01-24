@@ -1,8 +1,8 @@
-# Compteur d'Énergie Théorique
+# Energy Counter Theorical
 
-Le **Compteur d'Énergie Théorique** est conçu pour calculer la quantité d'énergie détournée vers la charge. *Il s'agit d'un package optionnel.*
+Le **energy counter theorical** est conçu pour calculer la quantité d'énergie détournée vers la charge. *Il s'agit d'un package optionnel.*
 
-La quantité d'énergie détournée est calculée en fonction de la puissance de la charge (en `W`) et du niveau d'énergie détourné chaque seconde.
+La quantité d'énergie détournée est calculée en fonction de la puissance de la charge déclarée (en `W`) et du niveau d'énergie détourné chaque seconde.
 
 !!! attention "L'énergie économisée rapportée par ce compteur est à titre informatif uniquement"
     Rappelez-vous que les valeurs sont calculées et non mesurées.  
@@ -17,7 +17,7 @@ packages:
     url: https://github.com/XavierBerger/Solar-Router-for-ESPHome/
     file: solar_router/energy_counter_theorical.yaml
 ```
-Ensuite, vous devez définir la **puissance de charge** dans l'interface `Control` de Home Assistant. La puissance saisie doit refléter la puissance de l'élément branché sur le routeur solaire.
+Ensuite, vous devez définir la puissance de charge (**Load power**)S dans l'interface `Control` de Home Assistant. La puissance saisie doit refléter la puissance de l'élément branché sur le routeur solaire.
 
 ![texte alternatif](images/SolarRouterEnergyCounterTheoricalConfiguration.png)
 

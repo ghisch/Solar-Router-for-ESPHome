@@ -1,6 +1,6 @@
-# Limiteurs de température
+# Temperature limiter
 
-Un limiteur de température est conçu pour surveiller une température et **arrêter le détournement d'énergie lorsqu'un seuil est atteint**. La régulation est réactivée **lorsque les conditions de redémarrage sont à nouveau réunies**.
+Un *temperature limiter* est conçu pour surveiller une température et **arrêter le détournement d'énergie lorsqu'un seuil est atteint**. La régulation est réactivée **lorsque les conditions de redémarrage sont à nouveau réunies**.
 
 La régulation à 2 seuils est appelée hystérésis. Ce mécanisme évite les oscillations de la régulation.
 
@@ -15,7 +15,7 @@ La régulation à 2 seuils est appelée hystérésis. Ce mécanisme évite les o
 
     source : [wikipedia](https://fr.wikipedia.org/wiki/Trigger_de_Schmitt)
 
-!!! warning "Si la température n'est pas atteignable, la `limite de sécurité` est activée et le détournement d'énergie est arrêté"
+!!! warning "Si la température n'est pas atteignable, la `safety limit` est activée et le détournement d'énergie est arrêté"
 
 ![HA](images/temperature_limiter_controls.png){ align=left }
 !!! note ""

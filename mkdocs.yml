@@ -13,8 +13,8 @@ nav:
       - Overview: firmware.md
       - Installation: installation.md
       - Examples:
-          - Standalone: standalone_example.md
-          - With proxy: proxy_example.md
+          - Standalone: example_standalone.md
+          - With proxy: example_proxy.md
   - Power Meter:
       - Overview: power_meter.md
       - Fronius: power_meter_fronius.md
@@ -40,6 +40,7 @@ nav:
     - ChangeLog: changelog.md
     - License: license.md
     - Contributing: contributing.md
+    - compile_coverage.md
     - Alternatives: alternatives.md
     - About the project: about.md
 
@@ -94,7 +95,7 @@ plugins:
             Proxy client: Client proxy
             Mecanical relay: Relais mécanique
             Progressive regulation: Régulation progressive
-            ON/OFF regulation: Regi=ulation tout ou rien
+            ON/OFF regulation: Regulation tout ou rien
             Theorical: Théorique
             Recorder configuration: Configuration des recorder
             Contributing: Contribution

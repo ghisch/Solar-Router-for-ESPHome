@@ -7,7 +7,7 @@ Vous souhaitez contribuer ? Vous êtes le bienvenu et vous trouverez ci-dessous 
 
 Vous pouvez proposer n'importe quel matériel basé sur vos besoins. Si ce nouveau matériel nécessite l'utilisation de GPIO, les broches utilisées par votre matériel doivent être configurées dans la section `substitution`.
 
-Une documentation doit être ajoutée décrivant ce nouveau matériel et ses contraintes (Ex : fonctionnalité disponibles sur les GPIO). Voir le chapitre [mettre à jour la documentation](#mettre-a-jour-la-documentation) ci-dessous.
+Une documentation doit être ajoutée décrivant ce nouveau matériel et ses contraintes (Ex : fonctionnalité disponibles sur les GPIO). Voir le chapitre [mettre à jour la documentation](#mise-a-jour-de-la-documentation) ci-dessous.
 
 ## Développer un **Package logiciel**
 
@@ -55,7 +55,7 @@ Ce capteur est utilisé par les **Engine** pour obtenir la valeur de la puissanc
 
 Si ce nouveau Power Meter nécessite une configuration spécifique, les paramètres requis doivent être ajoutés dans la section `substitution`.
 
-Une documentation doit être ajoutée décrivant le Power Meter et comment le configurer. Voir le chapitre [mettre à jour la documentation](#mettre-a-jour-la-documentation) ci-dessous.
+Une documentation doit être ajoutée décrivant le Power Meter et comment le configurer. Voir le chapitre [mettre à jour la documentation](#mise-a-jour-de-la-documentation) ci-dessous.
 
 ### Développer un **Régulateur**
 

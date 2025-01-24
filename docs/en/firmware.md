@@ -6,7 +6,7 @@ Firmware has been split in several packages which can be assemble to the needs o
 
 Packages are :
 
-* **Power meters** : design to measure the energy exchanged with the grid.
+* **Power meter** : design to measure the energy exchanged with the grid.
 * **Engine** : design to determine how much of energy and when surplus of energy should be diverted to the load.
 * **Regulator** : design to channel the surplus of energy to a designated load.
 * **Energy counter** : design to report the amount of energy diverted to the load.
@@ -30,7 +30,7 @@ In this proxy configuration, two ESP is doing the job. The first one (which coud
 ![hardware connection](images/with_proxy.drawio.png){width=535}
 
 !!! Note
-    A Power Meter Proxy doesn't require a lot of CPU power and could then be executed on an ESP8285 or ESP8286.
+    A Power Meter Proxy doesn't require a lot of CPU power and could then be executed on an ESP8285 or ESP8266.
 
 ### Multiple Solar Router configuration
 

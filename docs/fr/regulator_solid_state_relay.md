@@ -1,4 +1,4 @@
-# Régulateur à relais statique
+# Solid State Relay regulator
 
 Ce régulateur effectue une **régulation par salves** (Burst Fire Regulation).
 
@@ -6,7 +6,7 @@ Ce régulateur effectue une **régulation par salves** (Burst Fire Regulation).
 
 Un relais est capable de laisser passer ou non le courant vers la charge. En envoyant de petites parties de courant (clignotement), il est possible de dévier une quantité bien définie d'énergie vers la charge.
 
-!!! tip "Astuce : Ce régulateur peut également être utilisé avec un triac"
+!!! tip "Astuce : Ce régulateur peut également être utilisé avec un gradateur"
 
 ??? note "Comment fonctionne ce régulateur ?"
     Ce régulateur envoie un signal PWM (Modulation de Largeur d'Impulsion) au relais. La période du PWM est de 330ms. Le rapport cyclique détermine la quantité d'énergie transférée.  

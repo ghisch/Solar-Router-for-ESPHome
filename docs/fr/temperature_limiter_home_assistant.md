@@ -1,4 +1,4 @@
-# Limiteur de température Home Assistant
+# Temperature limiter Home Assistant
 
 Ce package est conçu pour surveiller une température provenant d'un capteur dans Home Assistant et déterminer si un seuil de température a été atteint ou non.
 

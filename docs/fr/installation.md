@@ -1,6 +1,6 @@
 # Installation et Configuration
 
-Pour installer votre routeur solaire, vous devez définir l'architecture de votre solution entre une installation [autonome](firmware.md#standalone-configuration), une installation fonctionnant avec un [proxy](firmware.md#power-meter-proxy-configuration) ou une installation avec [plusieurs routeurs solaires](firmware.md#multiple-solar-router-configuration).
+Pour installer votre routeur solaire, vous devez définir l'architecture de votre solution entre une installation [autonome](firmware.md#configuration-autonome), une installation fonctionnant avec un [proxy](firmware.md#configuration-avec-proxy-de-compteur-denergie) ou une installation avec [plusieurs routeurs solaires](firmware.md#configuration-avec-plusieurs-routeurs-solaires).
 
 ### Étape 1 : Installer et configurer le firmware ESPHome
 
@@ -15,47 +15,49 @@ Adoptez-le dans [Home Assistant](https://home-assistant.io).
 
 ### Étape 2 : Sélectionner les packages
 
-Un **routeur solaire** nécessite 3 packages : un **compteur de puissance**, un **régulateur** et le **moteur**.
+Un **routeur solaire** nécessite 3 packages : un **power meter**, un **regulator** et un **engine**.
 
-Un **proxy** n'a besoin que d'1 package de **compteur de puissance**
+Un **proxy** n'a besoin que d'un package **power meter**
 
-#### Étape 2.1 : Sélectionner un Compteur de Puissance
+#### Étape 2.1 : Sélectionner un power meter
 
 * [Fronius](power_meter_fronius.md)  
-    Obtenir les données de puissance de l'onduleur Fronius (Testé sur Gen24 Primo)
+    Pour obtenir les données de puissance de l'onduleur Fronius (Testé sur Gen24 Primo)
 * [Home Assistant](power_meter_home_assistant.md)  
-    Obtenir les données de puissance du capteur Home Assistant
+    Pour obtenir les données de puissance du capteur Home Assistant
+* [Shelly EM](power_meter_shelly_em.md)  
+    Pour obtenir les données de puissance d'un Shelly EM
 * [Client Proxy](power_meter_proxy_client.md)  
-    Obtenir les données de puissance de l'extérieur du routeur solaire
+    Pour obtenir les données de puissance de l'extérieur du routeur solaire
 
 !!! abstract "Contribuer"
-    Vous êtes développeur et votre compteur de puissance manque dans cette liste, référez-vous à la section [contribuer](contributing.md) pour voir comment contribuer à ce projet.
+    Vous êtes développeur et votre power meter manque dans cette liste, référez-vous à la section [contribuer](contributing.md) pour voir comment contribuer à ce projet.
 
-#### Étape 2.2 : Sélectionner un Régulateur
+#### Étape 2.2 : Sélectionner un Regulator
 
-* Pour les régulateurs pouvant être contrôlés de 0% à 100%
+* Pour les regulators pouvant être contrôlés de 0% à 100%
     * [Triac](regulator_triac.md)  
-    Réguler l'énergie avec un Triac
+    Réguler l'énergie avec un gratateur
     * [Relais Statique](regulator_solid_state_relay.md)  
-    Réguler l'énergie avec un Relais Statique
-* Pour les régulateurs qui ne peuvent être que allumés/éteints
+    Réguler l'énergie avec un relais statique
+* Pour les regulators qui ne peuvent être que allumés/éteints
     * [Relais mécanique](regulator_mecanical_relay.md)  
     Réguler l'énergie avec un relais mécanique
 
 !!! abstract "Contribuer"
-    Vous êtes développeur et votre régulateur manque dans cette liste, référez-vous à la section [contribuer](contributing.md) pour voir comment contribuer à ce projet.
+    Vous êtes développeur et votre regulator manque dans cette liste, référez-vous à la section [contribuer](contributing.md) pour voir comment contribuer à ce projet.
 
-#### Étape 2.3 : Ajouter un Moteur
+#### Étape 2.3 : Ajouter un engine
 
-* [Moteur Variable](engine.md)  
-  Lire l'échange de puissance avec le réseau, déterminer et appliquer le pourcentage d'ouverture du régulateur.
+* [Régulation progressive](engine.md)  
+  Lit l'échange de puissance avec le réseau, déterminer et appliquer le pourcentage d'ouverture du regulator.
 
-* [Moteur ON/OFF](engine_on_off.md)  
-  Lire l'échange de puissance avec le réseau, et commencer à détourner l'énergie si un seuil est atteint et arrêter si un autre seuil est atteint.
+* [Régulation tout ou rien](engine_on_off.md)  
+  Lit l'échange de puissance avec le réseau, et commencer à détourner l'énergie si un seuil est atteint et arrêter si un autre seuil est atteint.
 
 #### Étape 2.4 : Ajouter un Compteur d'Énergie (*Optionnel*)
 
-* [Compteur d'Énergie Théorique](energy_counter_theorical.md)  
+* [Compteur d'énergie théorique](energy_counter_theorical.md)  
   Calculer l'énergie économisée basée sur l'énergie détournée et la puissance de charge.
 
 ### Étape 3 : Configurer votre routeur solaire
@@ -63,7 +65,7 @@ Un **proxy** n'a besoin que d'1 package de **compteur de puissance**
 Chaque package nécessite une configuration qui se fait dans la section `substitution`.  
 *Référez-vous à la documentation des packages sélectionnés et ajoutez la configuration à la fin de votre fichier yaml.*
 
-Vous pouvez vous référer aux exemples pour voir comment configurer votre yaml pour une installation [autonome](standalone_example.md) ou une installation [basée sur un proxy](proxy_example.md).
+Vous pouvez vous référer aux exemples pour voir comment configurer votre yaml pour une installation [autonome](example_standalone.md) ou une installation [basée sur un proxy](example_proxy.md).
 
 !!! example "Plus d'exemples sont disponibles sur [github](https://github.com/XavierBerger/Solar-Router-for-ESPHome)"
 

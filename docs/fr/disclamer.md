@@ -2,7 +2,7 @@
 
 !!! danger "Avertissement"
 
-    Avant de mettre en œuvre le projet **Solar Router for ESPHome**, il est impératif que les utilisateurs fassent preuve d'une extrême prudence, en particulier concernant l'utilisation d'une alimentation à haute tension (110V/230V). L'auteur de ce projet ne peut être tenu responsable des accidents ou incidents potentiels qui pourraient survenir lors de la mise en place ou de l'utilisation du projet.
+    Avant de mettre en œuvre le projet **Solar Router for ESPHome**, il est impératif que les utilisateurs fassent preuve d'une extrême prudence, en particulier concernant l'utilisation d'une alimentation à haute tension (110V/240V). L'auteur de ce projet ne peut être tenu responsable des accidents ou incidents potentiels qui pourraient survenir lors de la mise en place ou de l'utilisation du projet.
 
     L'électricité, en particulier à haute tension, présente des risques importants, incluant mais ne se limitant pas aux chocs électriques, incendies, dommages aux équipements ou décès. Il est essentiel que les utilisateurs aient une compréhension approfondie des protocoles de sécurité électrique et respectent toutes les directives et réglementations pertinentes.
 

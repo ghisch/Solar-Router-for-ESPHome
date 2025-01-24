@@ -1,6 +1,6 @@
-# Configuration du Recorder Home Assistant
+# Configuration du *Recorder* Home Assistant
 
-Les **compteurs de puissance** et les **capteurs d'énergie** sont mis à jour toutes les secondes. 
+Les **energy counter** et les **power meter** sont mis à jour toutes les secondes. 
 Par défaut, le *recorder* de Home Assistant enregistre ces informations dans sa base de données.  
 Pour optimiser le stockage des données dans Home Assistant, il est essentiel de configurer correctement les bases de données.
 

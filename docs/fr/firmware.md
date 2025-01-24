@@ -1,24 +1,24 @@
-# Micrologiciel
+# Firmware
 
-Le micrologiciel a été divisé en plusieurs paquets qui peuvent être assemblés selon les besoins de l'utilisateur.
+Le firmware a été divisé en plusieurs *packages* qui peuvent être assemblés selon les besoins de l'utilisateur.
 
-![combinaison des paquets](images/packages.drawio.png)
+![combinaison des *packages*](images/packages.drawio.png)
 
-Les paquets sont :
+Les *packages* sont :
 
-* **Compteurs d'énergie** : conçus pour mesurer l'énergie échangée avec le réseau.
-* **Moteur** : conçu pour déterminer quelle quantité d'énergie et quand le surplus d'énergie doit être détourné vers la charge.
-* **Régulateur** : conçu pour canaliser le surplus d'énergie vers une charge désignée.
-* **Compteur d'énergie** : conçu pour rapporter la quantité d'énergie détournée vers la charge.
-* **Limiteur de température** : conçu pour arrêter le système lorsqu'une limite de température est atteinte.
+* **Power meter** : conçus pour mesurer l'énergie échangée avec le réseau.
+* **Engine** : conçu pour déterminer quelle quantité d'énergie et quand le surplus d'énergie doit être détourné vers la charge.
+* **Regulator** : conçu pour canaliser le surplus d'énergie vers une charge désignée.
+* **Energy counter** : conçu pour rapporter la quantité d'énergie détournée vers la charge.
+* **Temperature limiter** : conçu pour arrêter le système lorsqu'une limite de température est atteinte.
 
-## Paquets
+## Packages
 
-Les paquets peuvent être combinés pour créer une variété de routeurs solaires comme dans les exemples suivants.
+Les *packages* peuvent être combinés pour créer une variété de routeurs solaires comme dans les exemples suivants.
 
 ### Configuration autonome
 
-Dans cette configuration autonome, un seul ESP32 effectue le travail et exécute les 3 paquets.
+Dans cette configuration autonome, un seul ESP32 effectue le travail et exécute les 3 *packages*.
 
 ![connexion matérielle](images/standalone.drawio.png){width=374}
 
@@ -29,7 +29,7 @@ Dans cette configuration avec proxy, deux ESP effectuent le travail. Le premier 
 ![connexion matérielle](images/with_proxy.drawio.png){width=535}
 
 !!! Note
-    Un proxy de compteur d'énergie ne nécessite pas beaucoup de puissance CPU et pourrait donc être exécuté sur un ESP8285 ou ESP8286.
+    Un proxy de compteur d'énergie ne nécessite pas beaucoup de puissance CPU et pourrait donc être exécuté sur un ESP8285 ou ESP8266.
 
 ### Configuration avec plusieurs routeurs solaires
 

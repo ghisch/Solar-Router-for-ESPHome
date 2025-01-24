@@ -1,6 +1,6 @@
-# Compteur de puissance Shelly EM
+# Power meter Shelly EM
 
-Ce compteur de puissance est conçu pour obtenir la consommation d'énergie directement à partir du capteur Shelly EM.
+Ce *power meter* est conçu pour obtenir la consommation d'énergie directement à partir du capteur Shelly EM.
 
 Pour utiliser ce package, ajoutez les lignes suivantes à votre fichier de configuration :
 
@@ -22,12 +22,12 @@ substitutions:
 ```
 
 !!! note "En-tête d'authentification HTTP"
-    Ce compteur de puissance permet de définir l'en-tête d'authentification HTTP avec la variable `power_meter_auth_header`.
-    Cette variable peut être définie dans la section `substitution`.
+    Ce *power meter* permet de définir l'en-tête d'authentification HTTP avec la variable `power_meter_auth_header`.
+    Cette varialbe peut être définie dans la section `substitution`.
 
-Ce package est activé/désactivé avec une variable globale `power_meter_activated`. Par défaut, un compteur de puissance est désactivé au démarrage. L'interrupteur d'activation détermine si le compteur de puissance doit être démarré ou non.
+Ce package est activé/désactivé avec une variable globale `power_meter_activated`. Par défaut, un *power meter* est désactivé au démarrage. L'interrupteur d'activation détermine si le *power meter* doit être démarré ou non.
 
-Si ce compteur de puissance est utilisé à l'intérieur d'un proxy, il est nécessaire de l'activer au démarrage en définissant `power_meter_activated_at_start` à `1` dans votre fichier de configuration yaml, comme dans l'exemple ci-dessous :
+Si ce *power meter* est utilisé à l'intérieur d'un proxy, il est nécessaire de l'activer au démarrage en définissant `power_meter_activated_at_start` à `1` dans votre fichier de configuration yaml, comme dans l'exemple ci-dessous :
 
 ```yaml linenums="1"
 substitutions:
@@ -35,5 +35,5 @@ substitutions:
 ```
 
 !!! warning "Dépendance réseau"
-    Ce compteur de puissance nécessite le réseau pour recueillir des informations sur l'énergie échangée avec le réseau électrique.
+    Ce *power meter* nécessite le réseau pour recueillir des informations sur l'énergie échangée avec le réseau électrique.
 

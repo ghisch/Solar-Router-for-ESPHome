@@ -2,7 +2,7 @@
 
 !!! danger "Disclaimer"
 
-    Before implementing the **Solar Router for ESPHome** project, it is imperative that users exercise extreme caution, particularly concerning the utilization of high voltage (110V/230V) power supply. The author of this project cannot be held liable for any potential accidents or mishaps that may occur during the setup or operation of the project.
+    Before implementing the **Solar Router for ESPHome** project, it is imperative that users exercise extreme caution, particularly concerning the utilization of high voltage (110V/240V) power supply. The author of this project cannot be held liable for any potential accidents or mishaps that may occur during the setup or operation of the project.
 
     Electricity, especially at high voltages, poses significant risks, including but not limited to electrical shocks, fires, damage to equipment or death. It is essential that users have a thorough understanding of electrical safety protocols and adhere to all relevant guidelines and regulations.
 

@@ -1,6 +1,6 @@
-# Compteur d'énergie Fronius
+# Power meter Fronius
 
-Ce compteur d'énergie est conçu pour fonctionner avec le [Fronius Smart Meter](https://www.fronius.com/en-gb/uk/solar-energy/installers-partners/technical-data/all-products/system-monitoring/hardware/fronius-smart-meter/fronius-smart-meter-ts-100a-1) en conjonction avec un [Onduleur Fronius](https://www.fronius.com/en-gb/uk/solar-energy/installers-partners/technical-data/all-products/inverters/fronius-primo-gen24/fronius-primo-gen24-3-0).
+Ce *power meter* est conçu pour fonctionner avec le [Fronius Smart Meter](https://www.fronius.com/en-gb/uk/solar-energy/installers-partners/technical-data/all-products/system-monitoring/hardware/fronius-smart-meter/fronius-smart-meter-ts-100a-1) en conjonction avec un [Onduleur Fronius](https://www.fronius.com/en-gb/uk/solar-energy/installers-partners/technical-data/all-products/inverters/fronius-primo-gen24/fronius-primo-gen24-3-0).
 
 Fronius fournit une *Interface Ouverte* appelée [Fronius Solar API](https://www.fronius.com/en-gb/uk/solar-energy/installers-partners/technical-data/all-products/system-monitoring/open-interfaces/fronius-solar-api-json-) qui permet d'interroger l'onduleur et d'obtenir des données **localement**.
 
