@@ -12,7 +12,7 @@ Based on the value, the solar router engine will define the amount of energy to 
 
 Every power meter can be used as a proxy. A proxy is can be placed near the measurment probe and deliver its measurment to other solar router over the network.
 
-See [proxy example](proxy_example.md) to see how to implement it.
+See [proxy example](example_proxy.md) to see how to implement it.
 
 !!! important "ESP8266 and ESP8285"
     ESP8266 and ESP8285 has few memory but can be used a proxy if ssl support is disabled in `http_request`.

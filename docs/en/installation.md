@@ -15,7 +15,7 @@ Adopt it into [Home Assistant](https://home-assistant.io).
 
 ### Step 2: Select packages
 
-A **solar router** needs 3 packages: a **power meter**, a **regulator** and the **engine**.
+A **solar router** needs 3 packages: a **power meter**, a **regulator** and an **engine**.
 
 A **proxy** just need 1 **power meter** package
 
@@ -25,6 +25,8 @@ A **proxy** just need 1 **power meter** package
     Get power data from Fronius inverter (Tested on Gen24 Primo)
 * [Home Assistant](power_meter_home_assistant.md)  
     Get power data from Home Assistant sensor
+* [Shelly EM](power_meter_shelly_em.md)  
+    Get power data from a shelly EM
 * [Proxy client](power_meter_proxy_client.md)  
     Get power data from outside from solar router
 
@@ -49,7 +51,7 @@ A **proxy** just need 1 **power meter** package
 
 #### Step 2.3: Add an Engine
 
-* [Variable Engine](engine.md)  
+* [Progressive Engine](engine.md)  
   Read power exchange with the grid, determine and apply the percentage of regulator opening.
 
 * [ON/OFF Engine](engine_on_off.md)  
@@ -65,7 +67,7 @@ A **proxy** just need 1 **power meter** package
 Each package requires a configuration which is done in `substitution` section.  
 *Refer to documentation of packages selected and add configuration to the end of your yaml file.*
 
-You can refer to examples to see how to configure your yaml for a [standalone](standalone_example.md) installation a [proxy based](proxy_example.md) installation.
+You can refer to examples to see how to configure your yaml for a [standalone](example_standalone.md) installation a [proxy based](example_proxy.md) installation.
 
 !!! example "More examples are available in [github](https://github.com/XavierBerger/Solar-Router-for-ESPHome)"
 

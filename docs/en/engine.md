@@ -1,9 +1,9 @@
 
-# Variable Engine
+# Progressive Engine
 
 This package is implementing the engine of the solar router which determines when and how many energy has to be diverted to the load.
 
-**Variable engine** calls every second the power meter to get the actual energy exchanged with the grid. If energy produce is greater than energy consummed and exceed the define echange target, the engine will determine the **percentage of the regulator "opening"** and adjusts it dynamically to reach the target.
+**Progressive engine** calls every second the power meter to get the actual energy exchanged with the grid. If energy produce is greater than energy consummed and exceed the define echange target, the engine will determine the **percentage of the regulator "opening"** and adjusts it dynamically to reach the target.
 
 Engine's automatic regulation can be activated or deactivated with the activation switch.
 

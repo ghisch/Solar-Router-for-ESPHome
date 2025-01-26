@@ -1,4 +1,4 @@
-# Home Assistant configuration
+# Home Assistant Recorder configuration
 
 **Power meters** and **energy sensors** are updated every secondes. 
 By default, Home Assistant *recorder* is saving these informations in its database.  

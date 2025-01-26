@@ -2,7 +2,7 @@
 
 **Solar Router for ESPHome** is a DIY project aiming to provide specialized hardware device and software tailored for optimizing solar energy utilization. It performs real-time monitoring and intelligent surplus energy management to effectively channels excess solar energy to designated loads like water heaters or frost protection systems. 
 
-Key features include a choice of dynamic energy routing algorithms (variable, ON/OFF), power meter sources (local or remote ...), regulators (with triac or relay ... ), and a seamless integration with [HomeAssistant](http://home-assistant.io) via [ESPHome](http://esphome.io) firmware. 
+Key features include a choice of dynamic energy routing algorithms (progressive, ON/OFF), power meter sources (local or remote ...), regulators (with triac or relay ... ), and a seamless integration with [HomeAssistant](http://home-assistant.io) via [ESPHome](http://esphome.io) firmware. 
 
 This component enables users to effortlessly monitor and control the router's functionality within the HomeAssistant ecosystem, facilitating streamlined energy management and automation.
 

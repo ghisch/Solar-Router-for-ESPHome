@@ -2,7 +2,7 @@
 
 **Energy Counter Theorical** is designed to calculate the amount energy diverted to the load. *This is an optional package.*
 
-The amount of energy diverted is calculated based on the load power (in `W`) and the level of energy diverted every seconds.
+The amount of energy diverted is calculated based on the load power declared   (in `W`) and the level of energy diverted every seconds.
 
 !!! warning "Energy saved reported by this counter is for information only"
     Remember that values are calculated and not measured.  

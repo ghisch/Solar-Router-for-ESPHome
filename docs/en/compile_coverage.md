@@ -1,3 +1,5 @@
+# Compilation coverage
+
 ## wt32-eth01-solar-water-heater
 * common.yaml
 * power_meter_fronius.yaml
