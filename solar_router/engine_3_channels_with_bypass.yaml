@@ -1,0 +1,149 @@
+# ----------------------------------------------------------------------------------------------------
+# User interaction
+# ----------------------------------------------------------------------------------------------------
+<<: !include engine_common.yaml
+
+switch:
+  # Define if router is active or not
+  - platform: template
+    name: "Activate Solar Routing"
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    id: activate
+    on_turn_on:
+      then:
+        - light.turn_on: green_led
+        - lambda: id(power_meter_activated) = 1;
+    on_turn_off:
+      then:
+        - light.turn_off: green_led
+        - number.to_min: regulator_opening
+        - switch.turn_off: relay_1
+        - switch.turn_off: relay_2
+        - switch.turn_off: relay_3
+        - lambda: |- 
+            id(real_power).publish_state(NAN);
+            id(power_meter_activated) = 0;
+
+  # Define the three mechanical relays
+  - platform: template
+    name: "Relay 1"
+    id: relay_1
+    optimistic: true
+    on_turn_on:
+      then:
+        - script.execute: relay_1_control
+    on_turn_off:
+      then:
+        - script.execute: relay_1_control
+
+  - platform: template
+    name: "Relay 2"
+    id: relay_2
+    optimistic: true
+    on_turn_on:
+      then:
+        - script.execute: relay_2_control
+    on_turn_off:
+      then:
+        - script.execute: relay_2_control
+
+  # Relay 3 is the relay with the triac plugged in
+  - platform: template
+    name: "Relay 3"
+    id: relay_3
+    optimistic: true
+    on_turn_on:
+      then:
+        - script.execute: relay_3_control
+        - number.set:
+            id: regulator_opening
+            value: 0
+    on_turn_off:
+      then:
+        - script.execute: relay_3_control
+
+number:
+  # Regulator opening value
+  - platform: template
+    name: "Regulator Opening"
+    id: regulator_opening
+    min_value: 0
+    max_value: 100
+    step: 1
+    unit_of_measurement: "%"
+    optimistic: True
+    mode: slider
+    on_value:
+      then:
+        - script.execute: regulation_control
+
+  # Other number components remain the same as in original file
+  - platform: template
+    name: "Reactivity"
+    id: reactivity
+    optimistic: True
+    restore_value: True
+    mode: box
+    min_value: 1
+    max_value: 100
+    initial_value: 10
+    step: 1
+
+  - platform: template
+    name: "Target grid exchange"
+    id: target_grid_exchange
+    optimistic: True
+    restore_value: True
+    mode: box
+    min_value: -99999
+    max_value: 99999
+    initial_value: 0
+    unit_of_measurement: "W"
+    step: 1
+
+script:
+  - id: energy_regulation
+    mode: single
+    then:
+      - lambda: |-
+          if (isnan(id(real_power).state) || id(safety_limit)) {
+            id(regulator_opening).publish_state(0);
+            id(relay_1).turn_off();
+            id(relay_2).turn_off();
+            id(relay_3).turn_off();
+            return;
+          }
+
+          double delta = -1*(id(real_power).state-id(target_grid_exchange).state)*id(reactivity).state/1000;
+          double regulator_status = id(regulator_opening).state / 3 + delta;
+          regulator_status = std::max(0.0, std::min(100.0, regulator_status));
+
+          // Manage relays based on regulator_status
+          if (regulator_status >= 100) {
+            // Third stage: All relays on, regulator at 0
+            id(relay_1).turn_on();
+            id(relay_2).turn_on();
+            id(relay_3).turn_on();
+            id(regulator_opening).publish_state(0);
+          } else if (regulator_status >= 66.66666666666666) {
+            // Second stage: First two relays on, regulate remaining power
+            id(relay_1).turn_on();
+            id(relay_2).turn_on();
+            id(relay_3).turn_off();
+            double remaining_power = regulator_status - 66.66666666666666;
+            id(regulator_opening).publish_state(remaining_power * 3);
+          } else if (regulator_status >= 33.33333333333333) {
+            // First stage: First relay on, regulate remaining power
+            id(relay_1).turn_on();
+            id(relay_2).turn_off();
+            id(relay_3).turn_off();
+            double remaining_power = regulator_status - 33.33333333333333;
+            id(regulator_opening).publish_state(remaining_power * 3);
+          } else {
+            // Base stage: All relays off, regulate base power
+            id(relay_1).turn_off();
+            id(relay_2).turn_off();
+            id(relay_3).turn_off();
+            id(regulator_opening).publish_state(regulator_status * 3);
+          } 
