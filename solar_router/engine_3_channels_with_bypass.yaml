@@ -140,7 +140,7 @@ script:
             id(relay_3).turn_on();
             id(regulator_opening).publish_state(0);
           } else if (regulator_status >= 66.66666666666666) {
-            double remaining_power = 3 * regulator_status - 200
+            double remaining_power = 3 * regulator_status - 200;
             remaining_power = std::max(0.0, std::min(100.0, remaining_power));
             id(regulator_opening).publish_state(remaining_power);
             // Second stage: First two relays on, regulate remaining power
@@ -154,14 +154,14 @@ script:
             // = 3 * regulator_status - 200
           } else if (regulator_status >= 33.33333333333333) {
             // First stage: First relay on, regulate remaining power
-            double remaining_power = 3 * regulator_status - 100
+            double remaining_power = 3 * regulator_status - 100;
             remaining_power = std::max(0.0, std::min(100.0, remaining_power));
             id(regulator_opening).publish_state(remaining_power);
             id(relay_1).turn_on();
             id(relay_2).turn_off();
             id(relay_3).turn_off();
           } else {
-            double remaining_power = 3 * regulator_status
+            double remaining_power = 3 * regulator_status;
             remaining_power = std::max(0.0, std::min(100.0, remaining_power));
             id(regulator_opening).publish_state(remaining_power);
             // Base stage: All relays off, regulate base power
