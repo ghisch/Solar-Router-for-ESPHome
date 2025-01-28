@@ -159,7 +159,7 @@ script:
             // If regulator is at 100% for more than bypass_timer_threshold regulations
             if (regulator_status >= 100 && delta > 0) {
               id(full_power_timer)++;
-              if (id(full_power_timer) >= ${bypass_timer_threshold }) {
+              if (id(full_power_timer) >= ${bypass_timer_threshold}) {
                 id(energy_divertion).turn_on();
               }
             } else {
