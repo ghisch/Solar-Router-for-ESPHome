@@ -56,7 +56,7 @@ substitutions:
   yellow_led_pin: GPIO18
   
   # Bypass parameters ----------------------------------------------------------
-  bypass_timer_threshold: 30  # Number of consecutive regulations at 100% before activating bypass
+  bypass_timer_threshold: "30"  # Number of consecutive regulations at 100% before activating bypass
 ```
 
 !!! tip "Adjusting bypass_timer_threshold"
