@@ -12,6 +12,10 @@ globals:
     type: int
     restore_value: no
     initial_value: '0'
+  # By default, if no temperature package is used, safety_limit is disabled
+  - id: safety_limit
+    type: bool
+    initial_value: "false"
 
 switch:
   # Define is router is active or not
