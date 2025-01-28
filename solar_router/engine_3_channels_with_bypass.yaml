@@ -116,7 +116,20 @@ script:
           }
 
           double delta = -1*(id(real_power).state-id(target_grid_exchange).state)*id(reactivity).state/1000;
-          double regulator_status = id(regulator_opening).state / 3 + delta;
+          double regulator_status = id(regulator_opening).state / 3;
+
+          if (id(relay_1).state && !id(relay_2).state && !id(relay_3).state) {
+            // R1 ON; R2 R3 OFF
+            regulator_status += 33.33333333333333;
+          } else if (id(relay_1).state && id(relay_2).state && !id(relay_3).state) {
+            // R1 R2 ON; R3 OFF
+            regulator_status += 66.66666666666666;
+          } else if (id(relay_1).state && id(relay_2).state && id(relay_3).state) {
+            // R1 R2 R3 ON;
+            regulator_status = 100;
+          }
+
+          regulator_status = regulator_status + delta;
           regulator_status = std::max(0.0, std::min(100.0, regulator_status));
 
           // Manage relays based on regulator_status
