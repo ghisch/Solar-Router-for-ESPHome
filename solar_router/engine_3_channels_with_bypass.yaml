@@ -140,23 +140,32 @@ script:
             id(relay_3).turn_on();
             id(regulator_opening).publish_state(0);
           } else if (regulator_status >= 66.66666666666666) {
+            double remaining_power = 3 * regulator_status - 200
+            remaining_power = std::max(0.0, std::min(100.0, remaining_power));
+            id(regulator_opening).publish_state(remaining_power);
             // Second stage: First two relays on, regulate remaining power
             id(relay_1).turn_on();
             id(relay_2).turn_on();
             id(relay_3).turn_off();
-            double remaining_power = regulator_status - 66.66666666666666;
-            id(regulator_opening).publish_state(remaining_power * 3);
+            //   ( regulator_status - 2 / 3 * 100 ) * 3
+            // = ( regulator_status - 66.66666666 ) * 3
+            // = 3 * regulator_status - 3 * 2 / 3 * 100
+            // = 3 * regulator_status - 2 * 100
+            // = 3 * regulator_status - 200
           } else if (regulator_status >= 33.33333333333333) {
             // First stage: First relay on, regulate remaining power
+            double remaining_power = 3 * regulator_status - 100
+            remaining_power = std::max(0.0, std::min(100.0, remaining_power));
+            id(regulator_opening).publish_state(remaining_power);
             id(relay_1).turn_on();
             id(relay_2).turn_off();
             id(relay_3).turn_off();
-            double remaining_power = regulator_status - 33.33333333333333;
-            id(regulator_opening).publish_state(remaining_power * 3);
           } else {
+            double remaining_power = 3 * regulator_status
+            remaining_power = std::max(0.0, std::min(100.0, remaining_power));
+            id(regulator_opening).publish_state(remaining_power);
             // Base stage: All relays off, regulate base power
             id(relay_1).turn_off();
             id(relay_2).turn_off();
             id(relay_3).turn_off();
-            id(regulator_opening).publish_state(regulator_status * 3);
           } 
