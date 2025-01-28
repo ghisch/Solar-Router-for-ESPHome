@@ -38,7 +38,7 @@ switch:
             id(regulator_opening).publish_state(100);
             id(start_tempo_counter).publish_state(NAN);
             id(stop_tempo_counter).publish_state(NAN);
-        - script.execute: regulation_control
+        - script.execute: relay_regulation_control
         - light.turn_on:
             id: green_led
             effect: blink
@@ -48,7 +48,7 @@ switch:
             id(regulator_opening).publish_state(0);
             id(start_tempo_counter).publish_state(NAN);
             id(stop_tempo_counter).publish_state(NAN);
-        - script.execute: regulation_control
+        - script.execute: relay_regulation_control
         - light.turn_off: green_led
         - if:
             condition:
