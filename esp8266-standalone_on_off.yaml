@@ -38,6 +38,7 @@ substitutions:
   # Power meter source -----------------------------------------------------------
   # Define ip address of Power Meter (Fronius Inverter)
   main_power_sensor: "sensor.smart_meter_ts_100a_1_puissance_reelle"
+  consumption_sensor: "sensor.solarnet_power_load_consumed"
 
   # LEDs -------------------------------------------------------------------------
   # Green LED is reflecting regulation status

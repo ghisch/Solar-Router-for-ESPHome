@@ -5,11 +5,20 @@
 # ----------------------------------------------------------------------------------------------------
 
 sensor:
-  # Sensor showing the actual power consumption
+  # Sensor showing the actual power exchange
   - platform: homeassistant
     id: real_power
     entity_id: ${main_power_sensor}
     internal: False
     name: "Real Power"
+    device_class: "power"
+    unit_of_measurement: "W"
+
+  # Sensor showing the actual consumption
+  - platform: homeassistant
+    id: consumption
+    entity_id: ${consumption_sensor}
+    internal: False
+    name: "Consumption"
     device_class: "power"
     unit_of_measurement: "W"

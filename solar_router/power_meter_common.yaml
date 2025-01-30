@@ -24,3 +24,11 @@ sensor:
     device_class: "power"
     unit_of_measurement: "W"
     update_interval: 1s
+
+  # Sensor showing the actual power consumption
+  - id: consumption
+    platform: template
+    name: "Consumption"
+    device_class: "power"
+    unit_of_measurement: "W"
+    update_interval: 1s
