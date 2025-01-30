@@ -1,19 +1,6 @@
 <<: !include power_meter_common.yaml
 
 # ----------------------------------------------------------------------------------------------------
-# Sensor updated every second to give feedback in Home Assistant
-# ----------------------------------------------------------------------------------------------------
-
-sensor:
-  # Sensor showing the actual power consumption
-  - id: real_power
-    platform: template
-    name: "Real Power"
-    device_class: "power"
-    unit_of_measurement: "W"
-    update_interval: 1s
-
-# ----------------------------------------------------------------------------------------------------
 # Use http request component
 # ----------------------------------------------------------------------------------------------------
 
