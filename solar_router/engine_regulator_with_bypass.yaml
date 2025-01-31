@@ -143,7 +143,7 @@ script:
           double delta = -1*(id(real_power).state-id(target_grid_exchange).state)*id(reactivity).state/1000;
           double regulator_status = id(energy_divertion).state ? 100 : id(regulator_opening).state;
           regulator_status += delta;
-          regulator_status = std::clamp(regulator_status, 0.0, 100.0);
+          regulator_status = std::max(0.0, std::min(100.0, regulator_status));
 
           if (regulator_status >= 100) {
             if (++id(full_power_timer) >= ${bypass_timer_threshold}) {
