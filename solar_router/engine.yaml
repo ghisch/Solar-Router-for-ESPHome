@@ -41,7 +41,9 @@ number:
     mode: slider
     on_value:
       then:
-        - script.execute: regulation_control
+        - number.set_value:
+            id: regulator_opening
+            value: !lambda return id(router_level).state;
         - if:
             condition:
               number.in_range:
@@ -58,6 +60,18 @@ number:
                     - switch.is_on: activate
                   then:
                     - light.turn_on: green_led
+  - platform: template
+    name: "Regulator Opening"
+    id: regulator_opening
+    min_value: 0
+    max_value: 100
+    step: 1
+    unit_of_measurement: "%"
+    optimistic: True
+    mode: slider
+    on_value:
+      then:
+        - script.execute: regulation_control
 
   # Define the reactivity of router level
   - platform: template
