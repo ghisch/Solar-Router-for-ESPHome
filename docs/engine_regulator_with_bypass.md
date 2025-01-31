@@ -10,14 +10,13 @@ Engine's automatic regulation can be activated or deactivated with the activatio
 
 ## How to wire the bypass relay
 
-- Line on the Bypass Relay Common (COM)
-- Normally Closed (NC) of the Relay to the Line Input of the Regulator
+- Live on the Bypass Relay Common (COM) and on the Relay to the Live Input of the Regulator
+- Normally Closed (NC) floating
 - Normally Open (NO) of the Relay to the Load Output of the Regulator (or directly to the Load)
 
-This wiring ensures that:
-- When the relay is on, the TRIAC doesn't receive energy (it's shortcutted by the relay).
-- When the relay is off, only the TRIAC receive energy.
-- In case of energy outage, the "energy" is routed through the TRIAC, which should in theory be closed because of the lack of energy.
+!!! Danger "Follow the wiring instructions"
+    Do not plug the Regulator Live Input to the Normally Closed (NC) of the relay ! Your load would be de-energized while switching the relay, potentially creating arcs inside the relay.
+    More info in this [discussion](https://github.com/XavierBerger/Solar-Router-for-ESPHome/pull/51#issuecomment-2625724543).
 
 ## User feedback LEDS
 

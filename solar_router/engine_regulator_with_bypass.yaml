@@ -12,6 +12,10 @@ globals:
     type: int
     restore_value: no
     initial_value: '0'
+  # By default, if no temperature package is used, safety_limit is disabled
+  - id: safety_limit
+    type: bool
+    initial_value: "false"
 
 switch:
   # Define is router is active or not
@@ -43,13 +47,10 @@ switch:
     optimistic: true
     on_turn_on:
       then:
-        - number.set:
-            id: regulator_opening
-            value: 0
         - script.execute: relay_regulation_control
+        - number.to_min: regulator_opening
     on_turn_off:
       then:
-        - lambda: id(full_power_timer) = 0;
         - script.execute: relay_regulation_control
 
 number:
@@ -123,46 +124,46 @@ number:
 # ----------------------------------------------------------------------------------------------------
 
 script:
-  # Manage energy regulation
-  # Calculate the delta of percentage to apply to the regulator opening status to go closer to the
-  # objective. Closer we are to the objective smaller are the steps. Reactivity parameter is
-  # doing a ponderation on this parameter to avoid resonance effects.
-  # Bypass relay is activated when regulator is at 100% and delta is still positive
-  # and when counter reach bypass_timer_threshold
+  # Energy Regulation Script
+  # -------------------------
+  # This script manages energy regulation by adjusting the regulator opening percentage.
+  #
+  # - It calculates the percentage delta needed to bring the system closer to the target grid exchange.
+  # - The closer we are to the target, the smaller the adjustments, to ensure stability.
+  # - The `reactivity` parameter scales the delta to avoid oscillations (resonance effects).
+  # - If the regulator reaches 100% and the delta remains positive, a bypass relay is activated.
+  # - The bypass relay turns on when the regulator is at full power for a duration exceeding 
+  #   `bypass_timer_threshold`, preventing unnecessary fluctuations.
+  # - If safety conditions are not met (e.g., `safety_limit` is triggered or real power is invalid), 
+  #   the system shuts down the regulator and energy diversion.
   - id: energy_regulation
     mode: single
     then:
       - lambda: |-
+          // Safety check: Disable regulation if power readings are invalid or safety is triggered
           if (isnan(id(real_power).state) or id(safety_limit)){
             id(regulator_opening).publish_state(0);
             id(energy_divertion).turn_off();
             return;
           }
 
+          // Calculate the power difference and adjust the regulator opening percentage
           double delta = -1*(id(real_power).state-id(target_grid_exchange).state)*id(reactivity).state/1000;
-          
-          if (id(energy_divertion).state) {
-            // If bypass relay is turned on
-            if (delta < 0) {
-              // Turn off bypass relay and go back to regulator
-              id(energy_divertion).turn_off();
-              double regulator_status = 100 + delta;
-              regulator_status = std::max(0.0, std::min(100.0, regulator_status));
+          // Determine the new regulator status
+          double regulator_status = id(energy_divertion).state ? 100 : id(regulator_opening).state;
+          regulator_status += delta;
+          regulator_status = std::max(0.0, std::min(100.0, regulator_status));
+
+          if (regulator_status >= 100) {
+            // If at full power, start timing the bypass condition
+            if (++id(full_power_timer) >= ${bypass_timer_threshold}) {
+              id(energy_divertion).turn_on();
+            } else {
               id(regulator_opening).publish_state(regulator_status);
             }
           } else {
-            // Normal Regulator Mode
-            double regulator_status = id(regulator_opening).state + delta;
-            regulator_status = std::max(0.0, std::min(100.0, regulator_status));
+            // Reset bypass timer and update regulator state
+            id(full_power_timer) = 0;
             id(regulator_opening).publish_state(regulator_status);
-
-            // If regulator is at 100% for more than bypass_timer_threshold regulations
-            if (regulator_status >= 100 && delta > 0) {
-              id(full_power_timer)++;
-              if (id(full_power_timer) >= ${bypass_timer_threshold}) {
-                id(energy_divertion).turn_on();
-              }
-            } else {
-              id(full_power_timer) = 0;
-            }
+            id(energy_divertion).turn_off();
           }
