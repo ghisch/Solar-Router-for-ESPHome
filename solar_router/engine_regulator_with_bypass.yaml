@@ -47,13 +47,10 @@ switch:
     optimistic: true
     on_turn_on:
       then:
-        - number.set:
-            id: regulator_opening
-            value: 0
         - script.execute: relay_regulation_control
+        - number.to_min: regulator_opening
     on_turn_off:
       then:
-        - lambda: id(full_power_timer) = 0;
         - script.execute: relay_regulation_control
 
 number:
@@ -144,29 +141,18 @@ script:
           }
 
           double delta = -1*(id(real_power).state-id(target_grid_exchange).state)*id(reactivity).state/1000;
-          
-          if (id(energy_divertion).state) {
-            // If bypass relay is turned on
-            if (delta < 0) {
-              // Turn off bypass relay and go back to regulator
-              id(energy_divertion).turn_off();
-              double regulator_status = 100 + delta;
-              regulator_status = std::max(0.0, std::min(100.0, regulator_status));
+          double regulator_status = id(energy_divertion).state ? 100 : id(regulator_opening).state;
+          regulator_status += delta;
+          regulator_status = std::clamp(regulator_status, 0.0, 100.0);
+
+          if (regulator_status >= 100) {
+            if (++id(full_power_timer) >= ${bypass_timer_threshold}) {
+              id(energy_divertion).turn_on();
+            } else {
               id(regulator_opening).publish_state(regulator_status);
             }
           } else {
-            // Normal Regulator Mode
-            double regulator_status = id(regulator_opening).state + delta;
-            regulator_status = std::max(0.0, std::min(100.0, regulator_status));
+            id(full_power_timer) = 0;
             id(regulator_opening).publish_state(regulator_status);
-
-            // If regulator is at 100% for more than bypass_timer_threshold regulations
-            if (regulator_status >= 100 && delta > 0) {
-              id(full_power_timer)++;
-              if (id(full_power_timer) >= ${bypass_timer_threshold}) {
-                id(energy_divertion).turn_on();
-              }
-            } else {
-              id(full_power_timer) = 0;
-            }
+            id(energy_divertion).turn_off();
           }
