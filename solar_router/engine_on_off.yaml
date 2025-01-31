@@ -27,7 +27,7 @@ switch:
             id(energy_divertion).turn_off();
 
   # Define if energy has to be diverted or not.
-  # Reset counter, manage regulator opening (0 or 100) and manage LEDs
+  # Reset counter, manage router level (0 or 100) and manage LEDs
   - platform: template
     name: "Energy divertion"
     id: energy_divertion
@@ -35,7 +35,7 @@ switch:
     on_turn_on:
       then:
         - lambda: |-
-            id(regulator_opening).publish_state(100);
+            id(router_level).publish_state(100);
             id(start_tempo_counter).publish_state(NAN);
             id(stop_tempo_counter).publish_state(NAN);
         - script.execute: regulation_control
@@ -45,7 +45,7 @@ switch:
     on_turn_off:
       then:
         - lambda: |-
-            id(regulator_opening).publish_state(0);
+            id(router_level).publish_state(0);
             id(start_tempo_counter).publish_state(NAN);
             id(stop_tempo_counter).publish_state(NAN);
         - script.execute: regulation_control
@@ -57,11 +57,16 @@ switch:
               - light.turn_on: green_led
 
 number:
-  # Regulator opening from 0 to 100
+  # Router level 0 OR 100
+  # This value serves two purposes:
+  # 1. When solar routing is disabled: Acts as a manual control to set the regulator opening level
+  # 2. When solar routing is enabled: Automatically updated to reflect the current regulator opening level
+  #    Note: Manual adjustments via slider while routing is enabled are not recommended as they will be
+  #          immediately overridden by the solar router's automatic control
   - platform: template
-    id: regulator_opening
-    name: "Regulator opening"
-    step: 1
+    id: router_level
+    name: "Router Level"
+    step: 100
     min_value: 0
     initial_value: 0
     max_value: 100

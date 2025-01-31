@@ -13,7 +13,7 @@
     * ***Reactivity***  
       How fast will be the solar routing
       From 1 to 100. 1 is the slowest, 100 is the fastest.
-    * ***Regulator opening***  
+    * ***Router Level***  
       What is the current percentage of gate opening to send energy to the load 
     * ***Target grid exchange***  
       What is the target of energy exchanged with the grid.  
@@ -30,7 +30,7 @@
 <br>  
 
 !!! note 
-    When solar routing is deactivated, regulator opening slider can be modified "by hand".  
+    When solar routing is deactivated, router level slider can be modified "by hand".  
     If you modify the triac opening state while the solar routing is enabled, the routing algorithm will immediately modify the value to meet target grid exchange level.
 
 ## ON/OFF regulation
@@ -66,5 +66,5 @@
 
 
 !!! note 
-    When solar routing is deactivated, regulator opening slider can be modified "by hand".  
+    When solar routing is deactivated, router level slider can be modified "by hand".  
     If you modify the triac opening state while the solar routing is enabled, the routing algorithm will immediately modify the value to meet target grid exchange level.
