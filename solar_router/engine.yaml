@@ -21,6 +21,7 @@ switch:
         - number.to_min: router_level
         - lambda: |- 
             id(real_power).publish_state(NAN);
+            id(consumption).publish_state(NAN);
             id(power_meter_activated) = 0;
 
 number:
