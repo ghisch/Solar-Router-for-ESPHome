@@ -96,7 +96,7 @@ number:
         - script.execute: regulation_control
         - if:
             condition:
-              - lambda: return id(regulator_opening).state < 100.0;
+              - lambda: return id(router_level).state < 100.0;
               - switch.is_on: energy_divertion
               - lambda: return id(full_power_timer).state >= ${bypass_timer_threshold};
             then:
