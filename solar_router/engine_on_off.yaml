@@ -43,8 +43,8 @@ switch:
 number:
   # Router level 0 OR 100
   # This value serves two purposes:
-  # 1. When solar routing is disabled: Acts as a manual control to set the regulator opening level
-  # 2. When solar routing is enabled: Automatically updated to reflect the current regulator opening level
+  # 1. When solar routing is disabled: Acts as a manual control to set the router level
+  # 2. When solar routing is enabled: Automatically updated to reflect the current router level
   #    Note: Manual adjustments via slider while routing is enabled are not recommended as they will be
   #          immediately overridden by the solar router's automatic control
   - platform: template

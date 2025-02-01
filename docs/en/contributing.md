@@ -57,11 +57,13 @@ If this new power meter needs specific configuration, required parameters have t
 
 A documentation have to be added describing the power meter and how to configure it. See [update documentation](#update-documentation) chapter bellow.
 
-### Developping a **Regulator**
+### Developping **Regulator**
 
-A **Regulator** has to manage the percentage of energy sent to the load based on the `regulator_opening` sensor state. `regulator_opening` state can vary from 0 (where no energy is sent to the load) to 100 (where all the energy possible is sent to the load).
+A **Regulator** has to manage the percentage of energy sent to its load based on its regulator level sensor (e.g., `regulator_opening` for TRIAC/SSR). Each regulator's level can vary from 0 (where no energy is sent to the load) to 100 (where all possible energy is sent to the load).
 
-The following code represent an example (extracted from [regulator_triac.yaml](https://github.com/XavierBerger/Solar-Router-for-ESPHome/blob/main/solar_router/regulator_triac.yaml)) of usage based on `light` component using `brightness` to control the energy diverted:
+The system's overall state is managed by the `router_level` sensor, which controls all regulators. When `router_level` is 0, all regulators should be off, and when it's 100, all regulators should be at maximum. For systems with a single regulator, the regulator's level typically mirrors the `router_level`, but they remain separate as `router_level` is used for LED indicators and energy counting logic.
+
+Here's an example of a regulator implementation (extracted from [regulator_triac.yaml](https://github.com/XavierBerger/Solar-Router-for-ESPHome/blob/main/solar_router/regulator_triac.yaml)) using the `light` component's `brightness` to control energy diversion:
 
 ```yaml linenums="1"
 script:
@@ -69,13 +71,18 @@ script:
   - id: regulation_control
     mode: single
     then:
-      # Apply opening level on triac using light component
+      # Apply router_level to triac using light component
       - light.turn_on:
           id: dimmer_controller
           brightness: !lambda return id(regulator_opening).state/100.0;
 ```
 
-!!! tip "Tip: See already developped regulators for examples"
+!!! tip "Tip: See already developed regulators for examples"
+
+You can develop one or multiple regulators to work together in the same system. Each regulator should:
+- Have its own level sensor ranging from 0-100
+- Respond to changes in the system-wide `router_level`
+- Handle its specific hardware control logic
 
 If this new power meter needs specific configuration, required parameters have to be added into `substitution` section.
 
