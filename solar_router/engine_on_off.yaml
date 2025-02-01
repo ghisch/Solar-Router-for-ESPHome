@@ -24,7 +24,7 @@ switch:
             id(power_meter_activated) = 0;
             id(start_tempo_counter).publish_state(NAN);
             id(stop_tempo_counter).publish_state(NAN);
-            id(energy_divertion).turn_off();
+            id(router_level).publish_state(0);
 
   # Define if energy has to be diverted or not.
   # Reset counter, manage router level (0 or 100) and manage LEDs
