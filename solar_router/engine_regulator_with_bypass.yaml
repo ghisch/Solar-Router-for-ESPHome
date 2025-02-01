@@ -105,14 +105,14 @@ number:
   # When regulator is at 100% and delta is still positive, this counter is incremented
   # When counter reach bypass_timer_threshold, bypass relay is activated
   # Counter is reset to 0 when regulator is not at 100% or when delta is negative
-  - platfrom: template
+  - platform: template
     id: full_power_timer
     min_value: 0
     max_value: ${bypass_timer_threshold}
     step: 1
     initial_value: 0
     restore_value: False
-    internal: True
+    internal: False #True
 
   # Define the reactivity of router level
   - platform: template
