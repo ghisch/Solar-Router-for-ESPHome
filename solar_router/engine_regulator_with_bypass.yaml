@@ -1,6 +1,16 @@
 # ----------------------------------------------------------------------------------------------------
 # User interaction
 # ----------------------------------------------------------------------------------------------------
+globals:
+  # Define the number of consecutive regulations where regulator is at 100% before activating bypass relay
+  # When regulator is at 100% and delta is still positive, this counter is incremented
+  # When counter reach bypass_timer_threshold, bypass relay is activated
+  # Counter is reset to 0 when regulator is not at 100% or when delta is negative
+  - id: full_power_timer
+    type: int
+    restore_value: no
+    initial_value: '0'
+
 <<: !include engine_common.yaml
 
 switch:
@@ -135,16 +145,6 @@ number:
     initial_value: 0
     unit_of_measurement: "W"
     step: 1
-
-globals:
-  # Define the number of consecutive regulations where regulator is at 100% before activating bypass relay
-  # When regulator is at 100% and delta is still positive, this counter is incremented
-  # When counter reach bypass_timer_threshold, bypass relay is activated
-  # Counter is reset to 0 when regulator is not at 100% or when delta is negative
-  - id: full_power_timer
-    type: int
-    restore_value: no
-    initial_value: '0'
 
 # ----------------------------------------------------------------------------------------------------
 # Define scripts for power collection or energy regulation
