@@ -69,6 +69,7 @@ number:
     unit_of_measurement: "%"
     optimistic: True
     mode: slider
+    internal: True
     on_value:
       then:
         - script.execute: regulation_control
