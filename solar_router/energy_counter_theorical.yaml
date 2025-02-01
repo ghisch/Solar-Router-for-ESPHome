@@ -20,7 +20,7 @@ script:
     mode: single
     then:
       - lambda: |-
-          double diverted_energy = id(load_power).state*id(regulator_opening).state / 100;
+          double diverted_energy = id(load_power).state*id(router_level).state / 100;
           if (id(consumption).state >= diverted_energy or isnan(id(consumption).state)) 
           {
               // Therorical energy diverted is consumed (or we don't know the consumption)

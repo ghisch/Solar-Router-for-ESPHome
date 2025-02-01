@@ -13,6 +13,8 @@ substitutions:
   # By default led are pin control is not inverted
   green_led_inverted: "False"
   yellow_led_inverted: "False"
+  # By default regulators are hidden
+  hide_regulators: "True"
 
 # Component managing time.
 # If activate switch is ON, power measurment and energy regulation are performed every secondes
