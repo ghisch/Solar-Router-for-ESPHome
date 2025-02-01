@@ -109,7 +109,7 @@ number:
     step: 1
     initial_value: 0
     restore_value: False
-    internal: False #True
+    internal: True
 
   # Define the reactivity of router level
   - platform: template
