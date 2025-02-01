@@ -1,6 +1,6 @@
 # Contribuer au développement
 
-**Solar Router pour [ESPHome](http://esphome.io)** est conçu de manière modulaire pour faciliter la personnalisation avec différents compteurs de puissance et différents régulateurs.  
+**Solar Router for [ESPHome](http://esphome.io)** est conçu de manière modulaire pour faciliter la personnalisation avec différents compteurs de puissance et différents régulateurs.  
 Vous souhaitez contribuer ? Vous êtes les bienvenus et vous trouverez ci-dessous quelques recommandations pour le faire.
 
 ## Développer un **Hardware**
@@ -13,9 +13,9 @@ Une documentation doit être ajoutée décrivant ce nouveau matériel et ses con
 
 ### Configurer l'environnement de développement
 
-Pour contribuer à **Solar Router pour ESPHome**, développer une nouvelle fonctionnalité sur votre ordinateur et proposer une *demande de fusion*, vous devez :
+Pour contribuer à **Solar Router for ESPHome**, développer une nouvelle fonctionnalité sur votre ordinateur et proposer une *demande de fusion*, vous devez :
 
-- Forker le [dépôt **Solar Router pour ESPHome**](https://github.com/XavierBerger/Solar-Router-for-ESPHome) sur Github
+- Forker le [dépôt **Solar Router for ESPHome**](https://github.com/XavierBerger/Solar-Router-for-ESPHome) sur Github
 - Cloner votre dépôt forké sur votre PC
 - Créer une branche de développement à partir de **main**
 - [Créer et activer un environnement virtuel Python](https://docs.python.org/3/library/venv.html)
