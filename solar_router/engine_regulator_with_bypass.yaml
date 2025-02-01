@@ -59,11 +59,10 @@ number:
     on_value:
       then:
         - lambda: |-
-            double router_level = id(router_level).state;
-            if (router_level >= 100.0 && id(full_power_timer).state >= ${bypass_timer_threshold}) {
+            if (id(router_level).state >= 100.0 && id(full_power_timer).state >= ${bypass_timer_threshold}) {
               id(energy_divertion).turn_on();
             } else {
-              id(regulator_opening).publish_state(router_level);
+              id(regulator_opening).publish_state(id(router_level).state);
             }
         - if:
             condition:
@@ -176,7 +175,7 @@ script:
           id(router_level).publish_state(new_router_level);
 
           if (new_router_level >= 100.0) {
-            id(full_power_timer).publish_state(id(full_power_timer).state + 1)
+            id(full_power_timer).publish_state(id(full_power_timer).state + 1);
           } else {
             id(full_power_timer).publish_state(0);
           }
