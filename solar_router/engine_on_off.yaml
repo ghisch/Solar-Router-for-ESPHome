@@ -54,7 +54,6 @@ number:
     min_value: 0
     initial_value: 0
     max_value: 100
-    internal: True
     unit_of_measurement: "%"
     optimistic: True
     on_value:
