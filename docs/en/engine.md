@@ -23,6 +23,18 @@ The green LED is reflecting the actual configuration of regulation:
 - ***ON*** : automatic regulation is active and is not diverting energy to the load.
 - ***blink*** : solar router is currently sending energy to the load.
 
+## Router Level vs Regulator Opening
+
+The solar router uses two distinct but related level controls:
+
+- **Router Level**: This is the main system-wide control (0-100%) that represents the overall routing state. It controls the LED indicators and energy counter logic. When automatic regulation is enabled, this level is dynamically adjusted based on power measurements.
+
+- **Regulator Opening**: This represents the actual opening level (0-100%) of the physical regulator. By default, it mirrors the router level since there is only one regulator. While it can be controlled independently, changes to regulator_opening alone won't affect the router_level or trigger LED state changes.
+
+The regulator opening entity is hidden from Home Assistant by default. To expose it, add this to your substitutions:
+
+Note: It's recommended to adjust the router_level rather than regulator_opening directly, as this ensures proper system feedback through LEDs and energy monitoring.
+
 ## Configuration
 
 To use this package, add the following lines to your configuration file:
@@ -43,4 +55,6 @@ substitutions:
   # Yellow LED is reflecting power meter status
   green_led_pin: GPIO19
   yellow_led_pin: GPIO18
+  # (Optional) Expose regulator opening to HA (hidden by default)
+  hide_regulators: "False"
 ```
