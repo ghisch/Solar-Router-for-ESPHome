@@ -107,6 +107,7 @@ number:
   # Counter is reset to 0 when regulator is not at 100% or when delta is negative
   - platform: template
     id: full_power_timer
+    optimistic: True
     min_value: 0
     max_value: ${bypass_timer_threshold}
     step: 1
