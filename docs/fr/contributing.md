@@ -13,7 +13,7 @@ Une documentation doit être ajoutée décrivant ce nouveau matériel et ses con
 
 ### Configurer l'environnement de développement
 
-Pour contribuer à **Solar Router for ESPHome**, développer une nouvelle fonctionnalité sur votre ordinateur et proposer une *demande de fusion*, vous devez :
+Pour contribuer à **Solar Router for ESPHome**, développer une nouvelle fonctionnalité sur votre ordinateur et proposer une **pull request**, vous devez :
 
 - Forker le [dépôt **Solar Router for ESPHome**](https://github.com/XavierBerger/Solar-Router-for-ESPHome) sur Github
 - Cloner votre dépôt forké sur votre PC
@@ -32,11 +32,11 @@ Pour contribuer à **Solar Router for ESPHome**, développer une nouvelle foncti
     esphome run my_configuration.yaml
     ```
 - Mettre à jour le code et pousser les modifications sur votre dépôt
-- Proposer une pull request depuis votre fork vers le dépôt officiel
+- Proposer une *pull request* depuis votre fork vers le dépôt officiel
 
-### Développer un **Compteur de Puissance**
+### Développer un **Power Meter**
 
-Un **Compteur de Puissance** est un composant conçu pour fournir et mettre à jour périodiquement un capteur nommé `real_power`.
+Un **Power Meter** est un composant conçu pour fournir et mettre à jour périodiquement un capteur nommé `real_power`.
 
 ```yaml linenums="1"
 sensor:
@@ -57,9 +57,9 @@ Si ce nouveau compteur de puissance nécessite une configuration spécifique, le
 
 Une documentation doit être ajoutée décrivant le compteur de puissance et comment le configurer. Voir le chapitre [mettre à jour la documentation](#mettre-à-jour-la-documentation) ci-dessous.
 
-### Développer des **Régulateurs**
+### Développer des **Regulators**
 
-Un **Régulateur** doit gérer le pourcentage d'énergie envoyé à sa charge en fonction de son capteur de niveau de régulation (par exemple, `regulator_opening` pour TRIAC/SSR). Le niveau de chaque régulateur peut varier de 0 (où aucune énergie n'est envoyée à la charge) à 100 (où toute l'énergie possible est envoyée à la charge).
+Un **Regulator** doit gérer le pourcentage d'énergie envoyé à sa charge en fonction de son capteur de niveau de régulation (par exemple, `regulator_opening` pour TRIAC/SSR). Le niveau de chaque régulateur peut varier de 0 (où aucune énergie n'est envoyée à la charge) à 100 (où toute l'énergie possible est envoyée à la charge).
 
 L'état global du système est géré par le capteur `router_level`, qui contrôle tous les régulateurs. Quand `router_level` est à 0, tous les régulateurs doivent être éteints, et quand il est à 100, tous les régulateurs doivent être au maximum. Pour les systèmes avec un seul régulateur, le niveau du régulateur reflète généralement le `router_level`, mais ils restent séparés car `router_level` est utilisé pour les indicateurs LED et la logique de comptage d'énergie.
 
