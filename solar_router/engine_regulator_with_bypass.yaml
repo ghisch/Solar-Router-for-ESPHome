@@ -164,7 +164,7 @@ script:
             id(router_level).publish_state(0);
             id(regulator_opening).publish_state(0);
             id(energy_divertion).turn_off();
-            id(full_power_timer).set_value(0);
+            id(full_power_timer).publish_state(0);
             return;
           }
 
@@ -176,7 +176,7 @@ script:
           id(router_level).publish_state(new_router_level);
 
           if (new_router_level >= 100.0) {
-            id(full_power_timer)++;
+            id(full_power_timer).publish_state(id(full_power_timer).state + 1)
           } else {
-            id(full_power_timer).set_value(0);
+            id(full_power_timer).publish_state(0);
           }
