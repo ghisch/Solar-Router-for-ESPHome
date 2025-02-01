@@ -13,6 +13,7 @@ switch:
     id: activate
     on_turn_on:
       then:
+        - number.to_min: full_power_timer
         - light.turn_on: green_led
         - lambda: id(power_meter_activated) = 1;
     on_turn_off:
@@ -30,7 +31,7 @@ switch:
   - platform: template
     name: "Bypass Relay"
     id: energy_divertion
-    optimistic: true
+    optimistic: True
     internal: ${hide_regulators}
     on_turn_on:
       then:
@@ -105,6 +106,7 @@ number:
   # When counter reach bypass_timer_threshold, bypass relay is activated
   # Counter is reset to 0 when regulator is not at 100% or when delta is negative
   - platform: template
+    name: "Full Power Timer"
     id: full_power_timer
     optimistic: True
     min_value: 0
@@ -161,8 +163,6 @@ script:
           // Safety check: Disable regulation if power readings are invalid or safety is triggered
           if (isnan(id(real_power).state) or id(safety_limit)){
             id(router_level).publish_state(0);
-            id(regulator_opening).publish_state(0);
-            id(energy_divertion).turn_off();
             id(full_power_timer).publish_state(0);
             return;
           }
