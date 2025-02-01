@@ -21,53 +21,68 @@ switch:
       then:
         - lambda: |- 
             id(real_power).publish_state(NAN);
+            id(consumption).publish_state(NAN);
             id(power_meter_activated) = 0;
             id(start_tempo_counter).publish_state(NAN);
             id(stop_tempo_counter).publish_state(NAN);
-            id(energy_divertion).turn_off();
+            id(router_level).publish_state(0);
 
   # Define if energy has to be diverted or not.
-  # Reset counter, manage regulator opening (0 or 100) and manage LEDs
+  # Reset counter, manage router level (0 or 100) and manage LEDs
   - platform: template
     name: "Energy divertion"
     id: energy_divertion
     optimistic: True
+    internal: ${hide_regulators}
     on_turn_on:
       then:
-        - lambda: |-
-            id(regulator_opening).publish_state(100);
-            id(start_tempo_counter).publish_state(NAN);
-            id(stop_tempo_counter).publish_state(NAN);
         - script.execute: regulation_control
-        - light.turn_on:
-            id: green_led
-            effect: blink
     on_turn_off:
       then:
-        - lambda: |-
-            id(regulator_opening).publish_state(0);
-            id(start_tempo_counter).publish_state(NAN);
-            id(stop_tempo_counter).publish_state(NAN);
         - script.execute: regulation_control
-        - light.turn_off: green_led
-        - if:
-            condition:
-              - switch.is_on: activate
-            then:
-              - light.turn_on: green_led
 
 number:
-  # Regulator opening from 0 to 100
+  # Router level 0 OR 100
+  # This value serves two purposes:
+  # 1. When solar routing is disabled: Acts as a manual control to set the router level
+  # 2. When solar routing is enabled: Automatically updated to reflect the current router level
+  #    Note: Manual adjustments via slider while routing is enabled are not recommended as they will be
+  #          immediately overridden by the solar router's automatic control
   - platform: template
-    id: regulator_opening
-    name: "Regulator opening"
-    step: 1
+    id: router_level
+    name: "Router Level"
+    step: 100
     min_value: 0
     initial_value: 0
     max_value: 100
-    internal: True
     unit_of_measurement: "%"
     optimistic: True
+    on_value:
+      then:
+        - if:
+            condition:
+              number.in_range:
+                id: router_level
+                above: 1
+            then:
+              - switch.turn_on: energy_divertion
+              - lambda: |-
+                  id(start_tempo_counter).publish_state(NAN);
+                  id(stop_tempo_counter).publish_state(NAN);
+              - light.turn_on:
+                  id: green_led
+                  effect: blink
+            else:
+              - switch.turn_off: energy_divertion
+              - lambda: |-
+                  id(start_tempo_counter).publish_state(NAN);
+                  id(stop_tempo_counter).publish_state(NAN);
+              - light.turn_off: green_led
+              - if:
+                  condition:
+                    - switch.is_on: activate
+                  then:
+                    - light.turn_on: green_led
   
   # Define the power level to start divertion
   - platform: template
@@ -150,13 +165,13 @@ script:
       - lambda: |-
           if (isnan(id(real_power).state) or id(safety_limit)){
             // If we can have information about grid exchange or if safety_limit is active, do not divert any energy
-            id(energy_divertion).turn_off();
+            id(router_level).publish_state(0);
             return;
           }
           if (id(real_power).state < -id(start_power_level).state) 
           {
             // Energy divertion is needed
-            if ( id(energy_divertion).state ){
+            if ( id(router_level).state >= 100 ){
               // Energy divertion is already done
               id(start_tempo_counter).publish_state(NAN);
               return;
@@ -170,7 +185,7 @@ script:
             id(start_tempo_counter).publish_state(id(start_tempo_counter).state - 1);
             if (id(start_tempo_counter).state <= 0)
             {
-              id(energy_divertion).turn_on();
+              id(router_level).publish_state(100);
               id(start_tempo_counter).publish_state(NAN);
             }
             return;
@@ -178,7 +193,7 @@ script:
           if (id(real_power).state > -id(stop_power_level).state) 
           {
             // If energy divertion need to be stopped
-            if (not id(energy_divertion).state){
+            if (id(router_level).state <= 0){
               // Energy divertion is already stopped
               id(stop_tempo_counter).publish_state(NAN);
               return;
@@ -192,7 +207,7 @@ script:
             id(stop_tempo_counter).publish_state(id(stop_tempo_counter).state - 1);
             if (id(stop_tempo_counter).state <= 0)
             {
-              id(energy_divertion).turn_off();
+              id(router_level).publish_state(0);
               id(stop_tempo_counter).publish_state(NAN);
             }
             return;

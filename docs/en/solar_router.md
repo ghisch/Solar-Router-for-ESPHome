@@ -13,8 +13,9 @@
     * ***Reactivity***  
       How fast will be the solar routing
       From 1 to 100. 1 is the slowest, 100 is the fastest.
-    * ***Regulator opening***  
-      What is the current percentage of gate opening to send energy to the load 
+    * ***Router Level***  
+      What is the current percentage of energy sent to the load by the overall router
+      From 0 to 100. 0 means no energy diverted, 100 means all energy diverted.
     * ***Target grid exchange***  
       What is the target of energy exchanged with the grid.  
       &lt; 0 energy is sent to the grid  
@@ -30,8 +31,8 @@
 <br>  
 
 !!! note 
-    When solar routing is deactivated, regulator opening slider can be modified "by hand".  
-    If you modify the triac opening state while the solar routing is enabled, the routing algorithm will immediately modify the value to meet target grid exchange level.
+    When solar routing is deactivated, router level slider can be modified "by hand".  
+    If you modify the router level state while the solar routing is enabled, the routing algorithm will immediately modify the value to meet target grid exchange level.
 
 ## ON/OFF regulation
 
@@ -41,8 +42,9 @@
     
     * ***Activate Solar Routing***  
       Control if Solar routing should be activated or not
-    * ***Energy divertion***  
-      Ectivate energy divertion or not 
+    * ***Router Level***  
+      What is the current percentage of energy sent to the load by the overall router
+      Either 0 OR 100. 0 means no energy diverted, 100 means all energy diverted.
     * ***Start power level***  
       Define the level of energy when divertion has to start  
     * ***Start tempo***  
@@ -64,7 +66,6 @@
 <br>
 <br>
 
-
 !!! note 
-    When solar routing is deactivated, regulator opening slider can be modified "by hand".  
-    If you modify the triac opening state while the solar routing is enabled, the routing algorithm will immediately modify the value to meet target grid exchange level.
+    When solar routing is deactivated, router level slider can be modified "by hand".  
+    If you modify the router level state while the solar routing is enabled, the routing algorithm will immediately modify the value to meet target grid exchange level.

@@ -18,22 +18,22 @@ switch:
     on_turn_off:
       then:
         - light.turn_off: green_led
-        - number.to_min: regulator_opening
+        - number.to_min: router_level
         - lambda: |- 
             id(real_power).publish_state(NAN);
+            id(consumption).publish_state(NAN);
             id(power_meter_activated) = 0;
 
 number:
-  # Report or define regulator opening value
-  # If solar routing is not enabled, this value define the level of regulator opening
-  # If solar routing is enabled, this value is automatically updated and reflect the level
-  #   of regulator opening defined by the solar router
-  #   Moving the slider will have an impact on the solar energy diverted and will
-  #   immadiatelly be corrected by the solar router. It is advised to not use the slider
-  #   when the router is activated.
+  # Router level from 0 to 100
+  # This value serves two purposes:
+  # 1. When solar routing is disabled: Acts as a manual control to set the router level
+  # 2. When solar routing is enabled: Automatically updated to reflect the current router level
+  #    Note: Manual adjustments via slider while routing is enabled are not recommended as they will be
+  #          immediately overridden by the solar router's automatic control
   - platform: template
-    name: "Regulator Opening"
-    id: regulator_opening
+    name: "Router Level"
+    id: router_level
     min_value: 0
     max_value: 100
     step: 1
@@ -42,11 +42,13 @@ number:
     mode: slider
     on_value:
       then:
-        - script.execute: regulation_control
+        - number.set:
+            id: regulator_opening
+            value: !lambda return id(router_level).state;
         - if:
             condition:
               number.in_range:
-                id: regulator_opening
+                id: router_level
                 above: 1
             then:
               - light.turn_on:
@@ -59,8 +61,21 @@ number:
                     - switch.is_on: activate
                   then:
                     - light.turn_on: green_led
+  - platform: template
+    name: "Regulator Opening"
+    id: regulator_opening
+    min_value: 0
+    max_value: 100
+    step: 1
+    unit_of_measurement: "%"
+    optimistic: True
+    mode: slider
+    internal: ${hide_regulators}
+    on_value:
+      then:
+        - script.execute: regulation_control
 
-  # Define the reactivity of regulator opening
+  # Define the reactivity of router level
   - platform: template
     name: "Reactivity"
     id: reactivity
@@ -95,22 +110,21 @@ number:
 
 script:
   # Manage energy regulation
-  # Calculate the delta of percentage to apply to the regulator opening status to go closer to the
+  # Calculate the delta of percentage to apply to the router level status to go closer to the
   # objective. Closer we are to the objective smaller are the steps. Reactivity parameter is
   # doing a ponderation on this parameter to avoid resonance effects.
   - id: energy_regulation
     mode: single
     then:
-      # Define the opening level of regulator based on power measured and grid exchange target
+      # Define the reouter level based on power measured and grid exchange target
       # The value of regulator is a precentage and is then limited to the range 0 100
       - lambda: |-
           if (isnan(id(real_power).state) or id(safety_limit)){
             // If we can have information about grid exchange or if safety_limit is active, do not divert any energy
-            id(regulator_opening).publish_state(0);
+            id(router_level).publish_state(0);
             return;
           }
           double delta = -1*(id(real_power).state-id(target_grid_exchange).state)*id(reactivity).state/1000;
-          double regulator_status = id(regulator_opening).state + delta;
-          regulator_status = std::max(0.0, std::min(100.0, regulator_status));
-          id(regulator_opening).publish_state(regulator_status);
-
+          double new_router_level = id(router_level).state + delta;
+          new_router_level = std::max(0.0, std::min(100.0, new_router_level));
+          id(router_level).publish_state(new_router_level);
