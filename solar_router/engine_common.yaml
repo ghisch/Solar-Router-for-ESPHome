@@ -14,7 +14,7 @@ substitutions:
   green_led_inverted: "False"
   yellow_led_inverted: "False"
   # By default regulators are hidden
-  expose_regulators: "False"
+  hide_regulators: "True"
 
 # Component managing time.
 # If activate switch is ON, power measurment and energy regulation are performed every secondes
