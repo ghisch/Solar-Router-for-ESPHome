@@ -41,7 +41,7 @@ number:
     mode: slider
     on_value:
       then:
-        - number.set_value:
+        - number.set:
             id: regulator_opening
             value: !lambda return id(router_level).state;
         - if:
