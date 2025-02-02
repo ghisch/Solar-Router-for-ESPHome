@@ -11,19 +11,19 @@ sensor:
   - platform: template
     name: "Full Power Timer"
     id: bypass_tempo_counter
-    optimistic: True
-    min_value: 0
-    max_value: !lambda return id(bypass_duration).state();
-    step: 1
-    initial_value: 0
-    restore_value: False
+    filters:
+      - clamp:
+          min_value: 0
+          max_value: !lambda return id(bypass_duration).state();
   - platform: template
     name: "Regulator Opening"
     id: regulator_opening
-    min_value: 0
-    max_value: 100
+    filters:
+      - clamp:
+          min_value: 0
+          max_value: 100
     unit_of_measurement: "%"
-    optimistic: True
+    accuracy_decimals: 8
     on_value:
       then:
         - script.execute: regulation_control
@@ -36,7 +36,7 @@ binary_sensor:
     on_turn_on:
       then:
         - script.execute: relay_regulation_control
-        - number.to_min: regulator_opening
+        - lambda: id(regulator_opening).publish_state(0);
     on_turn_off:
       then:
         - script.execute: relay_regulation_control
@@ -51,15 +51,16 @@ switch:
     id: activate
     on_turn_on:
       then:
-        - number.to_max: bypass_tempo_counter
         - light.turn_on: green_led
-        - lambda: id(power_meter_activated) = 1;
+        - lambda: |-
+            id(bypass_tempo_counter).publish_state(id(bypass_duration).state());
+            id(power_meter_activated) = 1;
     on_turn_off:
       then:
         - light.turn_off: green_led
         - number.to_min: router_level
-        - number.to_min: bypass_tempo_counter
         - lambda: |- 
+            id(bypass_tempo_counter).publish_state(0);
             id(real_power).publish_state(NAN);
             id(consumption).publish_state(NAN);
             id(power_meter_activated) = 0;
