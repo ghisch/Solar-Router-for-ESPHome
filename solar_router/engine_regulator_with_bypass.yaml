@@ -129,7 +129,7 @@ number:
     internal: ${hide_regulators}
     on_value:
       then:
-        - lambda: id(regulator_opening).publish_state(id(regulator_opening_control).control);
+        - lambda: id(regulator_opening).publish_state(id(regulator_opening_control).state);
   - platform: template
     name: "Bypass Duration"
     id: bypass_duration
@@ -142,7 +142,7 @@ number:
     internal: True
     on_value:
       then:
-        - lambda: id(bypass_tempo_counter).publish_state(id(bypass_duration).state());
+        - lambda: id(bypass_tempo_counter).publish_state(id(bypass_duration).state);
 
   # Define the reactivity of router level
   - platform: template
