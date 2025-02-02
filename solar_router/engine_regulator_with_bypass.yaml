@@ -3,6 +3,44 @@
 # ----------------------------------------------------------------------------------------------------
 <<: !include engine_common.yaml
 
+sensor:
+  # Define the number of consecutive regulations where regulator is at 100% before activating bypass relay
+  # When regulator is at 100% and delta is still positive, this counter is incremented
+  # When counter reach bypass_timer_threshold, bypass relay is activated
+  # Counter is reset to 0 when regulator is not at 100% or when delta is negative
+  - platform: template
+    name: "Full Power Timer"
+    id: bypass_tempo_counter
+    optimistic: True
+    min_value: 0
+    max_value: !lambda return id(bypass_duration).state();
+    step: 1
+    initial_value: 0
+    restore_value: False
+  - platform: template
+    name: "Regulator Opening"
+    id: regulator_opening
+    min_value: 0
+    max_value: 100
+    unit_of_measurement: "%"
+    optimistic: True
+    on_value:
+      then:
+        - script.execute: regulation_control
+
+binary_sensor:
+  - platform: template
+    name: "Bypass Relay"
+    id: energy_divertion
+    optimistic: True
+    on_turn_on:
+      then:
+        - script.execute: relay_regulation_control
+        - number.to_min: regulator_opening
+    on_turn_off:
+      then:
+        - script.execute: relay_regulation_control
+
 switch:
   # Define is router is active or not
   # When switch is ON, pooling timer will trigger every seconds
@@ -13,14 +51,14 @@ switch:
     id: activate
     on_turn_on:
       then:
-        - number.to_min: full_power_timer
+        - number.to_max: bypass_tempo_counter
         - light.turn_on: green_led
         - lambda: id(power_meter_activated) = 1;
     on_turn_off:
       then:
         - light.turn_off: green_led
         - number.to_min: router_level
-        - number.to_max: full_power_timer
+        - number.to_in: bypass_tempo_counter
         - lambda: |- 
             id(real_power).publish_state(NAN);
             id(consumption).publish_state(NAN);
@@ -29,17 +67,16 @@ switch:
   # When bypass relay is ON, the regulator opening is set to 0
   # When bypass relay is OFF, the regulator opening is set to the value defined by the solar router
   - platform: template
-    name: "Bypass Relay"
-    id: energy_divertion
+    name: "Bypass Relay Control"
+    id: energy_divertion_control
     optimistic: True
     internal: ${hide_regulators}
     on_turn_on:
       then:
-        - script.execute: relay_regulation_control
-        - number.to_min: regulator_opening
+        - lambda: id(energy_divertion).turn_on();
     on_turn_off:
       then:
-        - script.execute: relay_regulation_control
+        - lambda: id(energy_divertion).turn_off();
 
 number:
   # Router level from 0 to 100
@@ -60,7 +97,7 @@ number:
     on_value:
       then:
         - lambda: |-
-            if (id(router_level).state >= 100.0 && id(full_power_timer).state >= ${bypass_timer_threshold}) {
+            if (id(router_level).state >= 100.0 && id(bypass_tempo_counter).state <= 0) {
               id(energy_divertion).turn_on();
             } else {
               id(energy_divertion).turn_off();
@@ -83,8 +120,8 @@ number:
                   then:
                     - light.turn_on: green_led
   - platform: template
-    name: "Regulator Opening"
-    id: regulator_opening
+    name: "Regulator Openin Control"
+    id: regulator_opening_control
     min_value: 0
     max_value: 100
     step: 1
@@ -94,18 +131,13 @@ number:
     internal: ${hide_regulators}
     on_value:
       then:
-        - script.execute: regulation_control
-
-  # Define the number of consecutive regulations where regulator is at 100% before activating bypass relay
-  # When regulator is at 100% and delta is still positive, this counter is incremented
-  # When counter reach bypass_timer_threshold, bypass relay is activated
-  # Counter is reset to 0 when regulator is not at 100% or when delta is negative
+        - lambda: id(regulator_opening).publish_state(id(regulator_opening_control).control);
   - platform: template
-    name: "Full Power Timer"
-    id: full_power_timer
+    name: "Bypass Duration"
+    id: bypass_durtion
     optimistic: True
     min_value: 0
-    max_value: ${bypass_timer_threshold}
+    max_value: 3600
     step: 1
     initial_value: 0
     restore_value: False
@@ -158,7 +190,7 @@ script:
           // Safety check: Disable regulation if power readings are invalid or safety is triggered
           if (isnan(id(real_power).state) or id(safety_limit)){
             id(router_level).publish_state(0);
-            id(full_power_timer).publish_state(0);
+            id(bypass_tempo_counter).publish_state(id(bypass_duration).state);
             return;
           }
 
@@ -170,7 +202,7 @@ script:
           id(router_level).publish_state(new_router_level);
 
           if (new_router_level >= 100.0) {
-            id(full_power_timer).publish_state(id(full_power_timer).state + 1);
+            id(bypass_tempo_counter).publish_state(id(bypass_tempo_counter).state - 1);
           } else {
-            id(full_power_timer).publish_state(0);
+            id(bypass_tempo_counter).publish_state(id(bypass_duration).state);
           }
