@@ -135,7 +135,7 @@ number:
         - lambda: id(regulator_opening).publish_state(id(regulator_opening_control).control);
   - platform: template
     name: "Bypass Duration"
-    id: bypass_durtion
+    id: bypass_duration
     optimistic: True
     min_value: 0
     max_value: 3600
