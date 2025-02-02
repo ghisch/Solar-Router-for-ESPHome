@@ -14,29 +14,18 @@ sensor:
     filters:
       - clamp:
           min_value: 0
-  - platform: template
+  - platform: copy
     name: "Regulator Opening"
-    id: regulator_opening
-    filters:
-      - clamp:
-          min_value: 0
-          max_value: 100
+    id: regulator_opening_sensor
+    source_id: regulator_opening
     unit_of_measurement: "%"
     accuracy_decimals: 8
-    on_value:
-      then:
-        - script.execute: regulation_control
 
 binary_sensor:
-  - platform: template
+  - platform: switch
     name: "Bypass Relay"
-    id: energy_divertion
-    on_press:
-      then:
-        - lambda: id(regulator_opening).publish_state(0);
-    on_state:
-      then:
-        - script.execute: relay_regulation_control
+    id: energy_divertion_sensor
+    source_id: energy_divertion
 
 switch:
   # Define is router is active or not
@@ -66,15 +55,16 @@ switch:
   # When bypass relay is OFF, the regulator opening is set to the value defined by the solar router
   - platform: template
     name: "Bypass Relay Control"
-    id: energy_divertion_control
+    id: energy_divertion
     optimistic: True
     internal: ${hide_regulators}
     on_turn_on:
       then:
-        - lambda: id(energy_divertion).publish_state(true);
+        - script.execute: relay_regulation_control
+        - lambda: id(regulator_opening).publish_state(0);
     on_turn_off:
       then:
-        - lambda: id(energy_divertion).publish_state(false);
+        - script.execute: relay_regulation_control
 
 number:
   # Router level from 0 to 100
@@ -96,9 +86,9 @@ number:
       then:
         - lambda: |-
             if (id(router_level).state >= 100.0 && id(bypass_tempo_counter).state <= 0) {
-              id(energy_divertion).publish_state(true);
+              id(energy_divertion).turn_on();
             } else {
-              id(energy_divertion).publish_state(true);
+              id(energy_divertion).turn_off();
               id(regulator_opening).publish_state(id(router_level).state);
             }
         - if:
@@ -119,7 +109,7 @@ number:
                     - light.turn_on: green_led
   - platform: template
     name: "Regulator Openin Control"
-    id: regulator_opening_control
+    id: regulator_opening
     min_value: 0
     max_value: 100
     step: 1
@@ -129,7 +119,7 @@ number:
     internal: ${hide_regulators}
     on_value:
       then:
-        - lambda: id(regulator_opening).publish_state(id(regulator_opening_control).state);
+        - script.execute: regulation_control
   - platform: template
     name: "Bypass Duration"
     id: bypass_duration
