@@ -14,7 +14,6 @@ sensor:
     filters:
       - clamp:
           min_value: 0
-          max_value: !lambda return id(bypass_duration).state();
   - platform: template
     name: "Regulator Opening"
     id: regulator_opening
@@ -143,6 +142,9 @@ number:
     initial_value: 0
     restore_value: False
     internal: True
+    on_value:
+      then:
+        - lambda: id(bypass_tempo_counter).publish_state(id(bypass_duration).state());
 
   # Define the reactivity of router level
   - platform: template
