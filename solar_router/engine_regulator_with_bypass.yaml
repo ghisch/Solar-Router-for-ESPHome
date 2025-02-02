@@ -14,10 +14,10 @@ sensor:
     filters:
       - clamp:
           min_value: 0
-  - platform: copy
+  - platform: template
     name: "Regulator Opening"
     id: regulator_opening_sensor
-    source_id: regulator_opening
+    lambda: return id(regulator_opening).state;
     unit_of_measurement: "%"
     accuracy_decimals: 8
 
