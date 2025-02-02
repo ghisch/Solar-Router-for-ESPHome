@@ -20,6 +20,7 @@ sensor:
     lambda: return id(regulator_opening).state;
     unit_of_measurement: "%"
     accuracy_decimals: 8
+    update_interval: 1s
 
 binary_sensor:
   - platform: switch
