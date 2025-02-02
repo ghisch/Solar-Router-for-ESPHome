@@ -127,9 +127,8 @@ number:
     min_value: 0
     max_value: 3600
     step: 1
-    initial_value: 0
-    restore_value: False
-    internal: True
+    initial_value: 30
+    restore_value: True
     on_value:
       then:
         - lambda: id(bypass_tempo_counter).publish_state(id(bypass_duration).state);
