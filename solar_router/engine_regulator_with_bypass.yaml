@@ -50,7 +50,7 @@ switch:
       then:
         - light.turn_on: green_led
         - lambda: |-
-            id(bypass_tempo_counter).publish_state(id(bypass_duration).state());
+            id(bypass_tempo_counter).publish_state(id(bypass_duration).state);
             id(power_meter_activated) = 1;
     on_turn_off:
       then:
