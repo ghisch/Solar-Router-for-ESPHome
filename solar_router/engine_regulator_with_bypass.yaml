@@ -31,12 +31,10 @@ binary_sensor:
   - platform: template
     name: "Bypass Relay"
     id: energy_divertion
-    optimistic: True
-    on_turn_on:
+    on_press:
       then:
-        - script.execute: relay_regulation_control
         - lambda: id(regulator_opening).publish_state(0);
-    on_turn_off:
+    on_state:
       then:
         - script.execute: relay_regulation_control
 
