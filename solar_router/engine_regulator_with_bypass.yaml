@@ -71,10 +71,10 @@ switch:
     internal: ${hide_regulators}
     on_turn_on:
       then:
-        - lambda: id(energy_divertion).publish_state(True);
+        - lambda: id(energy_divertion).publish_state(true);
     on_turn_off:
       then:
-        - lambda: id(energy_divertion).publish_state(False);
+        - lambda: id(energy_divertion).publish_state(false);
 
 number:
   # Router level from 0 to 100
@@ -96,9 +96,9 @@ number:
       then:
         - lambda: |-
             if (id(router_level).state >= 100.0 && id(bypass_tempo_counter).state <= 0) {
-              id(energy_divertion).publish_state(True);
+              id(energy_divertion).publish_state(true);
             } else {
-              id(energy_divertion).publish_state(True);
+              id(energy_divertion).publish_state(true);
               id(regulator_opening).publish_state(id(router_level).state);
             }
         - if:
