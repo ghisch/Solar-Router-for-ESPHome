@@ -78,8 +78,8 @@ switch:
     internal: ${hide_regulators}
     on_turn_on:
       then:
-        - script.execute: relay_1_control
         - lambda: id(regulator_opening).publish_state(0);
+        - script.execute: relay_1_control
     on_turn_off:
       then:
         - script.execute: relay_1_control
@@ -90,8 +90,8 @@ switch:
     internal: ${hide_regulators}
     on_turn_on:
       then:
-        - script.execute: relay_2_control
         - lambda: id(regulator_opening).publish_state(0);
+        - script.execute: relay_2_control
     on_turn_off:
       then:
         - script.execute: relay_2_control
