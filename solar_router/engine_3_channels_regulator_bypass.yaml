@@ -128,8 +128,8 @@ number:
     on_value:
       then:
         - lambda: |-
-            double router_level = id(router_level).state;
-            if router_level >= 100 {
+            double current_router_level = id(router_level).state;
+            if (current_router_level >= 100) {
               id(relay_1).turn_on();
               id(relay_2).turn_on();
               if (id(relay_3_tempo_counter).state <= 0) {
@@ -138,22 +138,22 @@ number:
                 id(relay_3).turn_off();
                 id(regulator_opening).publish_state(100);
               }
-            } else if router_level >= 200.0/3 {
+            } else if (current_router_level >= 200.0/3) {
               id(relay_1).turn_on();
               id(relay_3).turn_off();
               if (id(relay_2_tempo_counter).state <= 0) {
                 id(relay_2).turn_on();
-                id(regulator_opening).publish_state(3.0 * router_level - 200);
+                id(regulator_opening).publish_state(3.0 * current_router_level - 200);
               } else {
                 id(relay_2).turn_off();
                 id(regulator_opening).publish_state(100);
               }
-            } else if router_level >= 100.0/3 {
+            } else if (current_router_level >= 100.0/3) {
               id(relay_2).turn_off();
               id(relay_3).turn_off();
               if (id(relay_1_tempo_counter).state <= 0) {
                 id(relay_1).turn_on();
-                id(regulator_opening).publish_state(3.0 * router_level - 100);
+                id(regulator_opening).publish_state(3.0 * current_router_level - 100);
               } else {
                 id(relay_1).turn_off();
                 id(regulator_opening).publish_state(100);
@@ -162,7 +162,7 @@ number:
               id(relay_1).turn_off();
               id(relay_2).turn_off();
               id(relay_3).turn_off();
-              id(regulator_opening).publish_state(3.0 * router_level);
+              id(regulator_opening).publish_state(3.0 * current_router_level);
             }
         - if:
             condition:
