@@ -129,16 +129,16 @@ number:
       then:
         - lambda: |-
             double current_router_level = id(router_level).state;
-            if (current_router_level >= 100) {
+            if (current_router_level >= 100.0) {
               id(relay_1).turn_on();
               id(relay_2).turn_on();
               if (id(relay_3_tempo_counter).state <= 0) {
                 id(relay_3).turn_on();
               } else {
                 id(relay_3).turn_off();
-                id(regulator_opening).publish_state(100);
+                id(regulator_opening).publish_state(100.0);
               }
-            } else if (current_router_level >= 200.0/3) {
+            } else if (current_router_level >= 66.66666666) {
               id(relay_1).turn_on();
               id(relay_3).turn_off();
               if (id(relay_2_tempo_counter).state <= 0) {
@@ -146,9 +146,9 @@ number:
                 id(regulator_opening).publish_state(3.0 * current_router_level - 200);
               } else {
                 id(relay_2).turn_off();
-                id(regulator_opening).publish_state(100);
+                id(regulator_opening).publish_state(100.0);
               }
-            } else if (current_router_level >= 100.0/3) {
+            } else if (current_router_level >= 33.33333333) {
               id(relay_2).turn_off();
               id(relay_3).turn_off();
               if (id(relay_1_tempo_counter).state <= 0) {
@@ -156,7 +156,7 @@ number:
                 id(regulator_opening).publish_state(3.0 * current_router_level - 100);
               } else {
                 id(relay_1).turn_off();
-                id(regulator_opening).publish_state(100);
+                id(regulator_opening).publish_state(100.0);
               }
             } else {
               id(relay_1).turn_off();
@@ -272,17 +272,17 @@ script:
             id(relay_3_tempo_counter).publish_state(id(relay_3_tempo_counter).state - 1);
             id(relay_2_tempo_counter).publish_state(0);
             id(relay_1_tempo_counter).publish_state(0);
-          } else if (new_router_level >= 200.0/3) {
+          } else if (new_router_level >= 66.66666666) {
             if (id(relay_2_tempo_counter).state > 0) {
-              new_router_level = 200.0/3;
+              new_router_level = 66.66666666;
             }
 
             id(relay_3_tempo_counter).publish_state(id(relay_duration).state);
             id(relay_2_tempo_counter).publish_state(id(relay_2_tempo_counter).state - 1);
             id(relay_1_tempo_counter).publish_state(0);
-          } else if (new_router_level >= 100.0/3) {
+          } else if (new_router_level >=  33.33333333) {
             if (id(relay_1_tempo_counter).state > 0) {
-              new_router_level = 100.0/3;
+              new_router_level = 33.33333333;
             }
 
             id(relay_3_tempo_counter).publish_state(id(relay_duration).state);
