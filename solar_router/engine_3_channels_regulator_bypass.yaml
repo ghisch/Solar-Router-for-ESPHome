@@ -6,19 +6,19 @@
 sensor:
   - platform: template
     name: "Relay 1 Countdown"
-    id: relay1_tempo_counter
+    id: relay_1_tempo_counter
     filters:
       - clamp:
           min_value: 0
   - platform: template
     name: "Relay 2 Countdown"
-    id: relay2_tempo_counter
+    id: relay_2_tempo_counter
     filters:
       - clamp:
           min_value: 0
   - platform: template
     name: "Relay 3 Countdown"
-    id: relay3_tempo_counter
+    id: relay_3_tempo_counter
     filters:
       - clamp:
           min_value: 0
@@ -33,16 +33,16 @@ sensor:
 binary_sensor:
   - platform: switch
     name: "Relay 1"
-    id: relay1_sensor
-    source_id: relay1
+    id: relay_1_sensor
+    source_id: relay_1
   - platform: switch
     name: "Relay 2"
-    id: relay2_sensor
-    source_id: relay2
+    id: relay_2_sensor
+    source_id: relay_2
   - platform: switch
     name: "Relay 3"
-    id: relay3_sensor
-    source_id: relay3
+    id: relay_3_sensor
+    source_id: relay_3
 
 switch:
   # Define is router is active or not
@@ -56,24 +56,24 @@ switch:
       then:
         - light.turn_on: green_led
         - lambda: |-
-            id(relay1_tempo_counter).publish_state(id(relay_duration).state);
-            id(relay2_tempo_counter).publish_state(id(relay_duration).state);
-            id(relay3_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_1_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_2_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_3_tempo_counter).publish_state(id(relay_duration).state);
             id(power_meter_activated) = 1;
     on_turn_off:
       then:
         - light.turn_off: green_led
         - number.to_min: router_level
         - lambda: |- 
-            id(relay1_tempo_counter).publish_state(0);
-            id(relay2_tempo_counter).publish_state(0);
-            id(relay3_tempo_counter).publish_state(0);
+            id(relay_1_tempo_counter).publish_state(0);
+            id(relay_2_tempo_counter).publish_state(0);
+            id(relay_3_tempo_counter).publish_state(0);
             id(real_power).publish_state(NAN);
             id(consumption).publish_state(NAN);
             id(power_meter_activated) = 0;
   - platform: template
     name: "Relay 1"
-    id: relay1
+    id: relay_1
     optimistic: True
     internal: ${hide_regulators}
     on_turn_on:
@@ -85,7 +85,7 @@ switch:
         - script.execute: relay_1_control
   - platform: template
     name: "Relay 2"
-    id: relay2
+    id: relay_2
     optimistic: True
     internal: ${hide_regulators}
     on_turn_on:
@@ -97,7 +97,7 @@ switch:
         - script.execute: relay_2_control
   - platform: template
     name: "Relay 3"
-    id: relay3
+    id: relay_3
     optimistic: True
     internal: ${hide_regulators}
     on_turn_on:
@@ -130,38 +130,38 @@ number:
         - lambda: |-
             double router_level = id(router_level).state;
             if router_level >= 100 {
-              id(relay1).turn_on();
-              id(relay2).turn_on();
-              if (id(relay3_tempo_counter).state <= 0) {
-                id(relay3).turn_on();
+              id(relay_1).turn_on();
+              id(relay_2).turn_on();
+              if (id(relay_3_tempo_counter).state <= 0) {
+                id(relay_3).turn_on();
               } else {
-                id(relay3).turn_off();
+                id(relay_3).turn_off();
                 id(regulator_opening).publish_state(100);
               }
             } else if router_level >= 200.0/3 {
-              id(relay1).turn_on();
-              id(relay3).turn_off();
-              if (id(relay2_tempo_counter).state <= 0) {
-                id(relay2).turn_on();
+              id(relay_1).turn_on();
+              id(relay_3).turn_off();
+              if (id(relay_2_tempo_counter).state <= 0) {
+                id(relay_2).turn_on();
                 id(regulator_opening).publish_state(3.0 * router_level - 200);
               } else {
-                id(relay2).turn_off();
+                id(relay_2).turn_off();
                 id(regulator_opening).publish_state(100);
               }
             } else if router_level >= 100.0/3 {
-              id(relay2).turn_off();
-              id(relay3).turn_off();
-              if (id(relay1_tempo_counter).state <= 0) {
-                id(relay1).turn_on();
+              id(relay_2).turn_off();
+              id(relay_3).turn_off();
+              if (id(relay_1_tempo_counter).state <= 0) {
+                id(relay_1).turn_on();
                 id(regulator_opening).publish_state(3.0 * router_level - 100);
               } else {
-                id(relay1).turn_off();
+                id(relay_1).turn_off();
                 id(regulator_opening).publish_state(100);
               }
             } else {
-              id(relay1).turn_off();
-              id(relay2).turn_off();
-              id(relay3).turn_off();
+              id(relay_1).turn_off();
+              id(relay_2).turn_off();
+              id(relay_3).turn_off();
               id(regulator_opening).publish_state(3.0 * router_level);
             }
         - if:
@@ -205,9 +205,9 @@ number:
     on_value:
       then:
         - lambda: |-
-            id(relay1_tempo_counter).publish_state(id(relay_duration).state);
-            id(relay2_tempo_counter).publish_state(id(relay_duration).state);
-            id(relay3_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_1_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_2_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_3_tempo_counter).publish_state(id(relay_duration).state);
 
   # Define the reactivity of router level
   - platform: template
@@ -256,9 +256,9 @@ script:
           // Safety check: Disable regulation if power readings are invalid or safety is triggered
           if (isnan(id(real_power).state) or id(safety_limit)){
             id(router_level).publish_state(0);
-            id(relay1_tempo_counter).publish_state(id(relay_duration).state);
-            id(relay2_tempo_counter).publish_state(id(relay_duration).state);
-            id(relay3_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_1_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_2_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_3_tempo_counter).publish_state(id(relay_duration).state);
             return;
           }
 
@@ -269,29 +269,29 @@ script:
           new_router_level = std::max(0.0, std::min(100.0, new_router_level));
 
           if (new_router_level >= 100.0) {
-            id(relay3_tempo_counter).publish_state(id(relay3_tempo_counter).state - 1);
-            id(relay2_tempo_counter).publish_state(0);
-            id(relay1_tempo_counter).publish_state(0);
+            id(relay_3_tempo_counter).publish_state(id(relay_3_tempo_counter).state - 1);
+            id(relay_2_tempo_counter).publish_state(0);
+            id(relay_1_tempo_counter).publish_state(0);
           } else if (new_router_level >= 200.0/3) {
-            if id(relay2_tempo_counter).state > 0 {
+            if id(relay_2_tempo_counter).state > 0 {
               new_router_level = 200.0/3;
             }
 
-            id(relay3_tempo_counter).publish_state(id(relay_duration).state);
-            id(relay2_tempo_counter).publish_state(id(relay2_tempo_counter).state - 1);
-            id(relay1_tempo_counter).publish_state(0);
+            id(relay_3_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_2_tempo_counter).publish_state(id(relay_2_tempo_counter).state - 1);
+            id(relay_1_tempo_counter).publish_state(0);
           } else if (new_router_level >= 100.0/3) {
-            if id(relay1_tempo_counter).state > 0 {
+            if id(relay_1_tempo_counter).state > 0 {
               new_router_level = 100.0/3;
             }
 
-            id(relay3_tempo_counter).publish_state(id(relay_duration).state);
-            id(relay2_tempo_counter).publish_state(id(relay_duration).state);
-            id(relay1_tempo_counter).publish_state(id(relay1_tempo_counter).state - 1);
+            id(relay_3_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_2_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_1_tempo_counter).publish_state(id(relay_1_tempo_counter).state - 1);
           } else {
-            id(relay3_tempo_counter).publish_state(id(relay_duration).state);
-            id(relay2_tempo_counter).publish_state(id(relay_duration).state);
-            id(relay1_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_3_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_2_tempo_counter).publish_state(id(relay_duration).state);
+            id(relay_1_tempo_counter).publish_state(id(relay_duration).state);
           }
 
           id(router_level).publish_state(new_router_level);
