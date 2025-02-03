@@ -273,7 +273,7 @@ script:
             id(relay_2_tempo_counter).publish_state(0);
             id(relay_1_tempo_counter).publish_state(0);
           } else if (new_router_level >= 200.0/3) {
-            if id(relay_2_tempo_counter).state > 0 {
+            if (id(relay_2_tempo_counter).state > 0) {
               new_router_level = 200.0/3;
             }
 
@@ -281,7 +281,7 @@ script:
             id(relay_2_tempo_counter).publish_state(id(relay_2_tempo_counter).state - 1);
             id(relay_1_tempo_counter).publish_state(0);
           } else if (new_router_level >= 100.0/3) {
-            if id(relay_1_tempo_counter).state > 0 {
+            if (id(relay_1_tempo_counter).state > 0) {
               new_router_level = 100.0/3;
             }
 
